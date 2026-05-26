@@ -87,11 +87,34 @@ paysagiste:
 
 # Les textes pour l'électricien
 electricien:
-  titre: "Un problème électrique ou une installation à rénover ?"
-  description: "Électricien certifié disponible rapidement autour de Précy et Creil."
-  icon_1: "⚡"
-  service_1: "Dépannage Urgent"
-  desc_1: "Recherche de panne, coupure de courant et mise en sécurité."
-  icon_2: "🔌"
-  service_2: "Mise aux normes"
-  desc_2: "Remplacement de tableau électrique et ajout de prises."
+  activite: "Électricité Générale & Dépannage"
+  images:
+    heroFond: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=800&q=80"
+
+  textes:
+    heroTitre: "Votre installation électrique en toute sécurité"
+    # On n'écrit plus le nom ici, on gérera la fusion dans le HTML
+    heroDescription: "Rénovation, mise aux normes et dépannage rapide dans le sud de l'Oise par votre artisan de confiance."
+    valeursSectionTitre: "Engagements & Qualité"
+    valeursSectionSub: "Pourquoi nous confier vos travaux ?"
+    servicesSectionTitre: "Nos Prestations"
+    servicesSectionSub: "Des interventions sécurisées et aux normes en vigueur."
+    equipeSectionTitre: "À propos de votre électricien"
+    equipeDescription: "Professionnel qualifié et réactif, je mets mon expertise au service de vos projets de rénovation ou de dépannage. Soucieux du détail et des normes de sécurité, j'interviens rapidement pour garantir le confort et la sécurité de votre habitation."
+
+  valeurs:
+    - icone: "⚡"
+      titre: "Sécurité & Normes"
+      description: "Respect strict de la norme NF C 15-100 pour toutes les installations électriques."
+    - icone: "🛠️"
+      titre: "Matériel Pro"
+      description: "Utilisation exclusive de composants de grandes marques (Legrand, Schneider) pour une durabilité maximale."
+
+  services:
+    - titre: "Dépannage Urgent"
+      description: "Recherche de panne, coupure de courant, remplacement de disjoncteur défectueux."
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+    - titre: "Mise aux Normes"
+      description: "Remplacement de tableaux électriques obsolètes, mise à la terre, rénovation complète."
+      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
