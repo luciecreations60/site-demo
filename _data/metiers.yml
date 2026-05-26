@@ -1,5 +1,5 @@
 # =========================================================================
-# CONFIGURATION DES MÉTIERS (TEXTES ET IMAGES PROPRES À CHAQUE ACTIVITÉ)
+# PAYSAGISTE
 # =========================================================================
 
 paysagiste:
@@ -78,7 +78,9 @@ paysagiste:
     - auteur: "Sophie L."
       texte: "Superbe aménagement de notre massif. De très bons conseils sur le choix des plantes."
 
-# -------------------------------------------------------------------------
+# =========================================================================
+# ELECTRICIEN
+# =========================================================================
 
 electricien:
   activite: "Électricité Générale & Dépannage"
@@ -155,3 +157,215 @@ electricien:
       texte: "Intervention très rapide pour une panne sur mon tableau. Professionnel et rassurant."
     - auteur: "Clara M."
       texte: "Rénovation complète de notre appartement faite proprement, dans les délais annoncés."
+
+# =========================================================================
+# FLEURISTE / PÉPINIÉRISTE
+# =========================================================================
+fleuriste:
+  activite: "Artisan Fleuriste & Décoration Végétale"
+  images:
+    heroFond: "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1600&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80"
+  textes:
+    heroTitre: "Créations florales uniques & plantes d'exception"
+    heroDescription: "Des compositions de saison réalisées avec passion pour tous les moments de votre vie. Ateliers, mariages, événements et livraison à domicile."
+    valeursSectionTitre: "Le savoir-faire végétal"
+    servicesSectionTitre: "Nos prestations florales"
+    servicesSectionSub: "Artisanat d'art pour particuliers et professionnels."
+    equipeSectionTitre: "L'Atelier Floral"
+    equipeDescription: "Artisans fleuristes passionnés par le pouvoir des fleurs, nous sélectionnons chaque matin les plus belles variétés locales et de saison pour donner vie à vos émotions à travers le végétal."
+    portfolioSectionTitre: "Nos Dernières Créations"
+  valeurs:
+    - icone: "💐"
+      titre: "Fleurs de Saison"
+      description: "Une sélection fraîche et éco-responsable renouvelée chaque semaine."
+    - icone: "🎨"
+      titre: "Sur-Mesure"
+      description: "Chaque bouquet est une œuvre unique adaptée à votre sensibilité."
+    - icone: "🚗"
+      titre: "Livraison Soignée"
+      description: "Vos compositions livrées en main propre en véhicule adapté."
+  services:
+    - titre: "Abonnement Professionnel"
+      description: "Fleurissez votre accueil, boutique ou bureaux chaque semaine avec des créations uniques."
+      image: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80"
+    - titre: "Mariages & Événements"
+      description: "Scénographie florale complète, arches, bouquets de mariée et centres de table sur-mesure."
+      image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80"
+    - titre: "Plantes & Décoration"
+      description: "Conseils et vente de plantes d'intérieur rares et de poteries artisanales pour votre intérieur."
+      image: "https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=600&q=80"
+  chiffres:
+    - nombre: "15+"
+      label: "Ans de métier"
+    - nombre: "450"
+      label: "Mariages réussis"
+    - nombre: "100%"
+      label: "Fleurs fraîches"
+  googleRating:
+    note: "4.9"
+    totalAvis: "112 avis"
+  avisClients:
+    - auteur: "Amandine T."
+      texte: "Les compositions pour notre mariage étaient tout simplement splendides ! À l'écoute de nos moindres demandes, créative et d'une grande gentillesse."
+    - auteur: "Julien R."
+      texte: "Boutique magnifique et conseils en or pour sauver mes plantes d'intérieur. Les bouquets durent incroyablement longtemps."
+
+# =========================================================================
+# PLOMBIER / CHAUFFAGISTE
+# =========================================================================
+plombier:
+  activite: "Dépannage Plomberie & Chauffage"
+  images:
+    heroFond: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+  textes:
+    heroTitre: "Dépannage d'urgence & installations thermiques"
+    heroDescription: "Une fuite d'eau ? Une chaudière en panne ? Artisan certifié RGE pour vos travaux de plomberie, chauffage et rénovation de salle de bain."
+    valeursSectionTitre: "Les engagements de votre artisan"
+    servicesSectionTitre: "Nos domaines d'intervention"
+    servicesSectionSub: "Travail soigné, normes de sécurité respectées et tarifs transparents."
+    equipeSectionTitre: "À propos de l'artisan"
+    equipeDescription: "Fort de mon expérience, j'interviens au quotidien avec un objectif clair : apporter une solution durable à vos problèmes techniques, tout en vous conseillant sur les économies d'énergie."
+    portfolioSectionTitre: "Nos Chantiers Récents"
+  valeurs:
+    - icone: "⚡"
+      titre: "Urgence 7j/7"
+      description: "Intervention rapide pour les sinistres et pannes majeures."
+    - icone: "🏷️"
+      titre: "Tarifs Clairs"
+      description: "Devis gratuit détaillé avant travaux, aucune surprise sur la facture."
+    - icone: "🛡️"
+      titre: "Garantie Décennale"
+      description: "Toutes nos installations de plomberie et chauffage sont assurées."
+  services:
+    - titre: "Recherche de Fuite"
+      description: "Détection non-destructive des fuites d'eau par caméra thermique et acoustique."
+      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80"
+    - titre: "Chauffage & Chaudière"
+      description: "Installation, entretien annuel et remplacement de chaudières gaz, fioul ou pompes à chaleur."
+      image: "https://images.unsplash.com/photo-1621905252507-b354bc25edac?auto=format&fit=crop&w=600&q=80"
+    - titre: "Création de Salle de Bain"
+      description: "Rénovation clé en main de votre pièce d'eau : plomberie, pose des sanitaires et douche à l'italienne."
+      image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=600&q=80"
+  chiffres:
+    - nombre: "30min"
+      label: "Délai moyen d'urgence"
+    - nombre: "12"
+      label: "Ans d'expérience"
+    - nombre: "1800+"
+      label: "Clients dépannés"
+  googleRating:
+    note: "4.8"
+    totalAvis: "94 avis"
+  avisClients:
+    - auteur: "Marc L."
+      texte: "Intervention en moins de 45 minutes un samedi soir pour une fuite d'eau majeure sous l'évier. Tarif annoncé avant travaux et respecté. Un vrai professionnel !"
+    - auteur: "Véronique G."
+      texte: "Remplacement de notre vieille chaudière par une pompe à chaleur. Chantier propre, artisan très minutieux et aide pour le dossier MaPrimeRénov'."
+
+# =========================================================================
+# MAÇON / GROS OEUVRE
+# =========================================================================
+macon:
+  activite: "Maçonnerie Générale & Gros Œuvre"
+  images:
+    heroFond: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+  textes:
+    heroTitre: "Bâtir vos projets sur des fondations solides"
+    heroDescription: "Spécialiste de la construction en brique, parpaing et pierre. Extensions de maison, murs de clôture, dalles béton et rénovation de bâti ancien."
+    valeursSectionTitre: "La rigueur du bâtiment"
+    servicesSectionTitre: "Nos travaux de maçonnerie"
+    servicesSectionSub: "Du gros œuvre aux finitions extérieures, des structures faites pour durer."
+    equipeSectionTitre: "L'entreprise de maçonnerie"
+    equipeDescription: "Nous mettons notre savoir-faire au service de vos projets d'extension ou de rénovation. Respect scrupuleux des plans d'architecte et des calculs de charge pour une sécurité absolue."
+    portfolioSectionTitre: "Nos Réalisations Gros Œuvre"
+  valeurs:
+    - icone: "🧱"
+      titre: "Qualité Durable"
+      description: "Utilisation de matériaux certifiés adaptés aux contraintes du terrain."
+    - icone: "📏"
+      titre: "Précision"
+      description: "Respect strict des cotes, des niveaux et des règles de l'art (DTU)."
+    - icone: "🏗️"
+      titre: "Sécurité Chantier"
+      description: "Équipements professionnels et protection totale de vos abords."
+  services:
+    - titre: "Extension & Agrandissement"
+      description: "Création de fondations et élévation de murs pour ajouter une pièce ou un garage à votre maison."
+      image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=600&q=80"
+    - titre: "Ouverture de Murs Porteurs"
+      description: "Création d'espaces de vie modernes avec pose d'IPN pour ouvrir vos intérieurs en toute sécurité."
+      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=600&q=80"
+    - titre: "Aménagements Extérieurs"
+      description: "Coulage de dalles béton pour terrasses, création de murets de clôture et piliers de portail."
+      image: "https://images.unsplash.com/photo-1534349762230-e0cadf78f5db?auto=format&fit=crop&w=600&q=80"
+  chiffres:
+    - nombre: "20"
+      label: "Ans d'activité"
+    - nombre: "150+"
+      label: "Dalles & Terrasses couler"
+    - nombre: "10"
+      label: "Ans de garantie totale"
+  googleRating:
+    note: "4.9"
+    totalAvis: "68 avis"
+  avisClients:
+    - auteur: "Stéphane B."
+      texte: "Équipe impressionnante d'efficacité pour notre ouverture de mur porteur. Calcul d'ingénieur respecté, étaiement parfait et nettoyage complet en fin de chantier."
+    - auteur: "Nathalie M."
+      texte: "Construction de notre muret de clôture en pierre. Le résultat dépasse nos attentes, c'est un magnifique travail d'artisan maçon."
+
+# =========================================================================
+# PEINTRE / FINITIONS
+# =========================================================================
+peintre:
+  activite: "Peinture Intérieure, Extérieure & Revêtements"
+  images:
+    heroFond: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=1600&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80"
+  textes:
+    heroTitre: "Sublimez vos espaces de vie avec des finitions parfaites"
+    heroDescription: "Artisan peintre spécialisé dans la rénovation d'intérieurs, la pose de revêtements muraux (papier peint, toile de verre) et le ravalement de façade."
+    valeursSectionTitre: "Le souci du détail"
+    servicesSectionTitre: "Nos prestations de rénovation"
+    servicesSectionSub: "Des murs lisses, des couleurs éclatantes et une préparation méticuleuse."
+    equipeSectionTitre: "L'art du détail"
+    equipeDescription: "Parce qu'une belle peinture dépend à 80% de la préparation des supports, je passe le temps nécessaire sur l'enduisage et le ponçage pour vous garantir un rendu parfaitement lisse et durable."
+    portfolioSectionTitre: "Nos Chantiers Peinture & Déco"
+  valeurs:
+    - icone: "✨"
+      titre: "Préparation Soignée"
+      description: "Lessivage, rebouchage et enduisage croisé pour zéro défaut visible."
+    - icone: "🌱"
+      titre: "Peintures Éco-label"
+      description: "Utilisation prioritaire de peintures dépolluantes, sans odeur et à faible taux de COV."
+    - icone: "🧹"
+      titre: "Protection & Propreté"
+      description: "Vos sols et meubles sont entièrement bâchés, le chantier est rendu propre chaque soir."
+  services:
+    - titre: "Peinture Plafonds & Murs"
+      description: "Application de peintures mates, satinées ou velours de qualité professionnelle (Seigneurie/Gautier)."
+      image: "https://images.unsplash.com/photo-1574359411659-15573a27f0c1?auto=format&fit=crop&w=600&q=80"
+    - titre: "Poses de Papiers Peints"
+      description: "Pose méticuleuse de papiers peints panoramiques, intissés ou revêtements muraux techniques."
+      image: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80"
+    - titre: "Ravalement de Façade"
+      description: "Nettoyage, traitement anti-mousse et application de peintures extérieures imperméables (D2/D3)."
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80"
+  chiffres:
+    - nombre: "100%"
+      label: "Finitions impeccables"
+    - nombre: "8"
+      label: "Ans à mon compte"
+    - nombre: "400+"
+      label: "Pièces remises à neuf"
+  googleRating:
+    note: "4.9"
+    totalAvis: "75 avis"
+  avisClients:
+    - auteur: "Sophie R."
+      texte: "Le ponçage a été fait avec une machine aspirante, quasiment aucune poussière dans la maison ! Les murs de notre salon sont d'une régularité incroyable. Merci."
+    - auteur: "Pierre-Yves D."
+      texte: "Artisan ponctuel, discret et d'une propreté exemplaire. La peinture extérieure de nos volets et de la façade a redonné un coup de jeune à la maison."
