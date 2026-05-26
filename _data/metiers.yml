@@ -1,0 +1,21 @@
+# Les textes pour le paysagiste
+paysagiste:
+  titre: "Besoin d'entretenir ou d'aménager votre jardin ?"
+  description: "Artisan paysagiste de proximité à Précy-sur-Oise, Gouvieux et Chantilly."
+  icon_1: "✂️"
+  service_1: "Entretien régulier"
+  desc_1: "Tonte de pelouse, taille de haies et ramassage des feuilles."
+  icon_2: "🌱"
+  service_2: "Création & Plantations"
+  desc_2: "Engazonnement, plantation d'arbustes et fleurs de saison."
+
+# Les textes pour l'électricien
+electricien:
+  titre: "Un problème électrique ou une installation à rénover ?"
+  description: "Électricien certifié disponible rapidement autour de Précy et Creil."
+  icon_1: "⚡"
+  service_1: "Dépannage Urgent"
+  desc_1: "Recherche de panne, coupure de courant et mise en sécurité."
+  icon_2: "🔌"
+  service_2: "Mise aux normes"
+  desc_2: "Remplacement de tableau électrique et ajout de prises."
