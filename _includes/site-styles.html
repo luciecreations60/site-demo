@@ -126,14 +126,16 @@
   }
   
   window.addEventListener('DOMContentLoaded', () => {
-    const path = window.location.pathname;
+    // .toLowerCase() permet d'éviter les bugs si l'URL contient des majuscules
+    const path = window.location.pathname.toLowerCase();
     let defaultPalette = 'p1';
     
+    // Détection robuste des mots-clés dans l'URL
     if (path.includes('electricien')) {
       defaultPalette = 'p2';
-    } else if (path.includes('fleuriste')) || path.includes('pepinieriste')) {
+    } else if (path.includes('fleuriste') || path.includes('pepinieriste')) {
       defaultPalette = 'p3';
-    } else if (path.includes('macon')) || path.includes('plombier')) || path.includes('chauffagiste')) {
+    } else if (path.includes('macon') || path.includes('plombier') || path.includes('chauffagiste')) {
       defaultPalette = 'p4';
     } else if (path.includes('paysagiste') || path.includes('jardinier')) {
       defaultPalette = 'p5';
@@ -141,7 +143,13 @@
       defaultPalette = 'p6';
     }
     
-    document.getElementById('themeChanger').value = defaultPalette;
+    // Sécurité : On vérifie que la liste déroulante existe bien avant d'assigner la valeur
+    const selectElement = document.getElementById('themeChanger');
+    if (selectElement) {
+      selectElement.value = defaultPalette;
+    }
+    
+    // On applique le thème
     changePalette(defaultPalette);
   });
 </script>
