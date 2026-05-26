@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
     {% assign client = site.data.client %}
     {% assign info = site.data.metiers[page.metier] %}
     
@@ -14,11 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     {% include site-styles.html %}
-    
   </head>
   <body>
 
-    <!-- NAVBAR -->
     <header class="header">
       <div class="container header-flex">
         <div class="logo-box">
@@ -27,20 +22,21 @@
         </div>
         
         <div class="nav-actions">
-          <!-- LA LISTE DÉROULANTE DE PERSONNALISATION (Invisible pour le client final, top pour ta démo) -->
           <select id="themeChanger" class="theme-selector" onchange="changePalette(this.value)">
-            <option value="theme-emeraude">🎨 Palette Émeraude (Nature)</option>
-            <option value="theme-ambre">🎨 Palette Ambre (Moderne)</option>
-            <option value="theme-minuit">🎨 Palette Minuit (Luxe)</option>
-            <option value="theme-brique">🎨 Palette Brique (Artisan)</option>
-          </select>
+            <option value="p1">1. Coloré et équilibré</option>
+            <option value="p2">2. Paysagiste (Conseillé)</option>
+            <option value="p3">3. Fleuriste (Conseillé)</option>
+            <option value="p4">4. Plombier (Conseillé)</option>
+            <option value="p5">5. Électricien (Conseillé)</option>
+            <option value="p6">6. Maçon / Peintre</option>
+            <option value="p7">7. Thème Générique Artisan</option>
+            </select>
           
           <a href="{{ client.telephoneLien }}" class="btn-tel">📞 {{ client.telephone }}</a>
         </div>
       </div>
     </header>
 
-    <!-- HERO -->
     <section class="hero">
       <div class="container text-center">
         <span class="badge">Artisan Local — {{ client.localite }}</span>
@@ -50,7 +46,6 @@
       </div>
     </section>
 
-    <!-- VALEURS -->
     <section class="section bg-white">
       <div class="container">
         <div class="text-center mb-12">
@@ -69,7 +64,6 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
@@ -91,84 +85,6 @@
       </div>
     </section>
 
-    <!-- PROFIL / CHIFFRES -->
-    <section class="section bg-white">
-      <div class="container">
-        <div class="about-split">
-          <div>
-            <h2 class="section-title" style="text-align: left;">{{ info.textes.equipeSectionTitre }}</h2>
-            <p style="line-height: 1.7; color: #334155; font-weight: 300; margin-bottom: 24px;">{{ info.textes.equipeDescription }}</p>
-            <div class="chiffres-flex">
-              {% for c in info.chiffres %}
-                <div class="chiffre-item">
-                  <span class="chiffre-num">{{ c.nombre }}</span>
-                  <span class="chiffre-label">{{ c.label }}</span>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div>
-            <img src="{{ info.images.equipeArtisan }}" alt="{{ client.nom }}" class="about-img leaf-shape" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section id="realisations" class="section bg-light">
-      <div class="container">
-        <div class="text-center mb-12">
-          <h2 class="section-title">{{ info.textes.portfolioSectionTitre }}</h2>
-          <p class="section-sub">Découvrez nos projets classés par spécialités à {{ client.localite }} et dans sa région.</p>
-        </div>
-        <div class="portfolio-grid">
-          {% for r in info.realisations %}
-            <div class="portfolio-card leaf-shape">
-              <div class="portfolio-img-box">
-                <span class="portfolio-theme">{{ r.theme }}</span>
-                <img src="{{ r.image }}" alt="{{ r.titre }}" class="portfolio-img" />
-              </div>
-              <div class="portfolio-info">
-                <p style="margin:0;">{{ r.titre }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <!-- REVIEWS GOOGLE -->
-    <section class="section bg-white">
-      <div class="container">
-        <div class="reviews-split">
-          <div class="widget">
-            <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-size: 12px;">Note Globale</span>
-            <div class="rating-num">{{ info.googleRating.note }}</div>
-            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
-            <span style="color: #64748b; font-size: 14px;">{{ info.googleRating.totalAvis }} certifiés</span>
-          </div>
-          <div>
-            {% for a in info.avisClients %}
-              <div class="review">
-                <span class="review-meta">{{ a.auteur }} (Région de {{ client.localite }}) ⭐⭐⭐⭐⭐</span>
-                <p class="review-text">"{{ a.texte }}"</p>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PARTENAIRES -->
-    <div class="partenaires-section">
-      <div class="container partenaires-flex">
-        {% for p in info.partenaires %}
-          <span class="partenaire-logo">🤝 {{ p.nom }}</span>
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- FOOTER / CONTACT -->
     <footer id="contact" class="footer">
       <div class="container text-center">
         <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à {{ client.nom }}</h2>
@@ -186,20 +102,5 @@
       </div>
     </footer>
 
-    <!-- SCRIPT DE COMMUTATION DE COULEURS EN DIRECT -->
-    <script>
-      function changePalette(themeName) {
-        document.documentElement.setAttribute('data-theme', themeName);
-      }
-      
-      // Optionnel: On applique automatiquement la palette Ambre si on est sur la page électricien au chargement
-      window.addEventListener('DOMContentLoaded', () => {
-        const isElectricien = window.location.pathname.includes('electricien');
-        if (isElectricien) {
-          document.getElementById('themeChanger').value = 'theme-ambre';
-          changePalette('theme-ambre');
-        }
-      });
-    </script>
   </body>
 </html>
