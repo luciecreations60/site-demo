@@ -1,13 +1,15 @@
-# Les textes pour le paysagiste
+# =========================================================================
+# CONFIGURATION DES MÉTIERS (TEXTES ET IMAGES PROPRES À CHAQUE ACTIVITÉ)
+# =========================================================================
+
 paysagiste:
   activite: "Paysagiste & Espaces Verts"
   
-  # Images (Unsplash)
+  # Images spécifiques Paysagiste
   images:
     heroFond: "https://images.unsplash.com/photo-1558904541-efa8c3a30fc9?auto=format&fit=crop&w=1600&q=80"
     equipeArtisan: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=800&q=80"
 
-  # Textes
   textes:
     heroTitre: "L'art du jardin"
     heroDescription: "Création, aménagement et entretien rigoureux de vos extérieurs. Profitez d'un savoir-faire reconnu pour sublimer votre environnement au fil des saisons."
@@ -20,13 +22,15 @@ paysagiste:
     portfolioSectionTitre: "Nos Dernières Réalisations"
     portfolioSectionSub: "Découvrez nos projets classés par spécialités dans la région."
 
-  # Tableaux et Boucles
   valeurs:
-    - titre: "Éco-responsabilité"
+    - icone: "🌱"
+      titre: "Éco-responsabilité"
       description: "Utilisation de techniques respectueuses de la biodiversité locale et gestion raisonnée des déchets verts."
-    - titre: "Savoir-faire Artisan"
+    - icone: "🛠️"
+      titre: "Savoir-faire Artisan"
       description: "Un travail rigoureux, des finitions soignées et le respect des règles de l'art du paysage."
-    - titre: "Proximité & Écoute"
+    - icone: "🤝"
+      titre: "Proximité & Écoute"
       description: "Un interlocuteur unique, des conseils personnalisés et une grande réactivité pour vos chantiers."
 
   services:
@@ -74,34 +78,80 @@ paysagiste:
     - auteur: "Sophie L."
       texte: "Superbe aménagement de notre massif. De très bons conseils sur le choix des plantes."
 
-# Les textes pour l'électricien
+# -------------------------------------------------------------------------
+
 electricien:
   activite: "Électricité Générale & Dépannage"
+  
+  # Images spécifiques Électricien
   images:
     heroFond: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80"
-    equipeArtisan: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=800&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=800&q=80"
 
   textes:
-    heroTitre: "Votre installation électrique en toute sécurité"
-    # On n'écrit plus le nom ici, on gérera la fusion dans le HTML
-    heroDescription: "Rénovation, mise aux normes et dépannage rapide dans le sud de l'Oise par votre artisan de confiance."
-    valeursSectionTitre: "Engagements & Qualité"
-    valeursSectionSub: "Pourquoi nous confier vos travaux ?"
-    servicesSectionTitre: "Nos Prestations"
-    servicesSectionSub: "Des interventions sécurisées et aux normes en vigueur."
+    heroTitre: "Votre installation en toute sécurité"
+    heroDescription: "Mise aux normes, rénovation électrique complète et dépannages d'urgence. Profitez d'une expertise rigoureuse pour sécuriser votre habitat."
+    valeursSectionTitre: "Normes & Sécurité"
+    valeursSectionSub: "Pourquoi nous confier vos travaux d'électricité ?"
+    servicesSectionTitre: "Nos Domaines d'Intervention"
+    servicesSectionSub: "Des prestations soignées et conformes aux dernières normes de sécurité."
     equipeSectionTitre: "À propos de votre électricien"
-    equipeDescription: "Professionnel qualifié et réactif, je mets mon expertise au service de vos projets de rénovation ou de dépannage. Soucieux du détail et des normes de sécurité, j'interviens rapidement pour garantir le confort et la sécurité de votre habitation."
+    equipeDescription: "Électricien de métier, je mets mon savoir-faire au service des particuliers et professionnels. Soucieux de votre sécurité, j'interviens avec réactivité en utilisant exclusivement des équipements de grandes marques de confiance."
+    portfolioSectionTitre: "Nos Chantiers Récents"
+    portfolioSectionSub: "Aperçu de nos interventions de mise aux normes et installations dans la région."
 
   valeurs:
-    - titre: "Sécurité & Normes"
-      description: "Respect strict de la norme NF C 15-100 pour toutes les installations électriques."
-    - titre: "Matériel Pro"
-      description: "Utilisation exclusive de composants de grandes marques (Legrand, Schneider) pour une durabilité maximale."
+    - icone: "⚡"
+      titre: "Norme NF C 15-100"
+      description: "Garantie d'une installation parfaitement conforme aux exigences de sécurité légales."
+    - icone: "🛠️"
+      titre: "Matériel Certifié"
+      description: "Rapports de confiance avec les plus grandes marques comme Legrand ou Schneider Électrique."
+    - icone: "🚨"
+      titre: "Dépannage Rapide"
+      description: "Une réactivité maximale en cas de panne de courant ou d'urgence sur votre tableau."
 
   services:
-    - titre: "Dépannage Urgent"
-      description: "Recherche de panne, coupure de courant, remplacement de disjoncteur défectueux."
+    - titre: "Tableau Électrique"
+      description: "Remplacement, mise en sécurité et distribution complète de vos circuits."
+      image: "https://images.unsplash.com/photo-1558441719-ff34b0524a24?auto=format&fit=crop&w=800&q=80"
+    - titre: "Dépannage & Panne"
+      description: "Recherche rapide de pannes, court-circuits et remplacement d'appareillage."
       image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
-    - titre: "Mise aux Normes"
-      description: "Remplacement de tableaux électriques obsolètes, mise à la terre, rénovation complète."
+    - titre: "Mise en conformité"
+      description: "Rénovation des vieilles installations, mise à la terre et diagnostics."
       image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+
+  chiffres:
+    - nombre: "10+"
+      label: "Années d'expérience"
+    - nombre: "500+"
+      label: "Interventions réussies"
+    - nombre: "100%"
+      label: "Normes respectées"
+
+  realisations:
+    - titre: "Rénovation Tableau Complet"
+      theme: "Tableau"
+      image: "https://images.unsplash.com/photo-1558441719-ff34b0524a24?auto=format&fit=crop&w=800&q=80"
+    - titre: "Éclairage LED Intérieur"
+      theme: "Éclairage"
+      image: "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?auto=format&fit=crop&w=800&q=80"
+    - titre: "Mise à la terre générale"
+      theme: "Sécurité"
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+
+  partenaires:
+    - nom: "Legrand France"
+    - nom: "Schneider Electric"
+    - nom: "Consuel"
+
+  googleRating:
+    note: "4.8 / 5"
+    totalAvis: "42 avis Google"
+    
+  avisClients:
+    - auteur: "Hervé T."
+      texte: "Intervention très rapide pour une panne sur mon tableau. Professionnel et rassurant."
+    - auteur: "Clara M."
+      texte: "Rénovation complète de notre appartement faite proprement, dans les délais annoncés."
