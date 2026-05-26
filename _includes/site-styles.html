@@ -129,14 +129,16 @@
     const path = window.location.pathname;
     let defaultPalette = 'p1';
     
-    if (path.includes('paysagiste') || path.includes('jardinier')) {
+    if (path.includes('electricien')) {
       defaultPalette = 'p2';
-    } else if (path.includes('fleuriste')) {
+    } else if (path.includes('fleuriste')) || path.includes('pepinieriste')) {
       defaultPalette = 'p3';
-    } else if (path.includes('plombier')) {
+    } else if (path.includes('macon')) || path.includes('plombier')) || path.includes('chauffagiste')) {
       defaultPalette = 'p4';
-    } else if (path.includes('electricien')) {
+    } else if (path.includes('paysagiste') || path.includes('jardinier')) {
       defaultPalette = 'p5';
+    } else if (path.includes('peintre')) {
+      defaultPalette = 'p6';
     }
     
     document.getElementById('themeChanger').value = defaultPalette;
