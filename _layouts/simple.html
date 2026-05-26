@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan de Proximité</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- On va chercher la variable "metier" définie dans la page pour cibler les bons textes -->
+    {% assign info = site.data.metiers[page.metier] %}
+
+    <header class="main-header">
+        <div class="container header-flex">
+            <div class="logo">Artisan Local</div>
+            <nav class="nav-links">
+                <a href="#services">Prestations</a>
+                <a href="#contact" class="btn-nav">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>{{ info.titre }}</h1>
+            <p>{{ info.description }}</p>
+            <a href="tel:06XXXXXXXX" class="btn-cta">📞 Nous Contacter</a>
+        </div>
+    </section>
+
+    <section id="services" class="container section-padding">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="grid-3">
+            <div class="card-service">
+                <div class="icon">{{ info.icon_1 }}</div>
+                <h3>{{ info.service_1 }}</h3>
+                <p>{{ info.desc_1 }}</p>
+            </div>
+            <div class="card-service">
+                <div class="icon">{{ info.icon_2 }}</div>
+                <h3>{{ info.service_2 }}</h3>
+                <p>{{ info.desc_2 }}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="bg-dark text-light py-12 text-center">
+        <h2>Demander un devis</h2>
+        <p class="mt-4">Disponible du lundi au samedi.</p>
+    </section>
+
+</body>
+</html>
