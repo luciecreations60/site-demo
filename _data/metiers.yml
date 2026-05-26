@@ -1,14 +1,7 @@
 # Les textes pour le paysagiste
 paysagiste:
-  # Configuration Entreprise
-  nom: "Floc'H-Loïc"
   activite: "Paysagiste & Espaces Verts"
-  taglineLocal: "Artisan Local - Précy-sur-Oise"
-  telephone: "06 00 00 00 00"
-  telephoneLien: "tel:0600000000"
-  adresse: "Rue de la Tour du Moulin, 60460 Précy-sur-Oise"
-  zoneIntervention: "Précy-sur-Oise, Boran-sur-Oise, Chantilly, Gouvieux et alentours"
-
+  
   # Images (Unsplash)
   images:
     heroFond: "https://images.unsplash.com/photo-1558904541-efa8c3a30fc9?auto=format&fit=crop&w=1600&q=80"
@@ -17,27 +10,24 @@ paysagiste:
   # Textes
   textes:
     heroTitre: "L'art du jardin"
-    heroDescription: "Création, aménagement et entretien rigoureux de vos extérieurs dans le sud de l'Oise par l'entreprise Floc'H-Loïc."
+    heroDescription: "Création, aménagement et entretien rigoureux de vos extérieurs. Profitez d'un savoir-faire reconnu pour sublimer votre environnement au fil des saisons."
     valeursSectionTitre: "Nos Engagements & Valeurs"
-    valeursSectionSub: "Pourquoi confier votre jardin à l'entreprise Floc'H-Loïc ?"
+    valeursSectionSub: "Pourquoi nous confier votre jardin ?"
     servicesSectionTitre: "Nos Prestations d'Excellence"
     servicesSectionSub: "Des réalisations sur-mesure pour sublimer votre environnement."
     equipeSectionTitre: "À propos de votre artisan"
-    equipeDescription: "Passionné par le végétal et l'aménagement extérieur, Loïc Floc'h met ses compétences à votre disposition pour donner vie à vos projets. Accompagné de collaborateurs qualifiés, l'entreprise allie créativité et rigueur technique pour sublimer votre environnement au quotidien."
+    equipeDescription: "Passionné par le végétal et l'aménagement extérieur, votre artisan met ses compétences à votre disposition pour donner vie à vos projets. Accompagné de collaborateurs qualifiés, l'entreprise allie créativité et rigueur technique pour un résultat irréprochable au quotidien."
     portfolioSectionTitre: "Nos Dernières Réalisations"
     portfolioSectionSub: "Découvrez nos projets classés par spécialités dans la région."
 
   # Tableaux et Boucles
   valeurs:
-    - icone: "🌱"
-      titre: "Éco-responsabilité"
+    - titre: "Éco-responsabilité"
       description: "Utilisation de techniques respectueuses de la biodiversité locale et gestion raisonnée des déchets verts."
-    - icone: "🛠️"
-      titre: "Savoir-faire Artisan"
+    - titre: "Savoir-faire Artisan"
       description: "Un travail rigoureux, des finitions soignées et le respect des règles de l'art du paysage."
-    - icone: "🤝"
-      titre: "Proximité & Écoute"
-      description: "Un interlocuteur unique, des conseils personnalisés et une grande réactivité dans le sud de l'Oise."
+    - titre: "Proximité & Écoute"
+      description: "Un interlocuteur unique, des conseils personnalisés et une grande réactivité pour vos chantiers."
 
   services:
     - titre: "Aménagement Paysager"
@@ -71,18 +61,17 @@ paysagiste:
 
   partenaires:
     - nom: "Pépinières Locales"
-    - nom: "Fournisseurs Matériaux Oise"
+    - nom: "Fournisseurs Matériaux"
     - nom: "Crédit d'Impôt Service"
-    - nom: "Mairie de Précy"
 
   googleRating:
     note: "4.9 / 5"
     totalAvis: "24 avis Google"
     
   avisClients:
-    - auteur: "Michel R. (Chantilly)"
+    - auteur: "Michel R."
       texte: "Artisan très sérieux pour l'entretien de ma haie. Chantier propre et tarif très correct."
-    - auteur: "Sophie L. (Précy-sur-Oise)"
+    - auteur: "Sophie L."
       texte: "Superbe aménagement de notre massif. De très bons conseils sur le choix des plantes."
 
 # Les textes pour l'électricien
@@ -104,11 +93,9 @@ electricien:
     equipeDescription: "Professionnel qualifié et réactif, je mets mon expertise au service de vos projets de rénovation ou de dépannage. Soucieux du détail et des normes de sécurité, j'interviens rapidement pour garantir le confort et la sécurité de votre habitation."
 
   valeurs:
-    - icone: "⚡"
-      titre: "Sécurité & Normes"
+    - titre: "Sécurité & Normes"
       description: "Respect strict de la norme NF C 15-100 pour toutes les installations électriques."
-    - icone: "🛠️"
-      titre: "Matériel Pro"
+    - titre: "Matériel Pro"
       description: "Utilisation exclusive de composants de grandes marques (Legrand, Schneider) pour une durabilité maximale."
 
   services:
