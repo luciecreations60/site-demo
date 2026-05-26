@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Récupération dynamique du bon métier -->
+    <!-- Initialisation des deux sources de données -->
+    {% assign client = site.data.client %}
     {% assign info = site.data.metiers[page.metier] %}
     
-    <title>{{ info.nom }} | {{ info.activite }}</title>
+    <title>{{ client.nom }} | {{ info.activite }} {{ client.localite }}</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -74,7 +75,7 @@
       }
       .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 50px; font-size: 12px; margin-bottom: 24px; text-transform: uppercase; }
       .hero-title { font-size: 54px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2; }
-      .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #e5e2d5; font-weight: 300; }
+      .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #e5e2d5; font-weight: 300; line-height: 1.6; }
       .btn-main { background: var(--couleur-fond-ligne); color: var(--couleur-fond-bloc); padding: 16px 36px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
 
       /* SECTIONS */
@@ -144,19 +145,19 @@
     <header class="header">
       <div class="container header-flex">
         <div class="logo-box">
-          <span class="brand-name">{{ info.nom }}</span>
+          <span class="brand-name">{{ client.nom }}</span>
           <span class="brand-sub">{{ info.activite }}</span>
         </div>
-        <a href="{{ info.telephoneLien }}" class="btn-tel">📞 {{ info.telephone }}</a>
+        <a href="{{ client.telephoneLien }}" class="btn-tel">📞 {{ client.telephone }}</a>
       </div>
     </header>
 
     <!-- HERO -->
     <section class="hero">
       <div class="container text-center">
-        <span class="badge">{{ info.taglineLocal }}</span>
-        <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic">signé {{ info.nom }}</span></h1>
-        <p class="hero-text">{{ info.textes.heroDescription }}</p>
+        <span class="badge">Artisan Local — {{ client.localite }}</span>
+        <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic">signé {{ client.nom }}</span></h1>
+        <p class="hero-text">{{ info.textes.heroDescription }} Intervention rapide à {{ client.localite }} et ses alentours.</p>
         <a href="#contact" class="btn-main">Demander un devis gratuit →</a>
       </div>
     </section>
@@ -166,7 +167,7 @@
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">{{ info.textes.valeursSectionTitre }}</h2>
-          <p class="section-sub">{{ info.textes.valeursSectionSub }}</p>
+          <p class="section-sub">Pourquoi confier vos espaces extérieurs à l'entreprise {{ client.nom }} ?</p>
         </div>
         <div class="valeurs-grid">
           {% for v in info.valeurs %}
@@ -219,7 +220,7 @@
             </div>
           </div>
           <div>
-            <img src="{{ info.images.equipeArtisan }}" alt="Artisan Loïc Floc'h" class="about-img leaf-shape" />
+            <img src="{{ info.images.equipeArtisan }}" alt="{{ client.nom }}" class="about-img leaf-shape" />
           </div>
         </div>
       </div>
@@ -230,7 +231,7 @@
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">{{ info.textes.portfolioSectionTitre }}</h2>
-          <p class="section-sub">{{ info.textes.portfolioSectionSub }}</p>
+          <p class="section-sub">Découvrez nos projets classés par spécialités à {{ client.localite }} et dans sa région.</p>
         </div>
         <div class="portfolio-grid">
           {% for r in info.realisations %}
@@ -261,7 +262,7 @@
           <div>
             {% for a in info.avisClients %}
               <div class="review">
-                <span class="review-meta">{{ a.auteur }} ⭐⭐⭐⭐⭐</span>
+                <span class="review-meta">{{ a.auteur }} (Région de {{ client.localite }}) ⭐⭐⭐⭐⭐</span>
                 <p class="review-text">"{{ a.texte }}"</p>
               </div>
             {% endfor %}
@@ -282,16 +283,16 @@
     <!-- FOOTER / CONTACT -->
     <footer id="contact" class="footer">
       <div class="container text-center">
-        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez-nous votre extérieur</h2>
-        <p style="color: #e5e2d5; font-weight: 300; margin: 0;">Contactez l'entreprise {{ info.nom }} pour convenir d'un rendez-vous sur site.</p>
+        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez votre extérieur à {{ client.nom }}</h2>
+        <p style="color: #e5e2d5; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         <div class="info-box">
           <div>
-            <p class="info-label">📍 ADRESSE</p>
-            <p class="info-val">{{ info.adresse }}</p>
+            <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
+            <p class="info-val">{{ client.adresse }}</p>
           </div>
           <div>
-            <p class="info-label">🚗 ZONE D'INTERVENTION</p>
-            <p class="info-val">{{ info.zoneIntervention }}</p>
+            <p class="info-label">🚗 ZONE D'INTERVENTION ACTUELLE</p>
+            <p class="info-val">{{ client.zoneIntervention }}</p>
           </div>
         </div>
       </div>
