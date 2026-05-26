@@ -86,7 +86,7 @@ electricien:
   # Images spécifiques Électricien
   images:
     heroFond: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80"
-    equipeArtisan: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=800&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1732660780054-0cf9fadb9d30?auto=format&fit=crop&w=800&q=80"
 
   textes:
     heroTitre: "Votre installation en toute sécurité"
@@ -117,7 +117,7 @@ electricien:
       image: "https://images.unsplash.com/photo-1576446470246-499c738d1c8e?auto=format&fit=crop&w=800&q=80"
     - titre: "Dépannage & Panne"
       description: "Recherche rapide de pannes, court-circuits et remplacement d'appareillage."
-      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1588616437819-7d30e6f76e66?auto=format&fit=crop&w=800&q=80"
     - titre: "Mise en conformité"
       description: "Rénovation des vieilles installations, mise à la terre et diagnostics."
       image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
