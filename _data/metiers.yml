@@ -1,13 +1,89 @@
 # Les textes pour le paysagiste
 paysagiste:
-  titre: "Besoin d'entretenir ou d'aménager votre jardin ?"
-  description: "Artisan paysagiste de proximité à Précy-sur-Oise, Gouvieux et Chantilly."
-  icon_1: "✂️"
-  service_1: "Entretien régulier"
-  desc_1: "Tonte de pelouse, taille de haies et ramassage des feuilles."
-  icon_2: "🌱"
-  service_2: "Création & Plantations"
-  desc_2: "Engazonnement, plantation d'arbustes et fleurs de saison."
+  # Configuration Entreprise
+  nom: "Floc'H-Loïc"
+  activite: "Paysagiste & Espaces Verts"
+  taglineLocal: "Artisan Local - Précy-sur-Oise"
+  telephone: "06 00 00 00 00"
+  telephoneLien: "tel:0600000000"
+  adresse: "Rue de la Tour du Moulin, 60460 Précy-sur-Oise"
+  zoneIntervention: "Précy-sur-Oise, Boran-sur-Oise, Chantilly, Gouvieux et alentours"
+
+  # Images (Unsplash)
+  images:
+    heroFond: "https://images.unsplash.com/photo-1558904541-efa8c3a30fc9?auto=format&fit=crop&w=1600&q=80"
+    equipeArtisan: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=800&q=80"
+
+  # Textes
+  textes:
+    heroTitre: "L'art du jardin"
+    heroDescription: "Création, aménagement et entretien rigoureux de vos extérieurs dans le sud de l'Oise par l'entreprise Floc'H-Loïc."
+    valeursSectionTitre: "Nos Engagements & Valeurs"
+    valeursSectionSub: "Pourquoi confier votre jardin à l'entreprise Floc'H-Loïc ?"
+    servicesSectionTitre: "Nos Prestations d'Excellence"
+    servicesSectionSub: "Des réalisations sur-mesure pour sublimer votre environnement."
+    equipeSectionTitre: "À propos de votre artisan"
+    equipeDescription: "Passionné par le végétal et l'aménagement extérieur, Loïc Floc'h met ses compétences à votre disposition pour donner vie à vos projets. Accompagné de collaborateurs qualifiés, l'entreprise allie créativité et rigueur technique pour sublimer votre environnement au quotidien."
+    portfolioSectionTitre: "Nos Dernières Réalisations"
+    portfolioSectionSub: "Découvrez nos projets classés par spécialités dans la région."
+
+  # Tableaux et Boucles
+  valeurs:
+    - icone: "🌱"
+      titre: "Éco-responsabilité"
+      description: "Utilisation de techniques respectueuses de la biodiversité locale et gestion raisonnée des déchets verts."
+    - icone: "🛠️"
+      titre: "Savoir-faire Artisan"
+      description: "Un travail rigoureux, des finitions soignées et le respect des règles de l'art du paysage."
+    - icone: "🤝"
+      titre: "Proximité & Écoute"
+      description: "Un interlocuteur unique, des conseils personnalisés et une grande réactivité dans le sud de l'Oise."
+
+  services:
+    - titre: "Aménagement Paysager"
+      description: "Création de massifs, engazonnement, maçonnerie paysagère."
+      image: "https://images.unsplash.com/photo-1776397283708-58f3d080b7d0?auto=format&fit=crop&w=800&q=80"
+    - titre: "Entretien de Jardins"
+      description: "Taille de haies, tonte, élagage et ramassage de feuilles."
+      image: "https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?auto=format&fit=crop&w=800&q=80"
+    - titre: "Clôtures & Portails"
+      description: "Pose de clôtures, claustras et aménagements d'accès."
+      image: "https://images.unsplash.com/photo-1662525196157-a8676b1c2756?auto=format&fit=crop&w=800&q=80"
+
+  chiffres:
+    - nombre: "15+"
+      label: "Années d'expérience"
+    - nombre: "350+"
+      label: "Jardins sublimés"
+    - nombre: "100%"
+      label: "Clients satisfaits"
+
+  realisations:
+    - titre: "Aménagement de massifs"
+      theme: "Aménagement"
+      image: "https://images.unsplash.com/photo-1776397283708-58f3d080b7d0?auto=format&fit=crop&w=800&q=80"
+    - titre: "Entretien de gazon"
+      theme: "Entretien"
+      image: "https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?auto=format&fit=crop&w=800&q=80"
+    - titre: "Terrasses & Accès"
+      theme: "Terrasse"
+      image: "https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?auto=format&fit=crop&w=800&q=80"
+
+  partenaires:
+    - nom: "Pépinières Locales"
+    - nom: "Fournisseurs Matériaux Oise"
+    - nom: "Crédit d'Impôt Service"
+    - nom: "Mairie de Précy"
+
+  googleRating:
+    note: "4.9 / 5"
+    totalAvis: "24 avis Google"
+    
+  avisClients:
+    - auteur: "Michel R. (Chantilly)"
+      texte: "Artisan très sérieux pour l'entretien de ma haie. Chantier propre et tarif très correct."
+    - auteur: "Sophie L. (Précy-sur-Oise)"
+      texte: "Superbe aménagement de notre massif. De très bons conseils sur le choix des plantes."
 
 # Les textes pour l'électricien
 electricien:
