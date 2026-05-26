@@ -1,0 +1,9 @@
+# ==========================================
+# CONFIGURATION DU PROSPECT (À MODIFIER AVANT CHAQUE DÉMO)
+# ==========================================
+nom: "Jean Électricité"
+telephone: "06 12 34 56 78"
+telephoneLien: "tel:0612345678"
+adresse: "14 Rue du Connétable, 60500 Chantilly"
+localite: "Chantilly"
+zoneIntervention: "Chantilly, Gouvieux, Senlis et alentours"
