@@ -1,389 +1,109 @@
-<!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  /* =========================================================================
+     LES 41 PALETTES DE COULEURS
+     ========================================================================= */
+  :root, [data-theme="p1"] {
+    --heroFond: url('{{ info.images.heroFond }}');
+    --couleur-fond-site: #f7f9fa; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #e27d60; --couleur-texte: #4a5a64; --couleur-accent: #41b3a3;
+  }
+  [data-theme="p2"] { --couleur-fond-site: #f4f7f5; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1e3f20; --couleur-texte: #4a554d; --couleur-accent: #2e7d32; }
+  [data-theme="p3"] { --couleur-fond-site: #faf6f0; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #4a283d; --couleur-texte: #6b5b65; --couleur-accent: #d4a373; }
+  [data-theme="p4"] { --couleur-fond-site: #f0f4f8; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #0f2d4a; --couleur-texte: #48535e; --couleur-accent: #0070f3; }
+  [data-theme="p5"] { --couleur-fond-site: #111827; --couleur-fond-site-light: #1f2937; --couleur-fond-bloc: #ffffff; --couleur-texte: #9ca3af; --couleur-accent: #f59e0b; }
+  [data-theme="p6"] { --couleur-fond-site: #fcfbf9; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #292524; --couleur-texte: #57534e; --couleur-accent: #ea580c; }
+  [data-theme="p7"] { --couleur-fond-site: #f8fafc; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #0f172a; --couleur-texte: #334155; --couleur-accent: #0d9488; }
+  /* ... Colle ici toutes les autres lignes de p8 à p41 de ma réponse précédente ... */
+  [data-theme="p41"] { --couleur-fond-site: #111625; --couleur-fond-site-light: #1e293b; --couleur-fond-bloc: #38bdf8; --couleur-texte: #94a3b8; --couleur-accent: #0f172a; }
+
+  /* =========================================================================
+     STYLE GÉNÉRAL
+     ========================================================================= */
+  body {
+    margin: 0; font-family: 'Inter', sans-serif;
+    background-color: var(--couleur-fond-site); color: var(--couleur-texte);
+    -webkit-font-smoothing: antialiased; transition: all 0.3s ease;
+  }
+  h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .text-center { text-align: center; }
+  .mb-12 { margin-bottom: 48px; }
+  .italic { font-style: italic; color: var(--couleur-accent); }
+  .leaf-shape { border-radius: 40px 4px 40px 4px !important; }
+  .header { position: sticky; top: 0; background: rgba(255, 255, 255, 0.98); border-bottom: 1px solid #e2e8f0; z-index: 50; }
+  .header-flex { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+  .brand-name { display: block; font-size: 24px; font-weight: bold; color: var(--couleur-fond-bloc); }
+  .brand-sub { display: block; font-size: 11px; text-transform: uppercase; color: var(--couleur-texte); letter-spacing: 1px; margin-top: 2px; opacity: 0.8; }
+  .nav-actions { display: flex; align-items: center; gap: 16px; }
+  .theme-selector { padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; background-color: #fff; font-size: 13px; color: #334155; cursor: pointer; }
+  .btn-tel { background: var(--couleur-fond-bloc); color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: 600; }
+  .hero { background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), var(--heroFond) no-repeat center/cover; padding: 160px 0; color: white; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 50px; font-size: 12px; margin-bottom: 24px; text-transform: uppercase; }
+  .hero-title { font-size: 54px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2; }
+  .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #f1f5f9; font-weight: 300; line-height: 1.6; }
+  .btn-main { background: var(--couleur-accent); color: white; padding: 16px 36px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
+  .section { padding: 100px 0; }
+  .bg-white { background: var(--couleur-fond-site-light); }
+  .bg-light { background: var(--couleur-fond-site); }
+  .section-title { font-size: 40px; color: var(--couleur-fond-bloc); margin: 0 0 16px 0; }
+  .section-sub { color: var(--couleur-texte); opacity: 0.8; font-size: 16px; font-weight: 300; max-width: 600px; margin: 0 auto; }
+  .valeurs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+  .valeur-card { background: var(--couleur-fond-site); padding: 32px; border-radius: 16px; border-left: 4px solid var(--couleur-accent); }
+  .valeur-icon { font-size: 32px; margin-bottom: 16px; }
+  .valeur-titre { font-size: 22px; margin: 0 0 12px 0; color: var(--couleur-fond-bloc); }
+  .valeur-text { margin: 0; color: var(--couleur-texte); line-height: 1.6; font-weight: 300; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+  .service-bg-card { position: relative; height: 380px; overflow: hidden; display: flex; align-items: flex-end; color: white; text-decoration: none; }
+  .service-bg-card .img-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 20%, rgba(15, 23, 42, 0.4) 60%, rgba(0,0,0,0) 100%); z-index: 1; }
+  .service-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .service-bg-card:hover .service-bg-img { transform: scale(1.05); }
+  .service-content { position: relative; z-index: 2; padding: 40px; }
+  .service-titre { font-size: 26px; margin: 0 0 12px 0; }
+  .service-desc { margin: 0; font-size: 14px; color: #cbd5e1; line-height: 1.5; font-weight: 300; }
+  .about-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center; }
+  .about-img { width: 100%; height: 400px; object-fit: cover; }
+  .chiffres-flex { display: flex; justify-content: space-between; margin-top: 40px; background: var(--couleur-fond-site); padding: 24px; border-radius: 16px; border: 1px solid #e2e8f0; }
+  .chiffre-item { text-align: center; flex: 1; }
+  .chiffre-num { font-size: 36px; font-weight: 900; color: var(--couleur-accent); display: block; }
+  .chiffre-label { font-size: 12px; color: var(--couleur-texte); text-transform: uppercase; margin-top: 4px; display: block; opacity: 0.8; }
+  .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+  .portfolio-card { background: var(--couleur-fond-site-light); overflow: hidden; border: 1px solid #e2e8f0; }
+  .portfolio-img-box { position: relative; height: 260px; overflow: hidden; }
+  .portfolio-img { width: 100%; height: 100%; object-fit: cover; }
+  .portfolio-theme { position: absolute; top: 16px; left: 16px; background: var(--couleur-fond-bloc); color: white; padding: 4px 12px; font-size: 11px; text-transform: uppercase; font-weight: 600; border-radius: 4px; }
+  .portfolio-info { padding: 20px; font-weight: 600; color: var(--couleur-fond-bloc); font-size: 16px; }
+  .reviews-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
+  .widget { background: var(--couleur-fond-site-light); border: 1px solid #e2e8f0; padding: 32px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+  .rating-num { font-size: 44px; font-weight: 900; color: var(--couleur-fond-bloc); }
+  .rating-stars { color: #f59e0b; font-size: 20px; margin: 8px 0; }
+  .review { background: var(--couleur-fond-site); padding: 24px; border-radius: 16px; text-align: left; margin-bottom: 16px; }
+  .review-meta { font-weight: bold; font-size: 14px; color: var(--couleur-fond-bloc); margin-bottom: 8px; display: block; }
+  .review-text { font-style: italic; color: var(--couleur-texte); margin: 0; font-size: 14px; line-height: 1.5; font-weight: 300; }
+  .footer { background: var(--couleur-fond-bloc); color: white; padding: 80px 0; border-top: 8px solid var(--couleur-accent); }
+  .info-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 32px; border-radius: 24px; max-width: 700px; margin: 40px auto 0 auto; }
+  .info-label { font-size: 11px; color: var(--couleur-accent); font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
+  .info-val { margin: 0; font-size: 15px; color: #cbd5e1; }
+</style>
+
+<script>
+  function changePalette(themeName) {
+    document.documentElement.setAttribute('data-theme', themeName);
+  }
+  
+  window.addEventListener('DOMContentLoaded', () => {
+    const path = window.location.pathname;
+    let defaultPalette = 'p1';
     
-    {% assign client = site.data.client %}
-    {% assign info = site.data.metiers[page.metier] %}
+    if (path.includes('paysagiste') || path.includes('jardinier')) {
+      defaultPalette = 'p2';
+    } else if (path.includes('fleuriste')) {
+      defaultPalette = 'p3';
+    } else if (path.includes('plombier')) {
+      defaultPalette = 'p4';
+    } else if (path.includes('electricien')) {
+      defaultPalette = 'p5';
+    }
     
-    <title>{{ client.nom }} | {{ info.activite }} {{ client.localite }}</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-      /* =========================================================================
-         LES 41 PALETTES DE COULEURS ISSUES DE NOTRE CONVERSATION PRÉCÉDENTE
-         ========================================================================= */
-
-      :root, [data-theme="p1"] {
-        --heroFond: url('{{ info.images.heroFond }}');
-        --couleur-fond-site: #f7f9fa; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #e27d60; --couleur-texte: #4a5a64; --couleur-accent: #41b3a3;
-      }
-      [data-theme="p2"] { --couleur-fond-site: #f4f7f5; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1e3f20; --couleur-texte: #4a554d; --couleur-accent: #2e7d32; }
-      [data-theme="p3"] { --couleur-fond-site: #faf6f0; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #4a283d; --couleur-texte: #6b5b65; --couleur-accent: #d4a373; }
-      [data-theme="p4"] { --couleur-fond-site: #f0f4f8; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #0f2d4a; --couleur-texte: #48535e; --couleur-accent: #0070f3; }
-      [data-theme="p5"] { --couleur-fond-site: #111827; --couleur-fond-site-light: #1f2937; --couleur-fond-bloc: #ffffff; --couleur-texte: #9ca3af; --couleur-accent: #f59e0b; }
-      [data-theme="p6"] { --couleur-fond-site: #fcfbf9; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #292524; --couleur-texte: #57534e; --couleur-accent: #ea580c; }
-      [data-theme="p7"] { --couleur-fond-site: #f8fafc; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #0f172a; --couleur-texte: #334155; --couleur-accent: #0d9488; }
-      [data-theme="p8"] { --couleur-fond-site: #edf5e1; --couleur-fond-site-light: #2f2fa2; --couleur-fond-bloc: #ffffff; --couleur-texte: #379683; --couleur-accent: #5cdb95; }
-      [data-theme="p9"] { --couleur-fond-site: #ffeec1; --couleur-fond-site-light: #96ceb4; --couleur-fond-bloc: #ff6f69; --couleur-texte: #2d3a3a; --couleur-accent: #ffcc5c; }
-      [data-theme="p10"] { --couleur-fond-site: #1d2731; --couleur-fond-site-light: #393f4d; --couleur-fond-bloc: #fbeec1; --couleur-texte: #eed9c4; --couleur-accent: #66757f; }
-      [data-theme="p11"] { --couleur-fond-site: #000000; --couleur-fond-site-light: #151515; --couleur-fond-bloc: #ff8303; --couleur-texte: #a35709; --couleur-accent: #2a2a2a; }
-      [data-theme="p12"] { --couleur-fond-site: #50514f; --couleur-fond-site-light: #70c1b3; --couleur-fond-bloc: #f25f5c; --couleur-texte: #ffe066; --couleur-accent: #247ba0; }
-      [data-theme="p13"] { --couleur-fond-site: #19181a; --couleur-fond-site-light: #2f2fa2; --couleur-fond-bloc: #f64c72; --couleur-texte: #d3a625; --couleur-accent: #bc4639; }
-      [data-theme="p14"] { --couleur-fond-site: #111111; --couleur-fond-site-light: #333333; --couleur-fond-bloc: #0055ff; --couleur-texte: #ffffff; --couleur-accent: #555555; }
-      [data-theme="p15"] { --couleur-fond-site: #f4f4f4; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #d21f3c; --couleur-texte: #1a1a1a; --couleur-accent: #990011; }
-      [data-theme="p16"] { --couleur-fond-site: #f5f5f5; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1e3d59; --couleur-texte: #17b978; --couleur-accent: #ff6f3c; }
-      [data-theme="p17"] { --couleur-fond-site: #0f172a; --couleur-fond-site-light: #1e293b; --couleur-fond-bloc: #38bdf8; --couleur-texte: #94a3b8; --couleur-accent: #ff7e67; }
-      [data-theme="p18"] { --couleur-fond-site: #1c1c1c; --couleur-fond-site-light: #2d142c; --couleur-fond-bloc: #e11d48; --couleur-texte: #a0a0a0; --couleur-accent: #801336; }
-      [data-theme="p19"] { --couleur-fond-site: #f4eedb; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #2b2927; --couleur-texte: #5c5854; --couleur-accent: #d9383a; }
-      [data-theme="p20"] { --couleur-fond-site: #120924; --couleur-fond-site-light: #2c003e; --couleur-fond-bloc: #fe346e; --couleur-texte: #cbd5e1; --couleur-accent: #512b58; }
-      [data-theme="p21"] { --couleur-fond-site: #f8fafc; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1d2731; --couleur-texte: #007cc7; --couleur-accent: #203c56; }
-      [data-theme="p22"] { --couleur-fond-site: #0b132b; --couleur-fond-site-light: #1c2541; --couleur-fond-bloc: #5bc0be; --couleur-texte: #cbd5e1; --couleur-accent: #3a506b; }
-      [data-theme="p23"] { --couleur-fond-site: #f0f9ff; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #00a8cc; --couleur-texte: #0c7b93; --couleur-accent: #27496d; }
-      [data-theme="p24"] { --couleur-fond-site: #e8ffff; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #056676; --couleur-texte: #00adb5; --couleur-accent: #a3de83; }
-      [data-theme="p25"] { --couleur-fond-site: #222831; --couleur-fond-site-light: #393e46; --couleur-fond-bloc: #00adb5; --couleur-texte: #eeeeee; --couleur-accent: #ff5722; }
-      [data-theme="p26"] { --couleur-fond-site: #f4f4f4; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #ff414d; --couleur-texte: #1a1a24; --couleur-accent: #242582; }
-      [data-theme="p27"] { --couleur-fond-site: #0d0d0d; --couleur-fond-site-light: #1a1a1a; --couleur-fond-bloc: #ffffff; --couleur-texte: #cccccc; --couleur-accent: #ff0055; }
-      [data-theme="p28"] { --couleur-fond-site: #eff0f3; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #0d0d0d; --couleur-texte: #2a2a2a; --couleur-accent: #ff5e62; }
-      [data-theme="p29"] { --couleur-fond-site: #fbeeed; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #4a0e17; --couleur-texte: #721c24; --couleur-accent: #b91c1c; }
-      [data-theme="p30"] { --couleur-fond-site: #ffffff; --couleur-fond-site-light: #f8fafc; --couleur-fond-bloc: #fc913a; --couleur-texte: #468966; --couleur-accent: #f9d423; }
-      [data-theme="p31"] { --couleur-fond-site: #f4f6f9; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1e2022; --couleur-texte: #686d76; --couleur-accent: #3772ff; }
-      [data-theme="p32"] { --couleur-fond-site: #fff9f4; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #6e3b3b; --couleur-texte: #914e4e; --couleur-accent: #e8a87c; }
-      [data-theme="p33"] { --couleur-fond-site: #111111; --couleur-fond-site-light: #222222; --couleur-fond-bloc: #d4af37; --couleur-texte: #e5e5e5; --couleur-accent: #aa771c; }
-      [data-theme="p34"] { --couleur-fond-site: #f4f9f4; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #2b4f43; --couleur-texte: #4a7c59; --couleur-accent: #90be6d; }
-      [data-theme="p35"] { --couleur-fond-site: #f0fdfa; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #00d2c4; --couleur-texte: #007a87; --couleur-accent: #f97316; }
-      [data-theme="p36"] { --couleur-fond-site: #1b262c; --couleur-fond-site-light: #0f4c75; --couleur-fond-bloc: #bbe1fa; --couleur-texte: #cbd5e1; --couleur-accent: #3282b8; }
-      [data-theme="p37"] { --couleur-fond-site: #ffffff; --couleur-fond-site-light: #fdf2f8; --couleur-fond-bloc: #ff007f; --couleur-texte: #222831; --couleur-accent: #3f72af; }
-      [data-theme="p38"] { --couleur-fond-site: #1a1a24; --couleur-fond-site-light: #1f4068; --couleur-fond-bloc: #e43f5a; --couleur-texte: #e5e5e5; --couleur-accent: #162447; }
-      [data-theme="p39"] { --couleur-fond-site: #f8fafc; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #2c3e50; --couleur-texte: #7f8c8d; --couleur-accent: #1abc9c; }
-      [data-theme="p40"] { --couleur-fond-site: #faf7f2; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #4f3b32; --couleur-texte: #7a6255; --couleur-accent: #0284c7; }
-      [data-theme="p41"] { --couleur-fond-site: #111625; --couleur-fond-site-light: #1e293b; --couleur-fond-bloc: #38bdf8; --couleur-texte: #94a3b8; --couleur-accent: #0f172a; }
-
-      /* =========================================================================
-         STYLE GÉNÉRAL
-         ========================================================================= */
-      body {
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        background-color: var(--couleur-fond-site);
-        color: var(--couleur-texte);
-        -webkit-font-smoothing: antialiased;
-        transition: all 0.3s ease;
-      }
-
-      h1, h2, h3, .font-serif {
-        font-family: 'Playfair Display', serif;
-      }
-
-      .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-      .text-center { text-align: center; }
-      .mb-12 { margin-bottom: 48px; }
-      .italic { font-style: italic; color: var(--couleur-accent); }
-      .leaf-shape { border-radius: 40px 4px 40px 4px !important; }
-
-      /* NAVIGATION & DÉMO SELECTOR */
-      .header {
-        position: sticky;
-        top: 0;
-        background: rgba(255, 255, 255, 0.98);
-        border-bottom: 1px solid #e2e8f0;
-        z-index: 50;
-      }
-      .header-flex { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-      .brand-name { display: block; font-size: 24px; font-weight: bold; color: var(--couleur-fond-bloc); }
-      .brand-sub { display: block; font-size: 11px; text-transform: uppercase; color: var(--couleur-texte); letter-spacing: 1px; margin-top: 2px; opacity: 0.8; }
-      
-      .nav-actions { display: flex; align-items: center; gap: 16px; }
-      .theme-selector {
-        padding: 8px 12px; border-radius: 6px; border: 1px solid #cbd5e1; background-color: #fff; font-size: 13px; font-family: inherit; color: #334155; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-      }
-      .theme-selector:focus { outline: 2px solid var(--couleur-accent); }
-
-      .btn-tel { background: var(--couleur-fond-bloc); color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: 600; }
-
-      /* HERO */
-      .hero {
-        background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), var(--heroFond) no-repeat center/cover;
-        padding: 160px 0; color: white;
-      }
-      .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 50px; font-size: 12px; margin-bottom: 24px; text-transform: uppercase; }
-      .hero-title { font-size: 54px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2; }
-      .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #f1f5f9; font-weight: 300; line-height: 1.6; }
-      .btn-main { background: var(--couleur-accent); color: white; padding: 16px 36px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-
-      /* SECTIONS */
-      .section { padding: 100px 0; }
-      .bg-white { background: var(--couleur-fond-site-light); }
-      .bg-light { background: var(--couleur-fond-site); }
-      .section-title { font-size: 40px; color: var(--couleur-fond-bloc); margin: 0 0 16px 0; }
-      .section-sub { color: var(--couleur-texte); opacity: 0.8; font-size: 16px; margin: 0; font-weight: 300; max-width: 600px; margin: 0 auto; }
-
-      /* VALEURS */
-      .valeurs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-      .valeur-card { background: var(--couleur-fond-site); padding: 32px; border-radius: 16px; border-left: 4px solid var(--couleur-accent); }
-      .valeur-icon { font-size: 32px; margin-bottom: 16px; }
-      .valeur-titre { font-size: 22px; margin: 0 0 12px 0; color: var(--couleur-fond-bloc); }
-      .valeur-text { margin: 0; color: var(--couleur-texte); line-height: 1.6; font-weight: 300; }
-
-      /* SERVICES */
-      .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-      .service-bg-card { position: relative; height: 380px; overflow: hidden; display: flex; align-items: flex-end; color: white; text-decoration: none; }
-      .service-bg-card .img-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 20%, rgba(15, 23, 42, 0.4) 60%, rgba(0,0,0,0) 100%); z-index: 1; }
-      .service-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-      .service-bg-card:hover .service-bg-img { transform: scale(1.05); }
-      .service-content { position: relative; z-index: 2; padding: 40px; }
-      .service-titre { font-size: 26px; margin: 0 0 12px 0; font-family: 'Playfair Display'; }
-      .service-desc { margin: 0; font-size: 14px; color: #cbd5e1; line-height: 1.5; font-weight: 300; }
-
-      /* CHIFFRES & EQUIPE */
-      .about-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center; }
-      .about-img { width: 100%; height: 400px; object-fit: cover; }
-      .chiffres-flex { display: flex; justify-content: space-between; margin-top: 40px; background: var(--couleur-fond-site); padding: 24px; border-radius: 16px; border: 1px solid #e2e8f0; }
-      .chiffre-item { text-align: center; flex: 1; }
-      .chiffre-num { font-size: 36px; font-weight: 900; color: var(--couleur-accent); display: block; font-family: 'Playfair Display'; }
-      .chiffre-label { font-size: 12px; color: var(--couleur-texte); text-transform: uppercase; tracking: 0.5px; margin-top: 4px; display: block; opacity: 0.8; }
-
-      /* PORTFOLIO */
-      .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-      .portfolio-card { background: var(--couleur-fond-site-light); overflow: hidden; border: 1px solid #e2e8f0; }
-      .portfolio-img-box { position: relative; height: 260px; overflow: hidden; }
-      .portfolio-img { width: 100%; height: 100%; object-fit: cover; }
-      .portfolio-theme { position: absolute; top: 16px; left: 16px; background: var(--couleur-fond-bloc); color: white; padding: 4px 12px; font-size: 11px; text-transform: uppercase; font-weight: 600; border-radius: 4px; }
-      .portfolio-info { padding: 20px; font-weight: 600; color: var(--couleur-fond-bloc); font-size: 16px; }
-
-      /* REVIEWS */
-      .reviews-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
-      .widget { background: var(--couleur-fond-site-light); border: 1px solid #e2e8f0; padding: 32px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
-      .rating-num { font-size: 44px; font-weight: 900; color: var(--couleur-fond-bloc); font-family: 'Playfair Display'; }
-      .rating-stars { color: #f59e0b; font-size: 20px; margin: 8px 0; }
-      .review { background: var(--couleur-fond-site); padding: 24px; border-radius: 16px; text-align: left; margin-bottom: 16px; }
-      .review-meta { font-weight: bold; font-size: 14px; color: var(--couleur-fond-bloc); margin-bottom: 8px; display: block; }
-      .review-text { font-style: italic; color: var(--couleur-texte); margin: 0; font-size: 14px; line-height: 1.5; font-weight: 300; }
-
-      /* FOOTER */
-      .footer { background: var(--couleur-fond-bloc); color: white; padding: 80px 0; border-top: 8px solid var(--couleur-accent); }
-      .info-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 32px; border-radius: 24px; max-width: 700px; margin: 40px auto 0 auto; }
-      .info-label { font-size: 11px; color: var(--couleur-accent); font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
-      .info-val { margin: 0; font-size: 15px; color: #cbd5e1; }
-    </style>
-  </head>
-  <body>
-
-    <header class="header">
-      <div class="container header-flex">
-        <div class="logo-box">
-          <span class="brand-name">{{ client.nom }}</span>
-          <span class="brand-sub">{{ info.activite }}</span>
-        </div>
-        
-        <div class="nav-actions">
-          <select id="themeChanger" class="theme-selector" onchange="changePalette(this.value)">
-            <option value="p1">1. Coloré et équilibré</option>
-            <option value="p2">2. Paysagiste (Conseillé)</option>
-            <option value="p3">3. Fleuriste (Conseillé)</option>
-            <option value="p4">4. Plombier (Conseillé)</option>
-            <option value="p5">5. Électricien (Conseillé)</option>
-            <option value="p6">6. Maçon / Peintre</option>
-            <option value="p7">7. Thème Générique Artisan</option>
-            <option value="p8">8. Couleurs vives</option>
-            <option value="p9">9. Naturel et terreux</option>
-            <option value="p10">10. Élégant et sophistiqué</option>
-            <option value="p11">11. Violets et bleu profond</option>
-            <option value="p12">12. Contemporain et audacieux</option>
-            <option value="p13">13. Animé et invitant</option>
-            <option value="p14">14. Frappant et simple</option>
-            <option value="p15">15. Couleur Rouge et vif</option>
-            <option value="p16">16. Élégante mais accessible</option>
-            <option value="p17">17. Élégant et futuriste</option>
-            <option value="p18">18. Texturé et dynamique</option>
-            <option value="p19">19. Minimal mais chaleureux</option>
-            <option value="p20">20. Vif et net</option>
-            <option value="p21">21. Propre et énergique</option>
-            <option value="p22">22. Corporatif et traditionnel</option>
-            <option value="p23">23. Bleu et rafraîchissant</option>
-            <option value="p24">24. Claire et moderne</option>
-            <option value="p25">25. Vibrant et élégant</option>
-            <option value="p26">26. Éclat de jeunesse</option>
-            <option value="p27">27. Tech haut de gamme</option>
-            <option value="p28">28. Minimalisme scandinave</option>
-            <option value="p29">29. Fruits des bois</option>
-            <option value="p30">30. Énergie pop</option>
-            <option value="p31">31. Style corporate moderne</option>
-            <option value="p32">32. Douceur d'automne</option>
-            <option value="p33">33. Glamour et luxe</option>
-            <option value="p34">34. Écologique & Bio</option>
-            <option value="p35">35. Lumineux & Énergique</option>
-            <option value="p36">36. Enneigé mais chaud</option>
-            <option value="p37">37. Riche et coloré</option>
-            <option value="p38">38. Moderne et minimaliste</option>
-            <option value="p39">39. Couleurs linéaires (Flat)</option>
-            <option value="p40">40. Éclectique et paisible</option>
-            <option value="p41">41. Slate minimal dark</option>
-          </select>
-          
-          <a href="{{ client.telephoneLien }}" class="btn-tel">📞 {{ client.telephone }}</a>
-        </div>
-      </div>
-    </header>
-
-    <section class="hero">
-      <div class="container text-center">
-        <span class="badge">Artisan Local — {{ client.localite }}</span>
-        <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic">signé {{ client.nom }}</span></h1>
-        <p class="hero-text">{{ info.textes.heroDescription }} Intervention rapide à {{ client.localite }} et ses alentours.</p>
-        <a href="#contact" class="btn-main">Demander un devis gratuit →</a>
-      </div>
-    </section>
-
-    <section class="section bg-white">
-      <div class="container">
-        <div class="text-center mb-12">
-          <h2 class="section-title">{{ info.textes.valeursSectionTitre }}</h2>
-          <p class="section-sub">Pourquoi confier vos projets à l'entreprise {{ client.nom }} ?</p>
-        </div>
-        <div class="valeurs-grid">
-          {% for v in info.valeurs %}
-            <div class="valeur-card">
-              <div class="valeur-icon">{{ v.icone }}</div>
-              <h3 class="valeur-titre">{{ v.titre }}</h3>
-              <p class="valeur-text">{{ v.description }}</p>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="section bg-light">
-      <div class="container">
-        <div class="text-center mb-12">
-          <h2 class="section-title">{{ info.textes.servicesSectionTitre }}</h2>
-          <p class="section-sub">{{ info.textes.servicesSectionSub }}</p>
-        </div>
-        <div class="services-grid">
-          {% for s in info.services %}
-            <div class="service-bg-card leaf-shape">
-              <img src="{{ s.image }}" alt="{{ s.titre }}" class="service-bg-img" />
-              <div class="img-overlay"></div>
-              <div class="service-content">
-                <h3 class="service-titre">{{ s.titre }}</h3>
-                <p class="service-desc">{{ s.description }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <section class="section bg-white">
-      <div class="container">
-        <div class="about-split">
-          <div>
-            <h2 class="section-title" style="text-align: left;">{{ info.textes.equipeSectionTitre }}</h2>
-            <p style="line-height: 1.7; font-weight: 300; margin-bottom: 24px;">{{ info.textes.equipeDescription }}</p>
-            <div class="chiffres-flex">
-              {% for c in info.chiffres %}
-                <div class="chiffre-item">
-                  <span class="chiffre-num">{{ c.nombre }}</span>
-                  <span class="chiffre-label">{{ c.label }}</span>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-          <div>
-            <img src="{{ info.images.equipeArtisan }}" alt="{{ client.nom }}" class="about-img leaf-shape" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="realisations" class="section bg-light">
-      <div class="container">
-        <div class="text-center mb-12">
-          <h2 class="section-title">{{ info.textes.portfolioSectionTitre }}</h2>
-          <p class="section-sub">Découvrez nos projets classés par spécialités à {{ client.localite }} et dans sa région.</p>
-        </div>
-        <div class="portfolio-grid">
-          {% for r in info.realisations %}
-            <div class="portfolio-card leaf-shape">
-              <div class="portfolio-img-box">
-                <span class="portfolio-theme">{{ r.theme }}</span>
-                <img src="{{ r.image }}" alt="{{ r.titre }}" class="portfolio-img" />
-              </div>
-              <div class="portfolio-info">
-                <p style="margin:0;">{{ r.titre }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-
-    <section class="section bg-white">
-      <div class="container">
-        <div class="reviews-split">
-          <div class="widget">
-            <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 12px; opacity: 0.7;">Note Globale</span>
-            <div class="rating-num">{{ info.googleRating.note }}</div>
-            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
-            <span style="font-size: 14px; opacity: 0.7;">{{ info.googleRating.totalAvis }} certifiés</span>
-          </div>
-          <div>
-            {% for a in info.avisClients %}
-              <div class="review">
-                <span class="review-meta">{{ a.auteur }} (Région de {{ client.localite }}) ⭐⭐⭐⭐⭐</span>
-                <p class="review-text">"{{ a.texte }}"</p>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer id="contact" class="footer">
-      <div class="container text-center">
-        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à {{ client.nom }}</h2>
-        <p style="color: #cbd5e1; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
-        <div class="info-box">
-          <div>
-            <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
-            <p class="info-val">{{ client.adresse }}</p>
-          </div>
-          <div>
-            <p class="info-label">🚗 ZONE D'INTERVENTION ACTUELLE</p>
-            <p class="info-val">{{ client.zoneIntervention }}</p>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      function changePalette(themeName) {
-        document.documentElement.setAttribute('data-theme', themeName);
-      }
-      
-      // Automatisation intelligente de la palette de départ en fonction de la page métier ouverte
-      window.addEventListener('DOMContentLoaded', () => {
-        const path = window.location.pathname;
-        let defaultPalette = 'p1'; // Par défaut
-        
-        if (path.includes('paysagiste') || path.includes('jardinier')) {
-          defaultPalette = 'p2'; // Conseillé Paysagiste
-        } else if (path.includes('fleuriste')) {
-          defaultPalette = 'p3'; // Conseillé Fleuriste
-        } else if (path.includes('plombier')) {
-          defaultPalette = 'p4'; // Conseillé Plombier
-        } else if (path.includes('electricien')) {
-          defaultPalette = 'p5'; // Conseillé Électricien
-        }
-        
-        // Application de la palette initiale
-        document.getElementById('themeChanger').value = defaultPalette;
-        changePalette(defaultPalette);
-      });
-    </script>
-  </body>
-</html>
+    document.getElementById('themeChanger').value = defaultPalette;
+    changePalette(defaultPalette);
+  });
+</script>
