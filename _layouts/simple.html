@@ -1,55 +1,398 @@
+---
+// ==========================================
+// CONFIGURATION DE L'ENTREPRISE (VARIABLES)
+// ==========================================
+
+const entreprise = {
+  nom: "Floc'H-Loïc",
+  activite: "Paysagiste & Espaces Verts",
+  taglineLocal: "Artisan Local - Précy-sur-Oise",
+  telephone: "06 00 00 00 00",
+  telephoneLien: "tel:0600000000",
+  adresse: "Rue de la Tour du Moulin, 60460 Précy-sur-Oise",
+  zoneIntervention: "Précy-sur-Oise, Boran-sur-Oise, Chantilly, Gouvieux et alentours",
+};
+
+// ==========================================
+// CONFIGURATION DES IMAGES (UNSPLASH CONFIGURÉ)
+// ==========================================
+const images = {
+  heroFond: "https://images.unsplash.com/photo-1558904541-efa8c3a30fc9?auto=format&fit=crop&w=1600&q=80",
+  serviceAménagement: "https://images.unsplash.com/photo-1776397283708-58f3d080b7d0?auto=format&fit=crop&w=800&q=80",
+  serviceEntretien: "https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?auto=format&fit=crop&w=800&q=80",
+  serviceCloture: "https://images.unsplash.com/photo-1662525196157-a8676b1c2756?auto=format&fit=crop&w=800&q=80",
+  equipeArtisan: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?auto=format&fit=crop&w=800&q=80",
+  projetMineral: "https://images.unsplash.com/photo-1776397283708-58f3d080b7d0?auto=format&fit=crop&w=800&q=80",
+  projetPelouse: "https://images.unsplash.com/photo-1628340981113-fe1949fe5cc0?auto=format&fit=crop&w=800&q=80",
+  projetTerrasse: "https://images.unsplash.com/photo-1531971589569-0d9370cbe1e5?auto=format&fit=crop&w=800&q=80"
+};
+
+// ==========================================
+// TEXTES ET CONTENUS DU SITE
+// ==========================================
+const textes = {
+  heroTitre: "L'art du jardin",
+  heroDescription: `Création, aménagement et entretien rigoureux de vos extérieurs dans le sud de l'Oise par l'entreprise ${entreprise.nom}.`,
+  valeursSectionTitre: "Nos Engagements & Valeurs",
+  valeursSectionSub: `Pourquoi confier votre jardin à l'entreprise ${entreprise.nom} ?`,
+  servicesSectionTitre: "Nos Prestations d'Excellence",
+  servicesSectionSub: "Des réalisations sur-mesure pour sublimer votre environnement.",
+  equipeSectionTitre: "À propos de votre artisan",
+  equipeDescription: "Passionné par le végétal et l'aménagement extérieur, Loïc Floc'h met ses compétences à votre disposition pour donner vie à vos projets. Accompagné de collaborateurs qualifiés, l'entreprise allie créativité et rigueur technique pour sublimer votre environnement au quotidien.",
+  portfolioSectionTitre: "Nos Dernières Réalisations",
+  portfolioSectionSub: "Découvrez nos projets classés par spécialités dans la région."
+};
+
+const valeurs = [
+  { /*icone: "🌱",*/ titre: "Éco-responsabilité", description: "Utilisation de techniques respectueuses de la biodiversité locale et gestion raisonnée des déchets verts." },
+  { /*icone: "🛠️",*/ titre: "Savoir-faire Artisan", description: "Un travail rigoureux, des finitions soignées et le respect des règles de l'art du paysage." },
+  { /*icone: "🤝",*/ titre: "Proximité & Écoute", description: "Un interlocuteur unique, des conseils personnalisés et une grande réactivité dans le sud de l'Oise." }
+];
+
+const services = [
+  { titre: "Aménagement Paysager", description: "Création de massifs, engazonnement, maçonnerie paysagère.", image: images.serviceAménagement },
+  { titre: "Entretien de Jardins", description: "Taille de haies, tonte, élagage et ramassage de feuilles.", image: images.serviceEntretien },
+  { titre: "Clôtures & Portails", description: "Pose de clôtures, claustras et aménagements d'accès.", image: images.serviceCloture }
+];
+
+const chiffres = [
+  { nombre: "15+", label: "Années d'expérience" },
+  { nombre: "350+", label: "Jardins sublimés" },
+  { nombre: "100%", label: "Clients satisfaits" }
+];
+
+const realisations = [
+  { titre: "Aménagement de massifs", theme: "Aménagement", image: images.projetMineral },
+  { titre: "Entretien de gazon", theme: "Entretien", image: images.projetPelouse },
+  { titre: "Terrasses & Accès", theme: "Terrasse", image: images.projetTerrasse }
+];
+
+const partenaires = [
+  { nom: "Pépinières Locales" },
+  { nom: "Fournisseurs Matériaux Oise" },
+  { nom: "Crédit d'Impôt Service" },
+  { nom: "Mairie de Précy" }
+];
+
+const googleRating = { note: "4.9 / 5", totalAvis: "24 avis Google" };
+const avisClients = [ 
+  { auteur: "Michel R. (Chantilly)", texte: "Artisan très sérieux pour l'entretien de ma haie. Chantier propre et tarif très correct." },
+  { auteur: "Sophie L. (Précy-sur-Oise)", texte: "Superbe aménagement de notre massif. De très bons conseils sur le choix des plantes." }
+];
+---
+
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artisan de Proximité</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+<html lang="fr" class="scroll-smooth theme-1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{entreprise.nom} | {entreprise.activite}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style define:vars={{ heroFond: `url('${images.heroFond}')` }}>
+      
+      .theme-1 {
+        --couleur-fond-site: #f8fafc;
+        --couleur-fond-site-light: #f1f5f9;
+        --couleur-fond-bloc: #0f2d1e;
+        --couleur-titre: midnightblue;
+        --couleur-sous-titre: #15803d;
+        --couleur-texte: #090d16;
+        --couleur-action: dodgerblue;
+        --couleur-fond-ligne: #84cc16;
+      }
 
-    <!-- On va chercher la variable "metier" définie dans la page pour cibler les bons textes -->
-    {% assign info = site.data.metiers[page.metier] %}
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: var(--couleur-fond-site);
+        color: var(--couleur-texte);
+        -webkit-font-smoothing: antialiased;
+      }
 
-    <header class="main-header">
-        <div class="container header-flex">
-            <div class="logo">Artisan Local</div>
-            <nav class="nav-links">
-                <a href="#services">Prestations</a>
-                <a href="#contact" class="btn-nav">Contact</a>
-            </nav>
+      h1, h2, h3, .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .text-center { text-align: center; }
+      .mb-12 { margin-bottom: 48px; }
+      .italic { font-style: italic; color: var(--couleur-fond-ligne); }
+
+      /* Effet Feuille */
+      .leaf-shape {
+        border-radius: 40px 4px 40px 4px !important;
+      }
+
+      /* NAVIGATION */
+      .header {
+        position: sticky;
+        top: 0;
+        background: rgba(255, 255, 255, 0.98);
+        border-bottom: 1px solid #e5e2d5;
+        z-index: 50;
+      }
+      .header-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+      }
+      .brand-name { display: block; font-size: 24px; font-weight: bold; color: var(--couleur-fond-bloc); }
+      .brand-sub { display: block; font-size: 11px; text-transform: uppercase; color: var(--couleur-sous-titre); letter-spacing: 1px; margin-top: 2px; }
+      .btn-tel { background: var(--couleur-fond-bloc); color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: 600; }
+
+      /* HERO BANNÈRE ACCUEIL (Couleur modifiée ici) */
+      .hero {
+        background: linear-gradient(var(--couleur-fond-bloc)), var(--heroFond) no-repeat center/cover;
+        padding: 160px 0;
+        color: white;
+      }
+      .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 50px; font-size: 12px; margin-bottom: 24px; text-transform: uppercase; }
+      .hero-title { font-size: 54px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2; }
+      .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #e5e2d5; font-weight: 300; }
+      .btn-main { background: var(--couleur-fond-ligne); color: var(--couleur-fond-bloc); padding: 16px 36px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
+
+      /* SECTIONS */
+      .section { padding: 100px 0; }
+      .bg-white { background: white; }
+      .bg-light { background: var(--couleur-fond-site-light); }
+      .section-title { font-size: 40px; color: var(--couleur-fond-bloc); margin: 0 0 16px 0; }
+      .section-sub { color: #555; font-size: 16px; margin: 0; font-weight: 300; max-width: 600px; margin: 0 auto; }
+
+      /* VALEURS */
+      .valeurs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+      .valeur-card { background: var(--couleur-fond-site-light); padding: 32px; border-radius: 16px; border-left: 4px solid var(--couleur-fond-ligne); }
+      .valeur-icon { font-size: 32px; margin-bottom: 16px; }
+      .valeur-titre { font-size: 22px; margin: 0 0 12px 0; color: var(--couleur-fond-bloc); }
+      .valeur-text { margin: 0; color: #444; line-height: 1.6; font-weight: 300; }
+
+      /* PRESTATIONS ACCUEIL */
+      .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+      .service-bg-card {
+        position: relative;
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        color: white;
+        text-decoration: none;
+      }
+      .service-bg-card .img-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+       /* background: linear-gradient(to top, rgba(15, 26, 14, 0.95) 20%, rgba(15, 26, 14, 0.4) 60%, rgba(0,0,0,0) 100%);*/
+        z-index: 1;
+      }
+      .service-bg-img {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+      }
+      .service-bg-card:hover .service-bg-img { transform: scale(1.05); }
+      .service-content {
+        position: relative;
+        z-index: 2;
+        padding: 40px;
+      }
+      .service-titre { font-size: 26px; margin: 0 0 12px 0; font-family: 'Playfair Display'; }
+      .service-desc { margin: 0; font-size: 14px; color: #e5e2d5; line-height: 1.5; font-weight: 300; }
+
+      /* CHIFFRES & ÉQUIPE */
+      .about-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center; }
+      .about-img { width: 100%; height: 400px; object-fit: cover; }
+      .chiffres-flex { display: flex; justify-content: space-between; margin-top: 40px; background: white; padding: 24px; border-radius: 16px; border: 1px solid #e5e2d5; }
+      .chiffre-item { text-align: center; flex: 1; }
+      .chiffre-num { font-size: 36px; font-weight: 900; color: var(--couleur-fond-ligne); display: block; font-family: 'Playfair Display'; }
+      .chiffre-label { font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
+
+      /* GALERIE THÉMATIQUE */
+      .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+      .portfolio-card { background: white; overflow: hidden; border: 1px solid #e5e2d5; }
+      .portfolio-img-box { position: relative; height: 260px; overflow: hidden; }
+      .portfolio-img { width: 100%; height: 100%; object-fit: cover; }
+      .portfolio-theme { position: absolute; top: 16px; left: 16px; background: var(--couleur-fond-bloc); color: white; padding: 4px 12px; font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; border-radius: 4px; }
+      .portfolio-info { padding: 20px; font-weight: 600; color: var(--couleur-fond-bloc); font-size: 16px; }
+
+      /* WIDGET REVIEWS */
+      .reviews-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
+      .widget { background: white; border: 1px solid #e5e2d5; padding: 32px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+      .rating-num { font-size: 44px; font-weight: 900; color: var(--couleur-fond-bloc); font-family: 'Playfair Display'; }
+      .rating-stars { color: #f59e0b; font-size: 20px; margin: 8px 0; }
+      .review { background: var(--couleur-fond-site-light); padding: 24px; border-radius: 16px; text-align: left; }
+      .review-meta { font-weight: bold; font-size: 14px; color: var(--couleur-fond-bloc); margin-bottom: 8px; display: block; }
+      .review-text { font-style: italic; color: #444; margin: 0; font-size: 14px; line-height: 1.5; font-weight: 300; }
+
+      /* PARTENAIRES */
+      .partenaires-section { background: #f0ede2; padding: 40px 0; border-top: 1px solid #e5e2d5; border-bottom: 1px solid #e5e2d5; }
+      .partenaires-flex { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 24px; }
+      .partenaire-logo { font-weight: 600; color: #788273; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; }
+
+      /* FOOTER */
+      .footer { background: var(--couleur-fond-bloc); color: white; padding: 80px 0; border-top: 8px solid var(--couleur-fond-ligne); }
+      .info-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 32px; border-radius: 24px; max-width: 700px; margin: 40px ... auto; }
+      .info-label { font-size: 11px; color: var(--couleur-fond-ligne); font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
+      .info-val { margin: 0; font-size: 15px; color: #e5e2d5; }
+    </style>
+  </head>
+  <body>
+
+    <header class="header">
+      <div class="container header-flex">
+        <div class="logo-box">
+          <span class="brand-name">{entreprise.nom}</span>
+          <span class="brand-sub">{entreprise.activite}</span>
         </div>
+        <a href={entreprise.telephoneLien} class="btn-tel">📞 {entreprise.telephone}</a>
+      </div>
     </header>
 
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>{{ info.titre }}</h1>
-            <p>{{ info.description }}</p>
-            <a href="tel:06XXXXXXXX" class="btn-cta">📞 Nous Contacter</a>
+    <section class="hero">
+      <div class="container text-center">
+        <span class="badge">{entreprise.taglineLocal}</span>
+        <h1 class="hero-title">{textes.heroTitre}, <span class="italic">signé {entreprise.nom}</span></h1>
+        <p class="hero-text">{textes.heroDescription}</p>
+        <a href="#contact" class="btn-main">Demander un devis gratuit →</a>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="section-title">{textes.valeursSectionTitre}</h2>
+          <p class="section-sub">{textes.valeursSectionSub}</p>
         </div>
-    </section>
-
-    <section id="services" class="container section-padding">
-        <h2 class="section-title">Nos Services</h2>
-        <div class="grid-3">
-            <div class="card-service">
-                <div class="icon">{{ info.icon_1 }}</div>
-                <h3>{{ info.service_1 }}</h3>
-                <p>{{ info.desc_1 }}</p>
+        <div class="valeurs-grid">
+          {valeurs.map((v) => (
+            <div class="valeur-card">
+              <div class="valeur-icon">{v.icone}</div>
+              <h3 class="valeur-titre">{v.titre}</h3>
+              <p class="valeur-text">{v.description}</p>
             </div>
-            <div class="card-service">
-                <div class="icon">{{ info.icon_2 }}</div>
-                <h3>{{ info.service_2 }}</h3>
-                <p>{{ info.desc_2 }}</p>
-            </div>
+          ))}
         </div>
+      </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="bg-dark text-light py-12 text-center">
-        <h2>Demander un devis</h2>
-        <p class="mt-4">Disponible du lundi au samedi.</p>
+    <section id="services" class="section bg-light">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="section-title">{textes.servicesSectionTitre}</h2>
+          <p class="section-sub">{textes.servicesSectionSub}</p>
+        </div>
+        <div class="services-grid">
+          {services.map((s) => (
+            <div class="service-bg-card leaf-shape">
+              <img src={s.image} alt={s.titre} class="service-bg-img" />
+              <div class="img-overlay"></div>
+              <div class="service-content">
+                <h3 class="service-titre">{s.titre}</h3>
+                <p class="service-desc">{s.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
 
-</body>
+    <section class="section bg-white">
+      <div class="container">
+        <div class="about-split">
+          <div>
+            <h2 class="section-title" style="text-align: left;">{textes.equipeSectionTitre}</h2>
+            <p style="line-height: 1.7; color: #444; font-weight: 300; margin-bottom: 24px;">{textes.equipeDescription}</p>
+            
+            <div class="chiffres-flex">
+              {chiffres.map((c) => (
+                <div class="chiffre-item">
+                  <span class="chiffre-num">{c.nombre}</span>
+                  <span class="chiffre-label">{c.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <img src={images.equipeArtisan} alt="Artisan Loïc Floc'h" class="about-img leaf-shape" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="realisations" class="section bg-light">
+      <div class="container">
+        <div class="text-center mb-12">
+          <h2 class="section-title">{textes.portfolioSectionTitre}</h2>
+          <p class="section-sub">{textes.portfolioSectionSub}</p>
+        </div>
+        <div class="portfolio-grid">
+          {realisations.map((r) => (
+            <div class="portfolio-card leaf-shape">
+              <div class="portfolio-img-box">
+                <span class="portfolio-theme">{r.theme}</span>
+                <img src={r.image} alt={r.titre} class="portfolio-img" />
+              </div>
+              <div class="portfolio-info">
+                <p style="margin:0;">{r.titre}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="container">
+        <div class="reviews-split">
+          <div class="widget">
+            <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #666; font-size: 12px;">Note Globale</span>
+            <div class="rating-num">{googleRating.note}</div>
+            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+            <span style="color: #777; font-size: 14px;">{googleRating.totalAvis} certifiés</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            {avisClients.map((a) => (
+              <div class="review">
+                <span class="review-meta">{a.auteur} ⭐⭐⭐⭐⭐</span>
+                <p class="review-text">"{a.texte}"</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="partenaires-section">
+      <div class="container partenaires-flex">
+        {partenaires.map((p) => (
+          <span class="partenaire-logo">🤝 {p.nom}</span>
+        ))}
+      </div>
+    </div>
+
+    <footer id="contact" class="footer">
+      <div class="container text-center">
+        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez-nous votre extérieur</h2>
+        <p style="color: #e5e2d5; font-weight: 300; margin: 0;">Contactez l'entreprise Floc'H-Loïc pour convenir d'un rendez-vous sur site.</p>
+        
+        <div class="info-box">
+          <div>
+            <p class="info-label">📍 ADRESSE</p>
+            <p class="info-val">{entreprise.adresse}</p>
+          </div>
+          <div>
+            <p class="info-label">🚗 ZONE D'INTERVENTION</p>
+            <p class="info-val">{entreprise.zoneIntervention}</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
