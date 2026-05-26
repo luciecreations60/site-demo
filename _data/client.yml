@@ -1,9 +1,9 @@
 # ==========================================
 # CONFIGURATION DU PROSPECT (À MODIFIER AVANT CHAQUE DÉMO)
 # ==========================================
-nom: "Jean Électricité"
+nom: "Floc'H-Loïc"
 telephone: "06 12 34 56 78"
 telephoneLien: "tel:0612345678"
-adresse: "14 Rue du Connétable, 60500 Chantilly"
-localite: "Chantilly"
+adresse: "Rue de la Tour du Moulin, 60460 Précy-sur-Oise"
+localite: "Précy-sur-Oise"
 zoneIntervention: "Chantilly, Gouvieux, Senlis et alentours"
