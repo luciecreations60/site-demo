@@ -1,6 +1,6 @@
 <style>
   /* =========================================================================
-     LES 41 PALETTES DE COULEURS
+     LES PALETTES DE COULEURS
      ========================================================================= */
   :root, [data-theme="p1"] {
     --heroFond: url('{{ info.images.heroFond }}');
@@ -13,17 +13,6 @@
 [data-theme="p5"] { --couleur-fond-site: #111827; --couleur-fond-site-light: #1f2937; --couleur-fond-bloc: #ffffff; --couleur-texte: #9ca3af; --couleur-accent: #f59e0b; }
 [data-theme="p6"] { --couleur-fond-site: #fcfbf9; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #292524; --couleur-texte: #57534e; --couleur-accent: #ea580c; }
 [data-theme="p7"] { --couleur-fond-site: #f8fafc; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #0f172a; --couleur-texte: #334155; --couleur-accent: #0d9488; }
-[data-theme="p8"] { --couleur-fond-site: #edf5e1; --couleur-fond-site-light: #2f2fa2; --couleur-fond-bloc: #ffffff; --couleur-texte: #379683; --couleur-accent: #5cdb95; }
-[data-theme="p9"] { --couleur-fond-site: #ffeec1; --couleur-fond-site-light: #96ceb4; --couleur-fond-bloc: #ff6f69; --couleur-texte: #2d3a3a; --couleur-accent: #ffcc5c; }
-[data-theme="p10"] { --couleur-fond-site: #1d2731; --couleur-fond-site-light: #393f4d; --couleur-fond-bloc: #fbeec1; --couleur-texte: #eed9c4; --couleur-accent: #66757f; }
-[data-theme="p11"] { --couleur-fond-site: #000000; --couleur-fond-site-light: #151515; --couleur-fond-bloc: #ff8303; --couleur-texte: #a35709; --couleur-accent: #2a2a2a; }
-[data-theme="p12"] { --couleur-fond-site: #50514f; --couleur-fond-site-light: #70c1b3; --couleur-fond-bloc: #f25f5c; --couleur-texte: #ffe066; --couleur-accent: #247ba0; }
-[data-theme="p13"] { --couleur-fond-site: #19181a; --couleur-fond-site-light: #2f2fa2; --couleur-fond-bloc: #f64c72; --couleur-texte: #d3a625; --couleur-accent: #bc4639; }
-[data-theme="p14"] { --couleur-fond-site: #111111; --couleur-fond-site-light: #333333; --couleur-fond-bloc: #0055ff; --couleur-texte: #ffffff; --couleur-accent: #555555; }
-[data-theme="p15"] { --couleur-fond-site: #f4f4f4; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #d21f3c; --couleur-texte: #1a1a1a; --couleur-accent: #990011; }
-[data-theme="p16"] { --couleur-fond-site: #f5f5f5; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1e3d59; --couleur-texte: #17b978; --couleur-accent: #ff6f3c; }
-[data-theme="p17"] { --couleur-fond-site: #0f172a; --couleur-fond-site-light: #1e293b; --couleur-fond-bloc: #38bdf8; --couleur-texte: #94a3b8; --couleur-accent: #ff7e67; }
-[data-theme="p18"] { --couleur-fond-site: #1c1c1c; --couleur-fond-site-light: #2d142c; --couleur-fond-bloc: #e11d48; --couleur-texte: #a0a0a0; --couleur-accent: #801336; }
 [data-theme="p19"] { --couleur-fond-site: #f4eedb; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #2b2927; --couleur-texte: #5c5854; --couleur-accent: #d9383a; }
 [data-theme="p20"] { --couleur-fond-site: #120924; --couleur-fond-site-light: #2c003e; --couleur-fond-bloc: #fe346e; --couleur-texte: #cbd5e1; --couleur-accent: #512b58; }
 [data-theme="p21"] { --couleur-fond-site: #f8fafc; --couleur-fond-site-light: #ffffff; --couleur-fond-bloc: #1d2731; --couleur-texte: #007cc7; --couleur-accent: #203c56; }
@@ -111,9 +100,32 @@
   .review-meta { font-weight: bold; font-size: 14px; color: var(--couleur-fond-bloc); margin-bottom: 8px; display: block; }
   .review-text { font-style: italic; color: var(--couleur-texte); margin: 0; font-size: 14px; line-height: 1.5; font-weight: 300; }
   .footer { background: var(--couleur-fond-bloc); color: white; padding: 80px 0; border-top: 8px solid var(--couleur-accent); }
-  .info-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 32px; border-radius: 24px; max-width: 700px; margin: 40px auto 0 auto; }
-  .info-label { font-size: 11px; color: var(--couleur-accent); font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
-  .info-val { margin: 0; font-size: 15px; color: #cbd5e1; }
+  .info-box { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+  gap: 24px; 
+  background: var(--couleur-fond-site-light); 
+  border: 1px solid rgba(0, 0, 0, 0.08); 
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  /* ------------------------------------------------------------------------- */
+  padding: 32px; 
+  border-radius: 24px; 
+  max-width: 700px; 
+  margin: 40px auto 0 auto; 
+}
+  .info-label { 
+  font-size: 11px; 
+  color: var(--couleur-accent); /* Reste bien visible */
+  font-weight: bold; 
+  margin-bottom: 8px; 
+  letter-spacing: 1px; 
+}
+
+.info-val { 
+  margin: 0; 
+  font-size: 15px; 
+  color: var(--couleur-texte); /* MODIFIÉ : Utilise la couleur de texte principale du thème */
+}
 </style>
 
 <script>
