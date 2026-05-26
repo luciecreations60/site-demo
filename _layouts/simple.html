@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth theme-1">
+<html lang="fr" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Initialisation des deux sources de données -->
     {% assign client = site.data.client %}
     {% assign info = site.data.metiers[page.metier] %}
     
@@ -15,18 +14,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-      :root {
+      /* =========================================================================
+         PALETTES DE COULEURS PROPOSÉES (Modifiables par la liste déroulante)
+         ========================================================================= */
+
+      /* Thème 1 : Émeraude & Tilleul (Idéal Nature / Paysagiste) */
+      :root, [data-theme="theme-emeraude"] {
         --heroFond: url('{{ info.images.heroFond }}');
         --couleur-fond-site: #f8fafc;
         --couleur-fond-site-light: #f1f5f9;
-        --couleur-fond-bloc: #0f2d1e;
-        --couleur-titre: midnightblue;
-        --couleur-sous-titre: #15803d;
-        --couleur-texte: #090d16;
-        --couleur-action: dodgerblue;
-        --couleur-fond-ligne: #84cc16;
+        --couleur-fond-bloc: #0f2d1e; /* Vert Sombre forestier */
+        --couleur-sous-titre: #166534;
+        --couleur-texte: #0f172a;
+        --couleur-accent: #84cc16; /* Vert Tilleul Éclatant */
       }
 
+      /* Thème 2 : Ambre & Ardoise (Idéal Moderne / Électricien) */
+      [data-theme="theme-ambre"] {
+        --couleur-fond-site: #fdfdfd;
+        --couleur-fond-site-light: #f4f4f6;
+        --couleur-fond-bloc: #1e293b; /* Gris Ardoise */
+        --couleur-sous-titre: #475569;
+        --couleur-texte: #0f172a;
+        --couleur-accent: #f59e0b; /* Orange Ambre Énergie */
+      }
+
+      /* Thème 3 : Bleu Minuit & Or (Idéal Rénovation / Premium) */
+      [data-theme="theme-minuit"] {
+        --couleur-fond-site: #fafaf9;
+        --couleur-fond-site-light: #f5f5f4;
+        --couleur-fond-bloc: #0b1a30; /* Bleu Nuit Intense */
+        --couleur-sous-titre: #1e3a8a;
+        --couleur-texte: #1c1917;
+        --couleur-accent: #d97706; /* Or Chaud / Ambre Foncé */
+      }
+
+      /* Thème 4 : Brique & Sable (Idéal Artisanal / Maçon) */
+      [data-theme="theme-brique"] {
+        --couleur-fond-site: #fcfbfa;
+        --couleur-fond-site-light: #f7f4ef;
+        --couleur-fond-bloc: #7c2d12; /* Terracotta / Brique */
+        --couleur-sous-titre: #9a3412;
+        --couleur-texte: #292524;
+        --couleur-accent: #ea580c; /* Orange Brûlé */
+      }
+
+      /* =========================================================================
+         STYLES GÉNÉRAUX DU SITE
+         ========================================================================= */
       body {
         margin: 0;
         font-family: 'Inter', sans-serif;
@@ -46,15 +81,15 @@
       }
       .text-center { text-align: center; }
       .mb-12 { margin-bottom: 48px; }
-      .italic { font-style: italic; color: var(--couleur-fond-ligne); }
+      .italic { font-style: italic; color: var(--couleur-accent); }
       .leaf-shape { border-radius: 40px 4px 40px 4px !important; }
 
-      /* NAVIGATION */
+      /* NAVIGATION & DÉMO SELECTOR */
       .header {
         position: sticky;
         top: 0;
         background: rgba(255, 255, 255, 0.98);
-        border-bottom: 1px solid #e5e2d5;
+        border-bottom: 1px solid #e2e8f0;
         z-index: 50;
       }
       .header-flex {
@@ -65,54 +100,78 @@
       }
       .brand-name { display: block; font-size: 24px; font-weight: bold; color: var(--couleur-fond-bloc); }
       .brand-sub { display: block; font-size: 11px; text-transform: uppercase; color: var(--couleur-sous-titre); letter-spacing: 1px; margin-top: 2px; }
-      .btn-tel { background: var(--couleur-fond-bloc); color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: 600; }
+      
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      /* Style du sélecteur de palette */
+      .theme-selector {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
+        background-color: #fff;
+        font-size: 13px;
+        font-family: inherit;
+        color: #334155;
+        cursor: pointer;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      }
+      .theme-selector:focus { outline: 2px solid var(--couleur-accent); }
+
+      .btn-tel { background: var(--couleur-fond-bloc); color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: 600; transition: background 0.2s; }
+      .btn-tel:hover { opacity: 0.9; }
 
       /* HERO */
       .hero {
         background: linear-gradient(rgba(15, 45, 30, 0.85), rgba(15, 45, 30, 0.85)), var(--heroFond) no-repeat center/cover;
         padding: 160px 0;
         color: white;
+        transition: background 0.3s;
       }
-      .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 50px; font-size: 12px; margin-bottom: 24px; text-transform: uppercase; }
+      .badge { display: inline-block; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); padding: 6px 18px; border-radius: 50px; font-size: 12px; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
       .hero-title { font-size: 54px; margin: 0 0 24px 0; font-weight: 700; line-height: 1.2; }
-      .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #e5e2d5; font-weight: 300; line-height: 1.6; }
-      .btn-main { background: var(--couleur-fond-ligne); color: var(--couleur-fond-bloc); padding: 16px 36px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; }
+      .hero-text { font-size: 19px; max-width: 650px; margin: 0 auto 40px auto; color: #f1f5f9; font-weight: 300; line-height: 1.6; }
+      .btn-main { background: var(--couleur-accent); color: white; padding: 16px 36px; border-radius: 50px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+      /* Correction couleur texte bouton pour lisibilité selon l'accent */
+      [data-theme="theme-emeraude"] .btn-main { color: var(--couleur-fond-bloc); }
 
       /* SECTIONS */
       .section { padding: 100px 0; }
       .bg-white { background: white; }
       .bg-light { background: var(--couleur-fond-site-light); }
       .section-title { font-size: 40px; color: var(--couleur-fond-bloc); margin: 0 0 16px 0; }
-      .section-sub { color: #555; font-size: 16px; margin: 0; font-weight: 300; max-width: 600px; margin: 0 auto; }
+      .section-sub { color: #475569; font-size: 16px; margin: 0; font-weight: 300; max-width: 600px; margin: 0 auto; }
 
       /* VALEURS */
       .valeurs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-      .valeur-card { background: var(--couleur-fond-site-light); padding: 32px; border-radius: 16px; border-left: 4px solid var(--couleur-fond-ligne); }
+      .valeur-card { background: var(--couleur-fond-site-light); padding: 32px; border-radius: 16px; border-left: 4px solid var(--couleur-accent); }
       .valeur-icon { font-size: 32px; margin-bottom: 16px; }
       .valeur-titre { font-size: 22px; margin: 0 0 12px 0; color: var(--couleur-fond-bloc); }
-      .valeur-text { margin: 0; color: #444; line-height: 1.6; font-weight: 300; }
+      .valeur-text { margin: 0; color: #334155; line-height: 1.6; font-weight: 300; }
 
       /* SERVICES */
       .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
       .service-bg-card { position: relative; height: 380px; overflow: hidden; display: flex; align-items: flex-end; color: white; text-decoration: none; }
-      .service-bg-card .img-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(15, 45, 30, 0.95) 20%, rgba(15, 45, 30, 0.4) 60%, rgba(0,0,0,0) 100%); z-index: 1; }
+      .service-bg-card .img-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 20%, rgba(15, 23, 42, 0.4) 60%, rgba(0,0,0,0) 100%); z-index: 1; }
       .service-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
       .service-bg-card:hover .service-bg-img { transform: scale(1.05); }
       .service-content { position: relative; z-index: 2; padding: 40px; }
       .service-titre { font-size: 26px; margin: 0 0 12px 0; font-family: 'Playfair Display'; }
-      .service-desc { margin: 0; font-size: 14px; color: #e5e2d5; line-height: 1.5; font-weight: 300; }
+      .service-desc { margin: 0; font-size: 14px; color: #cbd5e1; line-height: 1.5; font-weight: 300; }
 
       /* CHIFFRES & EQUIPE */
       .about-split { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 60px; align-items: center; }
       .about-img { width: 100%; height: 400px; object-fit: cover; }
-      .chiffres-flex { display: flex; justify-content: space-between; margin-top: 40px; background: white; padding: 24px; border-radius: 16px; border: 1px solid #e5e2d5; }
+      .chiffres-flex { display: flex; justify-content: space-between; margin-top: 40px; background: white; padding: 24px; border-radius: 16px; border: 1px solid #e2e8f0; }
       .chiffre-item { text-align: center; flex: 1; }
-      .chiffre-num { font-size: 36px; font-weight: 900; color: var(--couleur-fond-ligne); display: block; font-family: 'Playfair Display'; }
-      .chiffre-label { font-size: 12px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
+      .chiffre-num { font-size: 36px; font-weight: 900; color: var(--couleur-accent); display: block; font-family: 'Playfair Display'; }
+      .chiffre-label { font-size: 12px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
 
       /* PORTFOLIO */
       .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-      .portfolio-card { background: white; overflow: hidden; border: 1px solid #e5e2d5; }
+      .portfolio-card { background: white; overflow: hidden; border: 1px solid #e2e8f0; }
       .portfolio-img-box { position: relative; height: 260px; overflow: hidden; }
       .portfolio-img { width: 100%; height: 100%; object-fit: cover; }
       .portfolio-theme { position: absolute; top: 16px; left: 16px; background: var(--couleur-fond-bloc); color: white; padding: 4px 12px; font-size: 11px; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; border-radius: 4px; }
@@ -120,23 +179,23 @@
 
       /* REVIEWS */
       .reviews-split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto; }
-      .widget { background: white; border: 1px solid #e5e2d5; padding: 32px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
+      .widget { background: white; border: 1px solid #e2e8f0; padding: 32px; border-radius: 24px; display: flex; flex-direction: column; justify-content: center; text-align: center; }
       .rating-num { font-size: 44px; font-weight: 900; color: var(--couleur-fond-bloc); font-family: 'Playfair Display'; }
       .rating-stars { color: #f59e0b; font-size: 20px; margin: 8px 0; }
       .review { background: var(--couleur-fond-site-light); padding: 24px; border-radius: 16px; text-align: left; margin-bottom: 16px; }
       .review-meta { font-weight: bold; font-size: 14px; color: var(--couleur-fond-bloc); margin-bottom: 8px; display: block; }
-      .review-text { font-style: italic; color: #444; margin: 0; font-size: 14px; line-height: 1.5; font-weight: 300; }
+      .review-text { font-style: italic; color: #334155; margin: 0; font-size: 14px; line-height: 1.5; font-weight: 300; }
 
       /* PARTENAIRES */
-      .partenaires-section { background: #f0ede2; padding: 40px 0; border-top: 1px solid #e5e2d5; border-bottom: 1px solid #e5e2d5; }
+      .partenaires-section { background: var(--couleur-fond-site-light); padding: 40px 0; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
       .partenaires-flex { display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 24px; }
-      .partenaire-logo { font-weight: 600; color: #788273; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; }
+      .partenaire-logo { font-weight: 600; color: #64748b; font-size: 16px; letter-spacing: 1px; text-transform: uppercase; }
 
       /* FOOTER */
-      .footer { background: var(--couleur-fond-bloc); color: white; padding: 80px 0; border-top: 8px solid var(--couleur-fond-ligne); }
+      .footer { background: var(--couleur-fond-bloc); color: white; padding: 80px 0; border-top: 8px solid var(--couleur-accent); transition: border-color 0.3s; }
       .info-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 32px; border-radius: 24px; max-width: 700px; margin: 40px auto 0 auto; }
-      .info-label { font-size: 11px; color: var(--couleur-fond-ligne); font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
-      .info-val { margin: 0; font-size: 15px; color: #e5e2d5; }
+      .info-label { font-size: 11px; color: var(--couleur-accent); font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
+      .info-val { margin: 0; font-size: 15px; color: #cbd5e1; }
     </style>
   </head>
   <body>
@@ -148,7 +207,18 @@
           <span class="brand-name">{{ client.nom }}</span>
           <span class="brand-sub">{{ info.activite }}</span>
         </div>
-        <a href="{{ client.telephoneLien }}" class="btn-tel">📞 {{ client.telephone }}</a>
+        
+        <div class="nav-actions">
+          <!-- LA LISTE DÉROULANTE DE PERSONNALISATION (Invisible pour le client final, top pour ta démo) -->
+          <select id="themeChanger" class="theme-selector" onchange="changePalette(this.value)">
+            <option value="theme-emeraude">🎨 Palette Émeraude (Nature)</option>
+            <option value="theme-ambre">🎨 Palette Ambre (Moderne)</option>
+            <option value="theme-minuit">🎨 Palette Minuit (Luxe)</option>
+            <option value="theme-brique">🎨 Palette Brique (Artisan)</option>
+          </select>
+          
+          <a href="{{ client.telephoneLien }}" class="btn-tel">📞 {{ client.telephone }}</a>
+        </div>
       </div>
     </header>
 
@@ -167,7 +237,7 @@
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">{{ info.textes.valeursSectionTitre }}</h2>
-          <p class="section-sub">Pourquoi confier vos espaces extérieurs à l'entreprise {{ client.nom }} ?</p>
+          <p class="section-sub">Pourquoi confier vos projets à l'entreprise {{ client.nom }} ?</p>
         </div>
         <div class="valeurs-grid">
           {% for v in info.valeurs %}
@@ -209,7 +279,7 @@
         <div class="about-split">
           <div>
             <h2 class="section-title" style="text-align: left;">{{ info.textes.equipeSectionTitre }}</h2>
-            <p style="line-height: 1.7; color: #444; font-weight: 300; margin-bottom: 24px;">{{ info.textes.equipeDescription }}</p>
+            <p style="line-height: 1.7; color: #334155; font-weight: 300; margin-bottom: 24px;">{{ info.textes.equipeDescription }}</p>
             <div class="chiffres-flex">
               {% for c in info.chiffres %}
                 <div class="chiffre-item">
@@ -254,10 +324,10 @@
       <div class="container">
         <div class="reviews-split">
           <div class="widget">
-            <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #666; font-size: 12px;">Note Globale</span>
+            <span style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-size: 12px;">Note Globale</span>
             <div class="rating-num">{{ info.googleRating.note }}</div>
             <div class="rating-stars">⭐⭐⭐⭐⭐</div>
-            <span style="color: #777; font-size: 14px;">{{ info.googleRating.totalAvis }} certifiés</span>
+            <span style="color: #64748b; font-size: 14px;">{{ info.googleRating.totalAvis }} certifiés</span>
           </div>
           <div>
             {% for a in info.avisClients %}
@@ -283,8 +353,8 @@
     <!-- FOOTER / CONTACT -->
     <footer id="contact" class="footer">
       <div class="container text-center">
-        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez votre extérieur à {{ client.nom }}</h2>
-        <p style="color: #e5e2d5; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
+        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à {{ client.nom }}</h2>
+        <p style="color: #cbd5e1; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         <div class="info-box">
           <div>
             <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
@@ -297,5 +367,21 @@
         </div>
       </div>
     </footer>
+
+    <!-- SCRIPT DE COMMUTATION DE COULEURS EN DIRECT -->
+    <script>
+      function changePalette(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+      }
+      
+      // Optionnel: On applique automatiquement la palette Ambre si on est sur la page électricien au chargement
+      window.addEventListener('DOMContentLoaded', () => {
+        const isElectricien = window.location.pathname.includes('electricien');
+        if (isElectricien) {
+          document.getElementById('themeChanger').value = 'theme-ambre';
+          changePalette('theme-ambre');
+        }
+      });
+    </script>
   </body>
 </html>
