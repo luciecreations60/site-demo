@@ -2,8 +2,8 @@ offres:
   - id: "simple"
     nom: "Offre Simple"
     badge: "Idéal Lancement"
-    description: "Un site 'One-Page' percutant pour afficher vos coordonnées, vos services et rassurer vos clients."
-    prix: "À partir de 490€"
+    description: "Un site 'Une Page' percutant pour afficher vos coordonnées, vos services et rassurer vos clients."
+    prix: "À partir de 190€"
     points:
       - "Page unique optimisée mobile"
       - "Section Services & Valeurs"
@@ -14,7 +14,7 @@ offres:
     nom: "Offre Plus"
     badge: "Le + Populaire"
     description: "Un site multi-pages conçu pour le référencement local et cibler plusieurs spécialités."
-    prix: "À partir de 890€"
+    prix: "À partir de 390€"
     points:
       - "Tout de l'offre Simple"
       - "Pages dédiées par services (ex: Plomberie, Chauffage)"
@@ -25,7 +25,7 @@ offres:
     nom: "Offre Pro"
     badge: "Machine à Devis"
     description: "Une vitrine complète haut de gamme avec outils dynamiques pour les entreprises structurées."
-    prix: "Sur devis (Dès 1490€)"
+    prix: "Sur devis (Dès 590€)"
     points:
       - "Tout de l'offre Plus"
       - "Module Réalisations / Portfolio filtrable"
