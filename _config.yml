@@ -3,9 +3,8 @@
 # =========================================================================
 title: "Mon Portfolio d'Artisans"
 description: "Vente et démonstration de structures de sites web modernes pour artisans et entreprises du bâtiment."
-url: "https://ton-pseudo.github.io" # Remplace 'ton-pseudo' par ton nom d'utilisateur GitHub
+url: "https://luciecreations60.github.io" # Remplace 'ton-pseudo' par ton nom d'utilisateur GitHub
 
-# CRUCIAL : C'est ce qui règle ton problème de lien 404 !
 baseurl: "/site-demo" 
 
 # =========================================================================
