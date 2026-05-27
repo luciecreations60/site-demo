@@ -8,7 +8,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600&family=Playfair+Display:ital,wght=0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     {% include site-styles.html %}
   </head>
@@ -17,7 +17,7 @@
     <header class="header">
       <div class="container header-flex">
         <div class="logo-box">
-          <span class="brand-name">{{ client.nom }}</span>
+          <span class="brand-name brand-title">{{ client.nom }}</span>
           <span class="brand-sub">{{ info.activite }}</span>
         </div>
         
@@ -45,7 +45,7 @@
             <option value="p20">20. Enneigé mais chaud</option>
             <option value="p21">21. Couleurs linéaires (Flat)</option>
             <option value="p22">22. Éclectique et paisible</option>
-            </select>
+          </select>
           
           <a href="{{ client.telephoneLien }}" class="btn-tel">📞 {{ client.telephone }}</a>
         </div>
@@ -54,18 +54,18 @@
 
     <section class="hero">
       <div class="container text-center">
-        <span class="badge">Artisan Local — {{ client.localite }}</span>
-        <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic">signé {{ client.nom }}</span></h1>
-        <p class="hero-text">{{ info.textes.heroDescription }} Intervention rapide à {{ client.localite }} et ses alentours.</p>
+        <span class="badge cust-badge">Artisan Local — {{ client.localite }}</span>
+        <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic brand-title-hero">signé {{ client.nom }}</span></h1>
+        <p class="hero-text" id="heroDescriptionText">{{ info.textes.heroDescription }} Intervention rapide à {{ client.localite }} et ses alentours.</p>
         <a href="#contact" class="btn-main">Demander un devis gratuit →</a>
       </div>
     </section>
 
-    <section class="section bg-white">
+    <section id="section-valeurs" class="section bg-white">
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">{{ info.textes.valeursSectionTitre }}</h2>
-          <p class="section-sub">Pourquoi confier vos projets à l'entreprise {{ client.nom }} ?</p>
+          <p class="section-sub">Pourquoi confier vos projets à l'entreprise <span class="brand-title">{{ client.nom }}</span> ?</p>
         </div>
         <div class="valeurs-grid">
           {% for v in info.valeurs %}
@@ -79,7 +79,7 @@
       </div>
     </section>
 
-    <section id="services" class="section bg-light">
+    <section id="section-services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">{{ info.textes.servicesSectionTitre }}</h2>
@@ -102,20 +102,97 @@
 
     <footer id="contact" class="footer">
       <div class="container text-center">
-        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à {{ client.nom }}</h2>
+        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
         <p style="color: #cbd5e1; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         <div class="info-box">
           <div>
             <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
-            <p class="info-val">{{ client.adresse }}</p>
+            <p class="info-val" id="footer-adresse">{{ client.adresse }}</p>
           </div>
           <div>
             <p class="info-label">🚗 ZONE D'INTERVENTION ACTUELLE</p>
-            <p class="info-val">{{ client.zoneIntervention }}</p>
+            <p class="info-val" id="footer-zone">{{ client.zoneIntervention }}</p>
           </div>
         </div>
       </div>
     </footer>
 
+    <script>
+      function changePalette(themeName) {
+        document.documentElement.setAttribute('data-theme', themeName);
+      }
+      
+      window.addEventListener('DOMContentLoaded', () => {
+        // 1. DÉTECTION DU THÈME CONSEILLÉ SELON L'URL
+        const path = window.location.pathname.toLowerCase();
+        let defaultPalette = 'p1';
+        
+        if (path.includes('electricien')) {
+          defaultPalette = 'p2';
+        } else if (path.includes('fleuriste') || path.includes('pepinieriste')) {
+          defaultPalette = 'p3';
+        } else if (path.includes('macon') || path.includes('plombier') || path.includes('chauffagiste')) {
+          defaultPalette = 'p4';
+        } else if (path.includes('paysagiste') || path.includes('jardinier')) {
+          defaultPalette = 'p5';
+        } else if (path.includes('peintre')) {
+          defaultPalette = 'p6';
+        }
+        
+        const selectElement = document.getElementById('themeChanger');
+        if (selectElement) {
+          selectElement.value = defaultPalette;
+        }
+        changePalette(defaultPalette);
+
+        // 2. INTERCEPTION DES DONNÉES DU CONFIGURATEUR (URL)
+        const params = new URLSearchParams(window.location.search);
+        const nomPerso = params.get('nom');
+        const villePerso = params.get('ville');
+        const offreType = params.get('offre') || 'simple';
+
+        // Injection dynamique du Nom si présent
+        if (nomPerso && nomPerso.trim() !== "") {
+          const decodedNom = decodeURIComponent(nomPerso);
+          document.querySelectorAll('.brand-title').forEach(el => el.innerText = decodedNom);
+          const heroSpan = document.querySelector('.brand-title-hero');
+          if (heroSpan) heroSpan.innerText = "signé " + decodedNom;
+        }
+
+        // Injection dynamique de la Ville/Localité si présente
+        if (villePerso && villePerso.trim() !== "") {
+          const decodedVille = decodeURIComponent(villePerso);
+          
+          // Met à jour le badge d'accueil
+          document.querySelectorAll('.cust-badge').forEach(el => el.innerText = "Artisan Local — " + decodedVille);
+          
+          // Met à jour la phrase du Hero
+          const heroDesc = document.getElementById('heroDescriptionText');
+          if (heroDesc) {
+            heroDesc.innerText = heroDesc.innerText.replace("{{ client.localite }}", decodedVille);
+          }
+          
+          // Met à jour les infos de contact du bas
+          const footerZone = document.getElementById('footer-zone');
+          if (footerZone) footerZone.innerText = decodedVille + " et ses alentours";
+          
+          const footerAdresse = document.getElementById('footer-adresse');
+          if (footerAdresse) footerAdresse.innerText = "Région de " + decodedVille;
+        }
+
+        // 3. SIMULATION DES DIFFÉRENTES OFFRES (SIMPLE, PLUS, PRO)
+        const sectionValeurs = document.getElementById('section-valeurs');
+        const sectionServices = document.getElementById('section-services');
+
+        if (offreType === 'simple') {
+          // Offre de base One-Page : on affiche l'essentiel
+          if (sectionValeurs) sectionValeurs.style.display = 'block';
+        } else if (offreType === 'plus') {
+          // Offre intermédiaire : on pourrait ajuster des éléments spécifiques ou styles
+        } else if (offreType === 'pro') {
+          // Offre premium : On valorise l'affichage maximal
+        }
+      });
+    </script>
   </body>
 </html>
