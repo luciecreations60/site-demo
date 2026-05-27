@@ -99,7 +99,7 @@
 
       <div class="grid-metiers">
         {% for m in site.data.demos.metiers %}
-          <a href="{{ m.url }}" class="btn-metier" target="_blank">
+          <a href="{{ site.baseurl }}{{ m.url }}" class="btn-metier" target="_blank">
             <span class="metier-icon">{{ m.icone }}</span>
             <span>Site {{ m.nom }}</span>
           </a>
