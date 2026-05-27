@@ -1,38 +1,6 @@
-# =========================================================================
-# CONFIGURATION GÉNÉRALE DU SITE
-# =========================================================================
 title: "Mon Portfolio d'Artisans"
-description: "Vente et démonstration de structures de sites web modernes pour artisans et entreprises du bâtiment."
-url: "https://luciecreations60.github.io" # Remplace 'ton-pseudo' par ton nom d'utilisateur GitHub
+url: "https://luciecreations60.github.io"
+baseurl: "/site-demo"
 
-baseurl: "/site-demo" 
-
-# =========================================================================
-# PARAMÈTRES DE COMPILATION JEKYLL
-# =========================================================================
-
-# Indique à Jekyll où chercher les layouts, les includes et les données
-source: .
-destination: ./_site
-layouts_dir: _layouts
-includes_dir: _includes
-data_dir: _data
-
-# Fichiers et dossiers à ignorer lors de la génération du site
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - node_modules/
-  - vendor/bundle/
-  - vendor/cache/
-  - .jekyll-cache/
-  - .jekyll-metadata
-  - README.md
-  - LICENSE.txt
-
-# =========================================================================
-# OPTIONS AVANCÉES (Pour le développement local)
-# =========================================================================
 markdown: kramdown
-highlighter: rouge
 permalink: pretty
