@@ -66,11 +66,11 @@
       <div class="form-grid">
         <div class="form-group">
           <label>Nom de l'entreprise</label>
-          <input type="text" id="cust-nom" placeholder="Ex: Floc'H-Loïc" oninput="updateLinks()">
+          <input type="text" id="cust-nom" placeholder="Nom de l'entreprise" oninput="updateLinks()">
         </div>
         <div class="form-group">
           <label>Ville d'intervention</label>
-          <input type="text" id="cust-ville" placeholder="Ex: Précy-sur-Oise" oninput="updateLinks()">
+          <input type="text" id="cust-ville" placeholder="Ex: Chantilly" oninput="updateLinks()">
         </div>
         <div class="form-group">
           <label>Numéro de Téléphone</label>
@@ -78,7 +78,7 @@
         </div>
         <div class="form-group">
           <label>Adresse physique</label>
-          <input type="text" id="cust-adresse" placeholder="Ex: Rue de la Tour du Moulin" oninput="updateLinks()">
+          <input type="text" id="cust-adresse" placeholder="Ex: Rue de Chantilly" oninput="updateLinks()">
         </div>
       </div>
 
@@ -94,6 +94,7 @@
       <div class="text-center">
         <h3 style="margin-bottom: 5px; font-size: 22px;">Étape finale : Visualisez votre métier</h3>
         <p style="font-size: 14px; opacity: 0.8; margin: 0;">Cliquez sur votre secteur pour générer instantanément votre démonstration personnalisée.</p>
+        <span class="hint">💡 Une fois sur le site de démo, l'onglet "Palette de couleurs" vous permettra de changer les thèmes graphiques à la volée !</span>    
         
         <div class="grid-metiers">
           {% for m in site.data.demos.metiers %}
@@ -103,7 +104,6 @@
             </a>
           {% endfor %}
         </div>
-        <span class="hint">💡 Une fois sur le site de démo, l'onglet "Palette de couleurs" vous permettra de changer les thèmes graphiques à la volée !</span>
       </div>
 
       <div class="pricing-title text-center">
@@ -115,43 +115,48 @@
         <div class="card-offre active-highlight" id="card-simple">
           <div class="badge-current" id="badge-simple">Actif</div>
           <h4>Formule Simple</h4>
-          <div class="prix">19€ <span>/ mois</span></div>
+          <div class="prix">190€</div>
           <ul>
-            <li>✅ Site vitrine One-Page épuré</li>
+            <li>✅ Site vitrine "Une Page" optimisée mobile"</li>
             <li>✅ Informations essentielles (Contact, Ville)</li>
-            <li>✅ Section de réassurance / Valeurs</li>
+            <li>✅ Section Services / Valeurs</li>
             <li>✅ Thème graphique adaptatif</li>
             <li>❌ Galerie de réalisations photos</li>
+            <li>❌ Formulaire de contact</li>
           </ul>
         </div>
 
         <div class="card-offre" id="card-plus">
           <div class="badge-current" id="badge-plus" style="display:none;">Actif</div>
           <h4>Formule Plus</h4>
-          <div class="prix">49€ <span>/ mois</span></div>
+          <div class="prix">390€</div>
           <ul>
             <li>✅ Tout le contenu de la formule Simple</li>
             <li>✅ Galerie de photos de vos projets</li>
             <li>✅ Section Services enrichie et illustrée</li>
-            <li>✅ Optimisation SEO locale de base</li>
-            <li>❌ Module d'avis clients synchronisé</li>
+            <li>✅ Référencement locale de base</li>
+            <li>✅ Intégration 3 Avis Google selectionnés</li>
+            <li>❌ Formulaire de contact</li>
           </ul>
         </div>
 
         <div class="card-offre" id="card-pro">
           <div class="badge-current" id="badge-pro" style="display:none;">Actif</div>
           <h4>Formule Pro</h4>
-          <div class="prix">89€ <span>/ mois</span></div>
+          <div class="prix">590€</div>
           <ul>
             <li>✅ Présence internet premium complète</li>
             <li>✅ Galerie de réalisations illimitée</li>
             <li>✅ Module d'avis clients complet</li>
+            <li>✅ Formulaire de contact</li>
             <li>✅ Formulaire de demande de devis en ligne</li>
             <li>✅ Référencement Google Maps avancé</li>
           </ul>
         </div>
       </div>
-
+      <div class="pricing-sub-title text-center">
+        <p style="font-size: 14px; opacity: 0.8;">Possibilité de mensualiser les différentes offres.</p>
+      </div>
     </div>
   </section>
 
