@@ -13,39 +13,18 @@
     {% include site-styles.html %}
 
     <style>
-      /* 1. Barre d'en-tête (Header) */
+      /* Force le nom en couleur sombre dans la barre de navigation */
       .header .brand-name, 
       .header .brand-title {
         color: #0f172a !important;
       }
-
-      /* 2. Titres de sections et sous-titres (ex: "Normes & Sécurité") */
-      .section .section-title,
-      .section .section-sub,
-      .section .brand-title,
-      .section-sub .brand-title {
-        color: #0f172a !important;
-      }
       
-      /* 3. Blocs de valeurs / engagements */
-      .valeur-card .valeur-titre,
-      .valeur-card .valeur-text,
+      /* Force le nom en couleur sombre au sein des blocs et textes du site */
+      .section .brand-title,
+      .section-sub .brand-title,
+      .footer .brand-title,
       .valeur-card .brand-title {
-        color: #334155 !important; /* Un gris très sombre pour le texte descriptif */
-      }
-
-      /* 4. Zone du pied de page (Footer) */
-      .footer .section-title {
-        color: #ffffff !important; /* Le gros titre du footer reste blanc car le fond est foncé */
-      }
-      .footer .brand-title {
-        color: #38bdf8 !important; /* Donne une couleur d'accent (ex: bleu clair) au nom dans le footer pour qu'il ressorte */
-      }
-      .footer .info-box .info-val {
-        color: #ffffff !important; /* Force l'adresse et la zone à être écrites en blanc lisible */
-      }
-      .footer .info-box .info-label {
-        color: #94a3b8 !important; /* Force les étiquettes (📍 ADRESSE...) en gris clair */
+        color: #0f172a !important;
       }
     </style>
   </head>
@@ -139,8 +118,8 @@
 
     <footer id="contact" class="footer">
       <div class="container text-center">
-        <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
-        <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
+        <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
+        <p style="color: #cbd5e1; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         <div class="info-box">
           <div>
             <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
@@ -227,22 +206,6 @@
             footerAddress.innerText = adressePerso + cpVilleSuffix;
           }
         } else if (villePerso !== "") {
+          // Si adresse vide mais ville remplie, on affiche une région approximative
           const footerAddress = document.getElementById('footer-adresse');
-          if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
-        }
-
-        // 3. AFFICHAGE ADAPTÉ DES BLOCS DU SITE SELON LA FORMULE ÉTUDIÉE
-        const sectionValeurs = document.getElementById('section-valeurs');
-        const sectionServices = document.getElementById('section-services');
-
-        if (offreType === 'simple') {
-          if (sectionServices) sectionServices.style.background = '#f8fafc'; 
-        } else if (offreType === 'plus') {
-          // Configurations intermédiaires
-        } else if (offreType === 'pro') {
-          // Activation de tous les modules avancés
-        }
-      });
-    </script>
-  </body>
-</html>
+          if (footerAddress) footerAddress.innerText = "Région de " + ville
