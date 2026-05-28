@@ -1,211 +1,426 @@
 <!DOCTYPE html>
+
 <html lang="fr" class="scroll-smooth">
+
   <head>
+
     {% assign client = site.data.client %}
+
     {% assign info = site.data.metiers[page.metier] %}
+
     
+
     <title id="tab-title">{{ client.nom }} | {{ info.activite }} {{ client.localite }}</title>
+
     
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,600;0,700;1,400&display=swap" rel="stylesheet">
+
     
+
     {% include site-styles.html %}
 
-    <style>
-      /* Force le nom en couleur sombre dans la barre de navigation */
-      .header .brand-name, 
-      .header .brand-title {
-        color: #0f172a !important;
-      }
-      
-      /* Force le nom en couleur sombre au sein des blocs et textes du site */
-      .section .brand-title,
-      .section-sub .brand-title,
-      .footer .brand-title,
-      .valeur-card .brand-title {
-        color: #0f172a !important;
-      }
-    </style>
   </head>
+
   <body>
 
+
+
     <header class="header">
+
       <div class="container header-flex">
+
         <div class="logo-box">
+
           <span class="brand-name brand-title">{{ client.nom }}</span>
+
           <span class="brand-sub" id="nav-activite-label">{{ info.activite }}</span>
+
         </div>
+
         
+
         <div class="nav-actions">
+
           <select id="themeChanger" class="theme-selector" onchange="changePalette(this.value)">
+
             <option value="p1">1. Thème Générique Artisan</option>
+
             <option value="p2">2. Électricien (Conseillé)</option>
+
             <option value="p3">3. Fleuriste / Pépinieriste (Conseillé)</option>
+
             <option value="p4">4. Maçon / Plombier / Chauffagiste (Conseillé)</option>
+
             <option value="p5">5. Paysagiste / Jardinier (Conseillé)</option>
+
             <option value="p6">6. Peintre (Conseillé)</option>
+
             <option value="p7">7. Coloré et équilibré</option>
+
             <option value="p8">8. Minimal mais chaleureux</option>
+
             <option value="p9">9. Vif et net</option>
+
             <option value="p10">10. Propre et énergique</option>
+
             <option value="p11">11. Corporatif et traditionnel</option>
+
             <option value="p12">12. Claire et moderne</option>
+
             <option value="p13">13. Vibrant et élégant</option>
+
             <option value="p14">14. Minimalisme scandinave</option>
+
             <option value="p15">15. Fruits des bois</option>
+
             <option value="p16">16. Énergie pop</option>
+
             <option value="p17">17. Style corporate moderne</option>
+
             <option value="p18">18. Douceur d'automne</option>
+
             <option value="p19">19. Écologique & Bio</option>
+
             <option value="p20">20. Enneigé mais chaud</option>
+
             <option value="p21">21. Couleurs linéaires (Flat)</option>
+
             <option value="p22">22. Éclectique et paisible</option>
+
           </select>
+
           
+
           <a href="{{ client.telephoneLien }}" class="btn-tel" id="header-phone-link">📞 {{ client.telephone }}</a>
+
         </div>
+
       </div>
+
     </header>
 
+
+
     <section class="hero">
+
       <div class="container text-center">
+
         <span class="badge cust-badge">Artisan Local — {{ client.localite }}</span>
+
         <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic brand-title-hero">signé {{ client.nom }}</span></h1>
+
         <p class="hero-text" id="heroDescriptionText">{{ info.textes.heroDescription }} Intervention rapide à {{ client.localite }} et ses alentours.</p>
+
         <a href="#contact" class="btn-main">Demander un devis gratuit →</a>
+
       </div>
+
     </section>
+
+
 
     <section id="section-valeurs" class="section bg-white">
+
       <div class="container">
+
         <div class="text-center mb-12">
+
           <h2 class="section-title">{{ info.textes.valeursSectionTitre }}</h2>
+
           <p class="section-sub">Pourquoi confier vos projets à l'entreprise <span class="brand-title">{{ client.nom }}</span> ?</p>
+
         </div>
+
         <div class="valeurs-grid">
+
           {% for v in info.valeurs %}
+
             <div class="valeur-card">
+
               <div class="valeur-icon">{{ v.icone }}</div>
+
               <h3 class="valeur-titre">{{ v.titre }}</h3>
+
               <p class="valeur-text">{{ v.description }}</p>
+
             </div>
+
           {% endfor %}
+
         </div>
+
       </div>
+
     </section>
+
+
 
     <section id="section-services" class="section bg-light">
+
       <div class="container">
+
         <div class="text-center mb-12">
+
           <h2 class="section-title">{{ info.textes.servicesSectionTitre }}</h2>
+
           <p class="section-sub">{{ info.textes.servicesSectionSub }}</p>
+
         </div>
+
         <div class="services-grid">
+
           {% for s in info.services %}
+
             <div class="service-bg-card leaf-shape">
+
               <img src="{{ s.image }}" alt="{{ s.titre }}" class="service-bg-img" />
+
               <div class="img-overlay"></div>
+
               <div class="service-content">
+
                 <h3 class="service-titre">{{ s.titre }}</h3>
+
                 <p class="service-desc">{{ s.description }}</p>
+
               </div>
+
             </div>
+
           {% endfor %}
+
         </div>
+
       </div>
+
     </section>
 
+
+
     <footer id="contact" class="footer">
+
       <div class="container text-center">
+
         <h2 class="section-title" style="color: white; margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
+
         <p style="color: #cbd5e1; font-weight: 300; margin: 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
+
         <div class="info-box">
+
           <div>
+
             <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
+
             <p class="info-val" id="footer-adresse">{{ client.adresse }}</p>
+
           </div>
+
           <div>
+
             <p class="info-label">🚗 ZONE D'INTERVENTION ACTUELLE</p>
+
             <p class="info-val" id="footer-zone">{{ client.zoneIntervention }}</p>
+
           </div>
+
         </div>
+
       </div>
+
     </footer>
 
+
+
     <script>
+
       function changePalette(themeName) {
+
         document.documentElement.setAttribute('data-theme', themeName);
+
       }
+
       
+
       window.addEventListener('DOMContentLoaded', () => {
+
         // 1. CONFIGURATION DU THÈME RECOMMANDÉ
+
         const path = window.location.pathname.toLowerCase();
+
         let defaultPalette = 'p1';
+
         
+
         if (path.includes('electricien')) defaultPalette = 'p2';
+
         else if (path.includes('fleuriste') || path.includes('pepinieriste')) defaultPalette = 'p3';
+
         else if (path.includes('macon') || path.includes('plombier') || path.includes('chauffagiste')) defaultPalette = 'p4';
+
         else if (path.includes('paysagiste') || path.includes('jardinier')) defaultPalette = 'p5';
+
         else if (path.includes('peintre')) defaultPalette = 'p6';
+
         
+
         const selectElement = document.getElementById('themeChanger');
+
         if (selectElement) selectElement.value = defaultPalette;
+
         changePalette(defaultPalette);
 
+
+
         // 2. RÉCUPÉRATION GLOBALE DES INFOS DE CONFIGURATION
+
         const params = new URLSearchParams(window.location.search);
+
         
+
         // Extraction des valeurs de l'URL ou repli vers Jekyll par défaut
+
         const nomPerso = params.get('nom') ? decodeURIComponent(params.get('nom')).trim() : "";
+
         const villePerso = params.get('ville') ? decodeURIComponent(params.get('ville')).trim() : "";
+
         const telPerso = params.get('tel') ? decodeURIComponent(params.get('tel')).trim() : "";
+
         const adressePerso = params.get('adresse') ? decodeURIComponent(params.get('adresse')).trim() : "";
+
         const offreType = params.get('offre') || 'simple';
 
+
+
         // Variables pour composer l'onglet
+
         let finalTabNom = nomPerso !== "" ? nomPerso : "{{ client.nom }}";
+
         let finalTabVille = villePerso !== "" ? villePerso : "{{ client.localite }}";
+
         let activiteLabel = document.getElementById('nav-activite-label')?.innerText || "Artisan";
 
+
+
         // CORRECTION DE L'ONGLET DE NAVIGATION DYNAMIQUE
+
         document.title = `${finalTabNom} | ${activiteLabel} ${finalTabVille}`;
 
+
+
         // Injection du Nom dans la page
+
         if (nomPerso !== "") {
+
           document.querySelectorAll('.brand-title').forEach(el => el.innerText = nomPerso);
+
           const heroSpan = document.querySelector('.brand-title-hero');
+
           if (heroSpan) heroSpan.innerText = "signé " + nomPerso;
+
         }
+
+
 
         // Injection de la Ville dans la page
+
         if (villePerso !== "") {
+
           document.querySelectorAll('.cust-badge').forEach(el => el.innerText = "Artisan Local — " + villePerso);
+
           const heroDesc = document.getElementById('heroDescriptionText');
+
           if (heroDesc) {
+
             heroDesc.innerText = heroDesc.innerText.replace("{{ client.localite }}", villePerso);
+
           }
+
           const footerZone = document.getElementById('footer-zone');
+
           if (footerZone) footerZone.innerText = villePerso + " et ses alentours";
+
         }
+
+
 
         // Injection du Téléphone (Haut de page)
+
         if (telPerso !== "") {
+
           const phoneBtn = document.getElementById('header-phone-link');
+
           if (phoneBtn) {
+
             phoneBtn.innerText = "📞 " + telPerso;
+
             phoneBtn.href = "tel:" + telPerso.replace(/\s+/g, '');
+
           }
+
         }
 
+
+
         // Injection de l'Adresse physique (Pied de page)
+
         if (adressePerso !== "") {
+
           const footerAddress = document.getElementById('footer-adresse');
+
           if (footerAddress) {
+
             let cpVilleSuffix = villePerso !== "" ? `, ${villePerso}` : "";
+
             footerAddress.innerText = adressePerso + cpVilleSuffix;
+
           }
+
         } else if (villePerso !== "") {
+
           // Si adresse vide mais ville remplie, on affiche une région approximative
+
           const footerAddress = document.getElementById('footer-adresse');
-          if (footerAddress) footerAddress.innerText = "Région de " + ville
+
+          if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
+
+        }
+
+
+
+        // 3. AFFICHAGE ADAPTÉ DES BLOCS DU SITE SELON LA FORMULE ÉTUDIÉE
+
+        const sectionValeurs = document.getElementById('section-valeurs');
+
+        const sectionServices = document.getElementById('section-services');
+
+
+
+        if (offreType === 'simple') {
+
+          // Cache les éléments lourds si formule de base
+
+          if (sectionServices) sectionServices.style.background = '#f8fafc'; 
+
+        } else if (offreType === 'plus') {
+
+          // Configurations intermédiaires
+
+        } else if (offreType === 'pro') {
+
+          // Activation de tous les modules avancés
+
+        }
+
+      });
+
+    </script>
+
+  </body>
+
+</html> 
+
