@@ -37,82 +37,19 @@
     .metier-icon { font-size: 32px; }
 
     /* Grille des offres tarifaires */
-.pricing-title { 
-  margin-top: 60px; 
-  border-top: 1px dashed #cbd5e1; 
-  padding-top: 40px; 
-  font-size: 24px; 
-}
-.grid-offres { 
-  display: grid; 
-  /* Force strictement 3 colonnes de taille égale */
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 20px; 
-  margin-top: 30px; 
-}
-.card-offre { 
-  background: #f8fafc; 
-  border: 1px solid #e2e8f0; 
-  border-radius: 16px; 
-  padding: 24px; /* Un poil réduit (de 32 à 24) pour gagner de l'espace interne */
-  text-align: left; 
-  transition: 0.2s; 
-  position: relative; 
-}
-.card-offre.active-highlight { 
-  border-color: var(--accent); 
-  background: #f0f7ff; 
-  box-shadow: 0 10px 15px -3px rgba(37,99,235,0.1); 
-}
-.card-offre h4 { 
-  font-size: 19px; 
-  margin: 0 0 10px 0; 
-  color: var(--primary); 
-}
-.card-offre .badge-current { 
-  position: absolute; 
-  top: 16px; 
-  right: 16px; 
-  background: var(--accent); 
-  color: white; 
-  font-size: 11px; 
-  font-weight: bold; 
-  padding: 4px 8px; 
-  border-radius: 20px; 
-  text-transform: uppercase; 
-}
-.card-offre .prix { 
-  font-size: 26px; /* Légèrement ajusté */
-  font-weight: 700; 
-  color: var(--primary); 
-  margin-bottom: 20px; 
-  white-space: nowrap; /* Empêche absolument le prix de se couper en deux */
-}
-.card-offre .prix span { 
-  font-size: 13px; 
-  font-weight: 400; 
-  color: #64748b; 
-}
-.card-offre ul { 
-  list-style: none; 
-  padding: 0; 
-  margin: 0; 
-}
-.card-offre li { 
-  font-size: 13px; /* Passé de 14px à 13px pour que "Informations essentielles" tienne sur une ligne */
-  line-height: 1.4;
-  margin-bottom: 12px; 
-  display: flex; 
-  align-items: flex-start; /* Aligne le check vert en haut si jamais une ligne longue casse quand même */
-  gap: 8px; 
-}
+    .pricing-title {  margin-top: 60px;  border-top: 1px dashed #cbd5e1;  padding-top: 40px;  font-size: 24px;  }
+    .grid-offres {  display: grid;  grid-template-columns: repeat(3, 1fr);  gap: 20px;  margin-top: 30px; }
+    .card-offre {  background: #f8fafc;  border: 1px solid #e2e8f0;  border-radius: 16px;  padding: 24px;  text-align: left; transition: 0.2s; position: relative; }
+    .card-offre.active-highlight { border-color: var(--accent); background: #f0f7ff; box-shadow: 0 10px 15px -3px rgba(37,99,235,0.1); }
+    .card-offre h4 { font-size: 19px; margin: 0 0 10px 0; color: var(--primary); }
+    .card-offre .badge-current { position: absolute; top: 16px; right: 16px; background: var(--accent); color: white; font-size: 11px; font-weight: bold; padding: 4px 8px; border-radius: 20px; text-transform: uppercase; }
+    .card-offre .prix { font-size: 26px; font-weight: 700; color: var(--primary); margin-bottom: 20px; white-space: nowrap;
+    .card-offre .prix span { font-size: 13px; font-weight: 400; color: #64748b; }
+    .card-offre ul { list-style: none; padding: 0; margin: 0; }
+    .card-offre li { font-size: 13px; line-height: 1.4;margin-bottom: 12px; display: flex; align-items: flex-start;gap: 8px; }
     
     .hint { font-size: 13px; color: #64748b; margin-top: 20px; display: block; font-style: italic; }
-    @media (max-width: 768px) {
-  .grid-offres {
-    grid-template-columns: 1fr; /* Une seule colonne sur mobile */
-  }
-}
+    @media (max-width: 768px) { .grid-offres { grid-template-columns: 1fr;  } }
   </style>
 </head>
 <body>
