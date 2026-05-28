@@ -11,6 +11,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     {% include site-styles.html %}
+
+    <style>
+      /* Force le nom en couleur sombre dans la barre de navigation */
+      .header .brand-name, 
+      .header .brand-title {
+        color: #0f172a !important;
+      }
+      
+      /* Force le nom en couleur sombre au sein des blocs et textes du site */
+      .section .brand-title,
+      .section-sub .brand-title,
+      .footer .brand-title,
+      .valeur-card .brand-title {
+        color: #0f172a !important;
+      }
+    </style>
   </head>
   <body>
 
@@ -192,22 +208,4 @@
         } else if (villePerso !== "") {
           // Si adresse vide mais ville remplie, on affiche une région approximative
           const footerAddress = document.getElementById('footer-adresse');
-          if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
-        }
-
-        // 3. AFFICHAGE ADAPTÉ DES BLOCS DU SITE SELON LA FORMULE ÉTUDIÉE
-        const sectionValeurs = document.getElementById('section-valeurs');
-        const sectionServices = document.getElementById('section-services');
-
-        if (offreType === 'simple') {
-          // Cache les éléments lourds si formule de base
-          if (sectionServices) sectionServices.style.background = '#f8fafc'; 
-        } else if (offreType === 'plus') {
-          // Configurations intermédiaires
-        } else if (offreType === 'pro') {
-          // Activation de tous les modules avancés
-        }
-      });
-    </script>
-  </body>
-</html>
+          if (footerAddress) footerAddress.innerText = "Région de " + ville
