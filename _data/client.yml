@@ -1,9 +1,9 @@
 # ==========================================
 # CONFIGURATION DU PROSPECT
 # ==========================================
-nom: "Floc'H-Loïc"
+nom: "Test"
 telephone: "06 00 00 00 00"
 telephoneLien: "tel:06000000"
-adresse: "Rue de la Tour du Moulin, 60460 Précy-sur-Oise"
-localite: "Précy-sur-Oise"
+adresse: "Rue de Chantilly, 60500 Chantilly"
+localite: "Chantilly"
 zoneIntervention: "Chantilly, Gouvieux, Senlis et alentours"
