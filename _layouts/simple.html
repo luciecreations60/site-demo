@@ -11,43 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght=0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     {% include site-styles.html %}
-
-    <style>
-      /* 1. Barre d'en-tête (Header) */
-      .header .brand-name, 
-      .header .brand-title {
-        color: #0f172a !important;
-      }
-
-      /* 2. Titres de sections et sous-titres (ex: "Normes & Sécurité") */
-      .section .section-title,
-      .section .section-sub,
-      .section .brand-title,
-      .section-sub .brand-title {
-        color: #0f172a !important;
-      }
-      
-      /* 3. Blocs de valeurs / engagements */
-      .valeur-card .valeur-titre,
-      .valeur-card .valeur-text,
-      .valeur-card .brand-title {
-        color: #334155 !important; /* Un gris très sombre pour le texte descriptif */
-      }
-
-      /* 4. Zone du pied de page (Footer) */
-      .footer .section-title {
-        color: #ffffff !important; /* Le gros titre du footer reste blanc car le fond est foncé */
-      }
-      .footer .brand-title {
-        color: #38bdf8 !important; /* Donne une couleur d'accent (ex: bleu clair) au nom dans le footer pour qu'il ressorte */
-      }
-      .footer .info-box .info-val {
-        color: #ffffff !important; /* Force l'adresse et la zone à être écrites en blanc lisible */
-      }
-      .footer .info-box .info-label {
-        color: #94a3b8 !important; /* Force les étiquettes (📍 ADRESSE...) en gris clair */
-      }
-    </style>
   </head>
   <body>
 
@@ -177,29 +140,24 @@
         // 2. RÉCUPÉRATION GLOBALE DES INFOS DE CONFIGURATION
         const params = new URLSearchParams(window.location.search);
         
-        // Extraction des valeurs de l'URL ou repli vers Jekyll par défaut
         const nomPerso = params.get('nom') ? decodeURIComponent(params.get('nom')).trim() : "";
         const villePerso = params.get('ville') ? decodeURIComponent(params.get('ville')).trim() : "";
         const telPerso = params.get('tel') ? decodeURIComponent(params.get('tel')).trim() : "";
         const adressePerso = params.get('adresse') ? decodeURIComponent(params.get('adresse')).trim() : "";
         const offreType = params.get('offre') || 'simple';
 
-        // Variables pour composer l'onglet
         let finalTabNom = nomPerso !== "" ? nomPerso : "{{ client.nom }}";
         let finalTabVille = villePerso !== "" ? villePerso : "{{ client.localite }}";
         let activiteLabel = document.getElementById('nav-activite-label')?.innerText || "Artisan";
 
-        // CORRECTION DE L'ONGLET DE NAVIGATION DYNAMIQUE
         document.title = `${finalTabNom} | ${activiteLabel} ${finalTabVille}`;
 
-        // Injection du Nom dans la page
         if (nomPerso !== "") {
           document.querySelectorAll('.brand-title').forEach(el => el.innerText = nomPerso);
           const heroSpan = document.querySelector('.brand-title-hero');
           if (heroSpan) heroSpan.innerText = "signé " + nomPerso;
         }
 
-        // Injection de la Ville dans la page
         if (villePerso !== "") {
           document.querySelectorAll('.cust-badge').forEach(el => el.innerText = "Artisan Local — " + villePerso);
           const heroDesc = document.getElementById('heroDescriptionText');
@@ -210,7 +168,6 @@
           if (footerZone) footerZone.innerText = villePerso + " et ses alentours";
         }
 
-        // Injection du Téléphone (Haut de page)
         if (telPerso !== "") {
           const phoneBtn = document.getElementById('header-phone-link');
           if (phoneBtn) {
@@ -219,7 +176,6 @@
           }
         }
 
-        // Injection de l'Adresse physique (Pied de page)
         if (adressePerso !== "") {
           const footerAddress = document.getElementById('footer-adresse');
           if (footerAddress) {
@@ -237,10 +193,6 @@
 
         if (offreType === 'simple') {
           if (sectionServices) sectionServices.style.background = '#f8fafc'; 
-        } else if (offreType === 'plus') {
-          // Configurations intermédiaires
-        } else if (offreType === 'pro') {
-          // Activation de tous les modules avancés
         }
       });
     </script>
