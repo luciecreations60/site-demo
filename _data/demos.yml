@@ -42,7 +42,7 @@ metiers:
     icone: "💐"
     url: "fleuriste"
   - id: "macon"
-    nom: "Maçonnerie"
+    nom: "Maçon"
     icone: "🧱"
     url: "macon"
   - id: "plombier"
