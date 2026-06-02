@@ -13,7 +13,7 @@
     {% include site-styles.html %}
 
     <style>
-      /* Styles additionnels pour les nouvelles fonctionnalités des formules */
+      /* Styles additionnels existants */
       .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
       .review-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); text-align: left; }
       .stars { color: #fbbf24; font-size: 18px; margin-bottom: 10px; }
@@ -28,32 +28,35 @@
       .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
       .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
-      /* Alignement horizontal des coordonnées en bas */
+      /* Coordonnées Bas de page */
       .info-box-4col { display: flex !important; flex-direction: row !important; justify-content: space-between; align-items: flex-start; gap: 15px; margin-top: 40px; text-align: center !important; }
       .info-box-4col > div { flex: 1; min-width: 0; }
       .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
 
-      /* Galerie Lightbox sous les tuiles */
-      .gallery-container { margin-top: 50px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 40px; }
-      .gallery-container h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--primary-color, #0f172a); margin-bottom: 20px; }
-      .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-      .gallery-item { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 4/3; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-      .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-      .gallery-item:hover img { transform: scale(1.06); }
-      .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); opacity: 0; transition: opacity 0.2s ease; display: flex; align-items: center; justify-content: center; }
-      .gallery-item:hover .gallery-overlay { opacity: 1; }
-      .gallery-icon { color: white; font-size: 20px; }
+      /* NOUVEAU : Galerie Mosaïque Asymétrique (Style Pinterest / Avenue des Fleurs) */
+      .gallery-container { margin-top: 60px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 50px; }
+      .gallery-container h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary-color, #0f172a); margin-bottom: 30px; text-align: center; }
+      
+      /* Effet Colonnes type Pinterest */
+      .mosaic-grid { columns: 4 200px; column-gap: 20px; width: 100%; }
+      .mosaic-item { margin-bottom: 20px; break-inside: avoid; position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.04); background: #f1f5f9; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+      .mosaic-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+      .mosaic-item:hover { transform: translateY(-4px); }
+      .mosaic-item:hover img { transform: scale(1.04); }
+      .mosaic-overlay { position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 16px; }
+      .mosaic-item:hover .mosaic-overlay { opacity: 1; }
+      .mosaic-caption-text { color: white; margin: 0; font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 500; }
 
       /* Système Zoom Lightbox */
       .lightbox { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
       .lightbox.active { opacity: 1; pointer-events: auto; }
-      .lightbox-content { max-width: 90%; max-height: 85vh; border-radius: 6px; object-fit: contain; }
-      .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 40px; color: white; cursor: pointer; background: transparent; border: none; }
-      .lightbox-caption { position: absolute; bottom: 25px; color: #e2e8f0; font-family: 'Inter', sans-serif; font-size: 14px; background: rgba(0,0,0,0.6); padding: 8px 16px; border-radius: 20px; }
+      .lightbox-content { max-width: 90%; max-height: 85vh; border-radius: 8px; object-fit: contain; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+      .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 45px; color: white; cursor: pointer; background: transparent; border: none; font-weight: 200; }
+      .lightbox-caption { position: absolute; bottom: 30px; color: #f1f5f9; font-family: 'Inter', sans-serif; font-size: 14px; background: rgba(15, 23, 42, 0.75); padding: 10px 20px; border-radius: 30px; backdrop-filter: blur(4px); }
 
       /* Versions Mobiles */
-      @media (max-width: 768px) { .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } }
+      @media (max-width: 768px) { .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } .mosaic-grid { columns: 2 150px; } }
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -124,15 +127,15 @@
       </div>
     </section>
 
-    <!-- SECTION SERVICES MODIFIÉE : Tuiles préservées + Photos dynamiques en dessous -->
+    <!-- SECTION SERVICES EN SPIRATION AVENUE DES FLEURS + MOSAÏQUE -->
     <section id="section-services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">Nos Réalisations & Chantiers</h2>
-          <p class="section-sub">Découvrez en images la qualité de nos interventions récentes.</p>
+          <p class="section-sub">Découvrez l'étendue de notre savoir-faire à travers nos prestations de référence.</p>
         </div>
         
-        <!-- Les 3 tuiles de base (Visibles sur image_55f696.png) -->
+        <!-- Les 3 Catégories/Tuiles principales (comme sur Avenue des Fleurs) -->
         <div class="services-grid">
           {% for s in info.services %}
             <div class="service-bg-card leaf-shape">
@@ -146,26 +149,39 @@
           {% endfor %}
         </div>
 
-        <!-- NOUVEAU : Galerie photos bonus avec Zoom Lightbox (S'adapte au métier) -->
+        <!-- REPRISE STYLE AVENUE DES FLEURS : Flux continu de photos sous les catégories en Mosaïque Asymétrique -->
         <div class="gallery-container">
-          <h3>📷 Aperçu de nos derniers chantiers en images</h3>
-          <div class="gallery-grid">
-            <!-- Les images utilisent l'activité de l'artisan (ex: paysagiste, electricien) pour charger des visuels uniques -->
-            <div class="gallery-item" onclick="openLightbox('https://source.unsplash.com/featured/800x600/?{{ info.activite | url_encode }},work,1', 'Suivi rigoureux et propreté du chantier')">
-              <img src="https://source.unsplash.com/featured/400x300/?{{ info.activite | url_encode }},work,1" alt="Chantier Récent 1" />
-              <div class="gallery-overlay"><span class="gallery-icon">🔍</span></div>
+          <h3>✨ Dernières créations & interventions sur le terrain</h3>
+          
+          <div class="mosaic-grid">
+            <!-- Item 1 (Format Portrait / Vertical) -->
+            <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/600x800/?{{ info.activite | url_encode }},work,1', 'Zoom Réalisation — Travaux récents de l\'entreprise')">
+              <img src="https://source.unsplash.com/featured/400x530/?{{ info.activite | url_encode }},work,1" alt="Chantier Récent 1" />
+              <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Voir en grand</p></div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('https://source.unsplash.com/featured/800x600/?{{ info.activite | url_encode }},work,2', 'Intervention technique conforme aux normes')">
+            
+            <!-- Item 2 (Format Paysage / Horizontal court) -->
+            <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/800x600/?{{ info.activite | url_encode }},work,2', 'Zoom Réalisation — Zoom sur les finitions et la mise en oeuvre')">
               <img src="https://source.unsplash.com/featured/400x300/?{{ info.activite | url_encode }},work,2" alt="Chantier Récent 2" />
-              <div class="gallery-overlay"><span class="gallery-icon">🔍</span></div>
+              <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Voir en grand</p></div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('https://source.unsplash.com/featured/800x600/?{{ info.activite | url_encode }},work,3', 'Finitions soignées de haute qualité')">
-              <img src="https://source.unsplash.com/featured/400x300/?{{ info.activite | url_encode }},work,3" alt="Chantier Récent 3" />
-              <div class="gallery-overlay"><span class="gallery-icon">🔍</span></div>
+            
+            <!-- Item 3 (Format Carré) -->
+            <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/800x800/?{{ info.activite | url_encode }},work,3', 'Zoom Réalisation — Respect des normes de qualité de l\'artisan')">
+              <img src="https://source.unsplash.com/featured/400x400/?{{ info.activite | url_encode }},work,3" alt="Chantier Récent 3" />
+              <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Voir en grand</p></div>
             </div>
-            <div class="gallery-item" onclick="openLightbox('https://source.unsplash.com/featured/800x600/?{{ info.activite | url_encode }},work,4', 'Matériaux professionnels durables')">
-              <img src="https://source.unsplash.com/featured/400x300/?{{ info.activite | url_encode }},work,4" alt="Chantier Récent 4" />
-              <div class="gallery-overlay"><span class="gallery-icon">🔍</span></div>
+            
+            <!-- Item 4 (Format Grand Portrait) -->
+            <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/600x900/?{{ info.activite | url_encode }},work,4', 'Zoom Réalisation — Restitution propre et soignée en fin de prestation')">
+              <img src="https://source.unsplash.com/featured/400x600/?{{ info.activite | url_encode }},work,4" alt="Chantier Récent 4" />
+              <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Voir en grand</p></div>
+            </div>
+
+            <!-- Item 5 (Format Paysage classique) -->
+            <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/800x550/?{{ info.activite | url_encode }},work,5', 'Zoom Réalisation — Matériaux rigoureusement sélectionnés')">
+              <img src="https://source.unsplash.com/featured/400x275/?{{ info.activite | url_encode }},work,5" alt="Chantier Récent 5" />
+              <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Voir en grand</p></div>
             </div>
           </div>
         </div>
