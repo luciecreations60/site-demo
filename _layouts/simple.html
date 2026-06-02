@@ -57,7 +57,7 @@
         <span class="badge cust-badge">Artisan Local — {{ client.localite }}</span>
         <h1 class="hero-title">{{ info.textes.heroTitre }}, <span class="italic brand-title-hero">signé {{ client.nom }}</span></h1>
         <p class="hero-text" id="heroDescriptionText">{{ info.textes.heroDescription }} Intervention rapide à {{ client.localite }} et ses alentours.</p>
-        <a href="#contact" class="btn-main">Demander un devis gratuit →</a>
+        <a href="#contact" class="btn-main" id="hero-action-btn">Demander un devis gratuit →</a>
       </div>
     </section>
 
@@ -79,6 +79,7 @@
       </div>
     </section>
 
+    <!-- CETTE SECTION ENTIÈRE (GALERIE/SERVICES) VA SE MASQUER EN FORMULE SIMPLE -->
     <section id="section-services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
@@ -187,12 +188,22 @@
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
-        // 3. AFFICHAGE ADAPTÉ DES BLOCS DU SITE SELON LA FORMULE ÉTUDIÉE
-        const sectionValeurs = document.getElementById('section-valeurs');
+        // 3. LOGIQUE DYNAMIQUE DES FORMULES COMMERCIALES
         const sectionServices = document.getElementById('section-services');
+        const heroActionBtn = document.getElementById('hero-action-btn');
 
         if (offreType === 'simple') {
-          if (sectionServices) sectionServices.style.background = '#f8fafc'; 
+          // Formule Simple : On masque la galerie photos / services complets
+          if (sectionServices) sectionServices.style.display = 'none';
+          if (heroActionBtn) heroActionBtn.innerText = "Nous Contacter Par Téléphone →";
+        } else if (offreType === 'plus') {
+          // Formule Plus : On réaffiche la galerie de réalisations
+          if (sectionServices) sectionServices.style.display = 'block';
+          if (heroActionBtn) heroActionBtn.innerText = "Voir Nos Réalisations →";
+        } else if (offreType === 'pro') {
+          // Formule Pro : Tout est actif + bouton orienté Devis en Ligne
+          if (sectionServices) sectionServices.style.display = 'block';
+          if (heroActionBtn) heroActionBtn.innerText = "Demander un Devis En Ligne →";
         }
       });
     </script>
