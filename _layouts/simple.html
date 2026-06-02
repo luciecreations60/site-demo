@@ -28,7 +28,7 @@
       .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
       .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
-      /* grille adaptative sans forçage de fond */
+      /* Alignement horizontal strict sur une seule ligne (votre bloc d'origine préservé) */
       .info-box-4col { 
         display: flex !important; 
         flex-direction: row !important; 
@@ -36,20 +36,19 @@
         align-items: flex-start; 
         gap: 15px; 
         margin-top: 40px; 
-        text-align: center !important;
+        text-align: center !important; 
       }
       .info-box-4col > div { 
         flex: 1; 
-        min-width: 0;
+        min-width: 0; 
       }
       .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
 
-      /* Version mobile : on repasse sur une seule colonne uniquement sur petit écran */
+      /* Version mobile adaptative */
       @media (max-width: 768px) { 
         .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } 
       }
-
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -172,7 +171,6 @@
         <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
         <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         
-        <!-- Formulaire de Devis -->
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
           <h3>Formulaire de demande de devis en ligne</h3>
           <form onsubmit="event.preventDefault(); alert('Démonstration : Formulaire envoyé avec succès !');">
@@ -203,8 +201,7 @@
           </form>
         </div>
 
-        <!-- Coordonnées d'origine avec classe CSS nettoyée (Conserve l'aspect visuel de base) -->
-        <div class="info-box-4col">
+        <div class="info-box info-box-4col">
           <div>
             <p class="info-label">📍 ADRESSE</p>
             <p class="info-val" id="footer-adresse">{{ client.adresse }}</p>
@@ -217,9 +214,13 @@
             <p class="info-label">📞 TÉLÉPHONE</p>
             <p class="info-val"><a href="{{ client.telephoneLien }}" id="footer-tel">{{ client.telephone }}</a></p>
           </div>
-          <div>
+          <div id="bloc-email-container">
             <p class="info-label">✉️ EMAIL</p>
-            <p class="info-val"><a href="{% if client.email %}mailto:{{ client.email }}{% endif %}" id="footer-email"> {{ client.email }}</a></p>
+            <p class="info-val">
+              <a href="{% if client.email %}mailto:{{ client.email }}{% endif %}" id="footer-email">
+                {{ client.email }}
+              </a>
+            </p>
           </div>
         </div>
 
@@ -251,7 +252,7 @@
         const villePerso = params.get('ville') ? decodeURIComponent(params.get('ville')).trim() : "";
         const telPerso = params.get('tel') ? decodeURIComponent(params.get('tel')).trim() : "";
         const adressePerso = params.get('adresse') ? decodeURIComponent(params.get('adresse')).trim() : "";
-        const emailPerso = params.get('email') ? decodeURIComponent(params.get('email')).trim() : ""; // <-- Nouveau paramètre !
+        const emailPerso = params.get('email') ? decodeURIComponent(params.get('email')).trim() : "";
         const offreType = params.get('offre') || 'simple';
 
         let finalTabNom = nomPerso !== "" ? nomPerso : "{{ client.nom }}";
@@ -264,16 +265,6 @@
           document.querySelectorAll('.brand-title').forEach(el => el.innerText = nomPerso);
           const heroSpan = document.querySelector('.brand-title-hero');
           if (heroSpan) heroSpan.innerText = "signé " + nomPerso;
-          
-          // Génère un mail à la volée SEULEMENT si aucun email n'a été configuré dans _data/client
-          {% if client.email == null or client.email == "" %}
-            const formattedEmail = "contact@" + nomPerso.toLowerCase().replace(/[^a-z0-9]/g, "") + ".fr";
-            const footerMailEl = document.getElementById('footer-email');
-            if (footerMailEl) {
-              footerMailEl.innerText = formattedEmail;
-              footerMailEl.href = "mailto:" + formattedEmail;
-            }
-          {% endif %}
         }
 
         if (villePerso !== "") {
@@ -305,18 +296,30 @@
             let cpVilleSuffix = villePerso !== "" ? `, ${villePerso}` : "";
             footerAddress.innerText = adressePerso + cpVilleSuffix;
           }
-          if (emailPerso !== "") {
-          const footerMailEl = document.getElementById('footer-email');
-          if (footerMailEl) {
-            footerMailEl.innerText = emailPerso;
-            footerMailEl.href = "mailto:" + emailPerso;
-          }
-        }
         } else if (villePerso !== "") {
           const footerAddress = document.getElementById('footer-adresse');
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
+        // GESTION DYNAMIQUE ET ETANCHE DE L'EMAIL
+        const footerMailEl = document.getElementById('footer-email');
+        const emailContainer = document.getElementById('bloc-email-container');
+        
+        if (emailPerso !== "") {
+          if (footerMailEl) {
+            footerMailEl.innerText = emailPerso;
+            footerMailEl.href = "mailto:" + emailPerso;
+          }
+          if (emailContainer) emailContainer.style.display = 'block';
+        } else {
+          // Si l'URL est vide, Liquid prend le relais avec _data/client.yml.
+          // S'il n'y a rien non plus dans le YML, on masque proprement la case Email.
+          if (footerMailEl && footerMailEl.innerText.trim() === "") {
+            if (emailContainer) emailContainer.style.display = 'none';
+          }
+        }
+
+        // LOGIQUE DYNAMIQUE DES FORMULES COMMERCIALES
         const sectionServices = document.getElementById('section-services');
         const sectionAvis = document.getElementById('section-avis');
         const blocFormulairePro = document.getElementById('bloc-formulaire-pro');
