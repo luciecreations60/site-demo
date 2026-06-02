@@ -28,9 +28,9 @@
       .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
       .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
-      /* Grid adaptatif pour les 4 infos de contact en bas */
-      .info-box-4col { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-top: 40px; text-align: left; }
-      .info-box-4col a { color: #fff; text-decoration: none; transition: 0.2s; }
+      /* Restauration du style d'origine pour l'info-box (grille adaptative sans forçage de fond) */
+      .info-box-4col { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px; }
+      .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
 
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
@@ -155,7 +155,7 @@
         <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
         <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         
-        <!-- Formulaire de Devis avec titres et textes corrigés en sombre -->
+        <!-- Formulaire de Devis -->
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
           <h3>Formulaire de demande de devis en ligne</h3>
           <form onsubmit="event.preventDefault(); alert('Démonstration : Formulaire envoyé avec succès !');">
@@ -186,8 +186,8 @@
           </form>
         </div>
 
-        <!-- Bloc d'informations de contact enrichi à 4 colonnes -->
-        <div class="info-box-4col">
+        <!-- Coordonnées d'origine avec classe CSS nettoyée (Conserve l'aspect visuel de base) -->
+        <div class="info-box info-box-4col">
           <div>
             <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
             <p class="info-val" id="footer-adresse">{{ client.adresse }}</p>
@@ -202,7 +202,11 @@
           </div>
           <div>
             <p class="info-label">✉️ ADRESSE EMAIL</p>
-            <p class="info-val"><a href="mailto:{{ client.email | default: 'contact@artisan-digital.fr' }}" id="footer-email">{{ client.email | default: "contact@artisan-digital.fr" }}</a></p>
+            <p class="info-val">
+              <a href="mailto:{{ client.email | default: 'contact@artisan-digital.fr' }}" id="footer-email">
+                {{ client.email | default: "contact@artisan-digital.fr" }}
+              </a>
+            </p>
           </div>
         </div>
 
@@ -215,7 +219,6 @@
       }
       
       window.addEventListener('DOMContentLoaded', () => {
-        // 1. CONFIGURATION DU THÈME RECOMMANDÉ
         const path = window.location.pathname.toLowerCase();
         let defaultPalette = 'p1';
         
@@ -229,7 +232,6 @@
         if (selectElement) selectElement.value = defaultPalette;
         changePalette(defaultPalette);
 
-        // 2. RÉCUPÉRATION GLOBALE DES INFOS DE CONFIGURATION
         const params = new URLSearchParams(window.location.search);
         
         const nomPerso = params.get('nom') ? decodeURIComponent(params.get('nom')).trim() : "";
@@ -249,13 +251,15 @@
           const heroSpan = document.querySelector('.brand-title-hero');
           if (heroSpan) heroSpan.innerText = "signé " + nomPerso;
           
-          // Génération automatique d'un email basé sur le nom de l'entreprise s'il n'y a pas d'email fixe
-          const formattedEmail = "contact@" + nomPerso.toLowerCase().replace(/[^a-z0-9]/g, "") + ".fr";
-          const footerMailEl = document.getElementById('footer-email');
-          if (footerMailEl) {
-            footerMailEl.innerText = formattedEmail;
-            footerMailEl.href = "mailto:" + formattedEmail;
-          }
+          // Génère un mail à la volée SEULEMENT si aucun email n'a été configuré dans _data/client
+          {% if client.email == null or client.email == "" %}
+            const formattedEmail = "contact@" + nomPerso.toLowerCase().replace(/[^a-z0-9]/g, "") + ".fr";
+            const footerMailEl = document.getElementById('footer-email');
+            if (footerMailEl) {
+              footerMailEl.innerText = formattedEmail;
+              footerMailEl.href = "mailto:" + formattedEmail;
+            }
+          {% endif %}
         }
 
         if (villePerso !== "") {
@@ -292,7 +296,6 @@
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
-        // 3. LOGIQUE DYNAMIQUE ET ÉTANCHE DES FORMULES COMMERCIALES
         const sectionServices = document.getElementById('section-services');
         const sectionAvis = document.getElementById('section-avis');
         const blocFormulairePro = document.getElementById('bloc-formulaire-pro');
