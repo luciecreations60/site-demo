@@ -19,13 +19,20 @@
       .stars { color: #fbbf24; font-size: 18px; margin-bottom: 10px; }
       .review-author { font-weight: 600; font-size: 14px; margin-top: 12px; display: block; }
       
+      /* Formulaire Devis - Forçage des couleurs pour lisibilité sur fond blanc */
       .devis-form-container { max-width: 600px; margin: 40px auto 0 auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); text-align: left; }
+      .devis-form-container h3 { color: #0f172a !important; margin-top: 0; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
       .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
       .form-group { display: flex; flex-direction: column; margin-bottom: 16px; }
-      .form-group label { font-size: 12px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-      .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; }
-      .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
+      .form-group label { color: #334155 !important; font-size: 12px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+      .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
+      .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
+      /* Grid adaptatif pour les 4 infos de contact en bas */
+      .info-box-4col { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-top: 40px; text-align: left; }
+      .info-box-4col a { color: #fff; text-decoration: none; transition: 0.2s; }
+      .info-box-4col a:hover { opacity: 0.8; }
+
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -78,7 +85,6 @@
       </div>
     </section>
 
-    <!-- FORMULE SIMPLE, PLUS, PRO : Les valeurs restent toujours -->
     <section id="section-valeurs" class="section bg-white">
       <div class="container">
         <div class="text-center mb-12">
@@ -97,7 +103,6 @@
       </div>
     </section>
 
-    <!-- FORMULE PLUS & PRO UNIQUE : Galerie de photos et Réalisations -->
     <section id="section-services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
@@ -119,7 +124,6 @@
       </div>
     </section>
 
-    <!-- FORMULE PLUS & PRO UNIQUE : Témoignages et Avis Google -->
     <section id="section-avis" class="section bg-white">
       <div class="container">
         <div class="text-center mb-12">
@@ -135,7 +139,7 @@
           <div class="review-card">
             <div class="stars">★★★★★</div>
             <p>"Intervention en urgence un samedi. Problème résolu rapidement avec un tarif très honnête et transparent. Je recommande !"</p>
-            <span class="review-author">Sophie D. — Cliento Locale</span>
+            <span class="review-author">Sophie D. — Cliente Locale</span>
           </div>
           <div class="review-card">
             <div class="stars">★★★★★</div>
@@ -151,9 +155,9 @@
         <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
         <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         
-        <!-- FORMULE PRO UNIQUE : Formulaire de demande de devis complet -->
+        <!-- Formulaire de Devis avec titres et textes corrigés en sombre -->
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
-          <h3 style="color: #0f172a; margin-top: 0; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; text-align: center;">Formulaire de demande de devis en ligne</h3>
+          <h3>Formulaire de demande de devis en ligne</h3>
           <form onsubmit="event.preventDefault(); alert('Démonstration : Formulaire envoyé avec succès !');">
             <div class="form-row">
               <div class="form-group">
@@ -182,16 +186,26 @@
           </form>
         </div>
 
-        <div class="info-box" style="margin-top: 40px;">
+        <!-- Bloc d'informations de contact enrichi à 4 colonnes -->
+        <div class="info-box-4col">
           <div>
             <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
             <p class="info-val" id="footer-adresse">{{ client.adresse }}</p>
           </div>
           <div>
-            <p class="info-label">🚗 ZONE D'INTERVENTION ACTUELLE</p>
+            <p class="info-label">🚗 ZONE D'INTERVENTION</p>
             <p class="info-val" id="footer-zone">{{ client.zoneIntervention }}</p>
           </div>
+          <div>
+            <p class="info-label">📞 TÉLÉPHONE DIRECT</p>
+            <p class="info-val"><a href="{{ client.telephoneLien }}" id="footer-tel">{{ client.telephone }}</a></p>
+          </div>
+          <div>
+            <p class="info-label">✉️ ADRESSE EMAIL</p>
+            <p class="info-val"><a href="mailto:{{ client.email | default: 'contact@artisan-digital.fr' }}" id="footer-email">{{ client.email | default: "contact@artisan-digital.fr" }}</a></p>
+          </div>
         </div>
+
       </div>
     </footer>
 
@@ -234,6 +248,14 @@
           document.querySelectorAll('.brand-title').forEach(el => el.innerText = nomPerso);
           const heroSpan = document.querySelector('.brand-title-hero');
           if (heroSpan) heroSpan.innerText = "signé " + nomPerso;
+          
+          // Génération automatique d'un email basé sur le nom de l'entreprise s'il n'y a pas d'email fixe
+          const formattedEmail = "contact@" + nomPerso.toLowerCase().replace(/[^a-z0-9]/g, "") + ".fr";
+          const footerMailEl = document.getElementById('footer-email');
+          if (footerMailEl) {
+            footerMailEl.innerText = formattedEmail;
+            footerMailEl.href = "mailto:" + formattedEmail;
+          }
         }
 
         if (villePerso !== "") {
@@ -252,6 +274,11 @@
             phoneBtn.innerText = "📞 " + telPerso;
             phoneBtn.href = "tel:" + telPerso.replace(/\s+/g, '');
           }
+          const footerTel = document.getElementById('footer-tel');
+          if (footerTel) {
+            footerTel.innerText = telPerso;
+            footerTel.href = "tel:" + telPerso.replace(/\s+/g, '');
+          }
         }
 
         if (adressePerso !== "") {
@@ -265,14 +292,13 @@
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
-        // 3. LOGIQUE DYNAMIQUE ET ETANCHE DES FORMULES COMMERCIALES
+        // 3. LOGIQUE DYNAMIQUE ET ÉTANCHE DES FORMULES COMMERCIALES
         const sectionServices = document.getElementById('section-services');
         const sectionAvis = document.getElementById('section-avis');
         const blocFormulairePro = document.getElementById('bloc-formulaire-pro');
         const heroActionBtn = document.getElementById('hero-action-btn');
 
         if (offreType === 'simple') {
-          // Formule Simple : Uniquement les valeurs et le bouton téléphone
           if (sectionServices) sectionServices.style.display = 'none';
           if (sectionAvis) sectionAvis.style.display = 'none';
           if (blocFormulairePro) blocFormulairePro.style.display = 'none';
@@ -282,20 +308,18 @@
           }
         } 
         else if (offreType === 'plus') {
-          // Formule Plus : Apparition de la Galerie Photos + les Avis clients
           if (sectionServices) sectionServices.style.display = 'block';
           if (sectionAvis) sectionAvis.style.display = 'block';
-          if (blocFormulairePro) blocFormulairePro.style.display = 'none'; // Pas de devis en ligne
+          if (blocFormulairePro) blocFormulairePro.style.display = 'none';
           if (heroActionBtn) {
             heroActionBtn.innerText = "Voir Nos Réalisations ↓";
             heroActionBtn.href = "#section-services";
           }
         } 
         else if (offreType === 'pro') {
-          // Formule Pro : La totale (Galerie + Avis + Grand Formulaire de devis en bas)
           if (sectionServices) sectionServices.style.display = 'block';
           if (sectionAvis) sectionAvis.style.display = 'block';
-          if (blocFormulairePro) blocFormulairePro.style.display = 'block'; // Formulaire actif !
+          if (blocFormulairePro) blocFormulairePro.style.display = 'block';
           if (heroActionBtn) {
             heroActionBtn.innerText = "Demander un Devis En Ligne ↓";
             heroActionBtn.href = "#contact";
