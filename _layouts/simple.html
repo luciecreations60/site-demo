@@ -19,7 +19,7 @@
       .stars { color: #fbbf24; font-size: 18px; margin-bottom: 10px; }
       .review-author { font-weight: 600; font-size: 14px; margin-top: 12px; display: block; }
       
-      /* Formulaire Devis - Forçage des couleurs pour lisibilité sur fond blanc */
+      /* Formulaire Devis */
       .devis-form-container { max-width: 600px; margin: 40px auto 0 auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); text-align: left; }
       .devis-form-container h3 { color: #0f172a !important; margin-top: 0; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
       .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
@@ -28,27 +28,31 @@
       .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
       .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
-      /* Alignement horizontal strict sur une seule ligne (votre bloc d'origine préservé) */
-      .info-box-4col { 
-        display: flex !important; 
-        flex-direction: row !important; 
-        justify-content: space-between; 
-        align-items: flex-start; 
-        gap: 15px; 
-        margin-top: 40px; 
-        text-align: center !important; 
-      }
-      .info-box-4col > div { 
-        flex: 1; 
-        min-width: 0; 
-      }
+      /* Alignement horizontal des coordonnées en bas */
+      .info-box-4col { display: flex !important; flex-direction: row !important; justify-content: space-between; align-items: flex-start; gap: 15px; margin-top: 40px; text-align: center !important; }
+      .info-box-4col > div { flex: 1; min-width: 0; }
       .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
 
-      /* Version mobile adaptative */
-      @media (max-width: 768px) { 
-        .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } 
-      }
+      /* NOUVEAU : Galerie Grid & Effet de Survol */
+      .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 30px; }
+      .gallery-item { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 4/3; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.07); border: 1px solid rgba(0,0,0,0.05); }
+      .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+      .gallery-item:hover img { transform: scale(1.08); }
+      .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 16px; }
+      .gallery-item:hover .gallery-overlay { opacity: 1; }
+      .gallery-title { color: white; margin: 0; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; text-align: left; }
+
+      /* NOUVEAU : Système Lightbox (Fenêtre de Zoom) */
+      .lightbox { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
+      .lightbox.active { opacity: 1; pointer-events: auto; }
+      .lightbox-content { max-width: 90%; max-height: 80vh; border-radius: 8px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); object-fit: contain; }
+      .lightbox-close { position: absolute; top: 20px; right: 20px; font-size: 35px; color: white; cursor: pointer; background: transparent; border: none; font-weight: 300; transition: 0.2s; }
+      .lightbox-close:hover { transform: scale(1.1); }
+      .lightbox-caption { position: absolute; bottom: 30px; color: #cbd5e1; font-family: 'Inter', sans-serif; font-size: 15px; }
+
+      /* Versions Mobiles */
+      @media (max-width: 768px) { .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } }
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -119,26 +123,50 @@
       </div>
     </section>
 
+    <!-- NOUVELLE GALERIE COMPLÈTE LIGHTBOX (Formule Plus & Pro) -->
     <section id="section-services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">Nos Réalisations & Chantiers</h2>
-          <p class="section-sub">Découvrez en images la qualité de nos interventions récentes.</p>
+          <p class="section-sub">Cliquez sur une photo pour zoomer sur nos interventions récentes.</p>
         </div>
-        <div class="services-grid">
-          {% for s in info.services %}
-            <div class="service-bg-card leaf-shape">
-              <img src="{{ s.image }}" alt="{{ s.titre }}" class="service-bg-img" />
-              <div class="img-overlay"></div>
-              <div class="service-content">
-                <h3 class="service-titre">{{ s.titre }}</h3>
-                <p class="service-desc">{{ s.description }}</p>
-              </div>
-            </div>
-          {% endfor %}
+        
+        <div class="gallery-grid">
+          <!-- Photo 1 -->
+          <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80', 'Rénovation et suivi rigoureux du chantier - Qualité garantie')">
+            <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=500&q=80" alt="Chantier Réalisation 1" />
+            <div class="gallery-overlay"><p class="gallery-title">🔍 Zoom sur la réalisation</p></div>
+          </div>
+          <!-- Photo 2 -->
+          <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80', 'Intervention technique de précision conforme aux normes de sécurité')">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=80" alt="Chantier Réalisation 2" />
+            <div class="gallery-overlay"><p class="gallery-title">🔍 Zoom sur la réalisation</p></div>
+          </div>
+          <!-- Photo 3 -->
+          <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80', 'Finitions soignées pour une esthétique durable et impeccable')">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=500&q=80" alt="Chantier Réalisation 3" />
+            <div class="gallery-overlay"><p class="gallery-title">🔍 Zoom sur la réalisation</p></div>
+          </div>
+          <!-- Photo 4 -->
+          <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80', 'Matériaux rigoureusement sélectionnés et mise en œuvre pro')">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=500&q=80" alt="Chantier Réalisation 4" />
+            <div class="gallery-overlay"><p class="gallery-title">🔍 Zoom sur la réalisation</p></div>
+          </div>
+          <!-- Photo 5 -->
+          <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=800&q=80', 'Nettoyage minutieux et restitution parfaite de votre espace en fin de travaux')">
+            <img src="https://images.unsplash.com/photo-1590069261209-f8e9b8642343?auto=format&fit=crop&w=500&q=80" alt="Chantier Réalisation 5" />
+            <div class="gallery-overlay"><p class="gallery-title">🔍 Zoom sur la réalisation</p></div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- STRUCTURE HTML DE LA FENÊTRE ZOOM (LIGHTBOX) -->
+    <div id="customLightbox" class="lightbox" onclick="closeLightbox()">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img id="lightboxImg" class="lightbox-content" src="" alt="Zoom réalisation" />
+      <p id="lightboxCaption" class="lightbox-caption"></p>
+    </div>
 
     <section id="section-avis" class="section bg-white">
       <div class="container">
@@ -171,6 +199,7 @@
         <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
         <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         
+        <!-- Formulaire de Devis -->
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
           <h3>Formulaire de demande de devis en ligne</h3>
           <form onsubmit="event.preventDefault(); alert('Démonstration : Formulaire envoyé avec succès !');">
@@ -201,6 +230,7 @@
           </form>
         </div>
 
+        <!-- Coordonnées d'origine unifiées sur une ligne (info-box) -->
         <div class="info-box info-box-4col">
           <div>
             <p class="info-label">📍 ADRESSE</p>
@@ -228,6 +258,18 @@
     </footer>
 
     <script>
+      // FONCTIONS LOGIQUE DE ZOOM LIGHTBOX
+      function openLightbox(imgSrc, captionText) {
+        const lightbox = document.getElementById('customLightbox');
+        document.getElementById('lightboxImg').src = imgSrc;
+        document.getElementById('lightboxCaption').innerText = captionText;
+        lightbox.classList.add('active');
+      }
+
+      function closeLightbox() {
+        document.getElementById('customLightbox').classList.remove('active');
+      }
+      
       function changePalette(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
       }
@@ -301,7 +343,7 @@
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
-        // GESTION DYNAMIQUE ET ETANCHE DE L'EMAIL
+        // GESTION DYNAMIQUE DE L'EMAIL
         const footerMailEl = document.getElementById('footer-email');
         const emailContainer = document.getElementById('bloc-email-container');
         
@@ -312,8 +354,6 @@
           }
           if (emailContainer) emailContainer.style.display = 'block';
         } else {
-          // Si l'URL est vide, Liquid prend le relais avec _data/client.yml.
-          // S'il n'y a rien non plus dans le YML, on masque proprement la case Email.
           if (footerMailEl && footerMailEl.innerText.trim() === "") {
             if (emailContainer) emailContainer.style.display = 'none';
           }
