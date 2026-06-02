@@ -86,6 +86,10 @@
           <label>Adresse physique</label>
           <input type="text" id="cust-adresse" placeholder="Ex: 15 Rue de la Gare" oninput="updateLinks()">
         </div>
+        <div class="form-group">
+          <label>Adresse Email</label>
+          <input type="email" id="cust-email" placeholder="Ex: contact@artisan.fr" oninput="updateLinks()">
+        </div>
       </div>
 
       <div style="max-width: 500px; margin: 0 auto 40px auto; text-align: center;">
@@ -192,10 +196,12 @@
       const ville = encodeURIComponent(document.getElementById('cust-ville').value || '');
       const tel = encodeURIComponent(document.getElementById('cust-tel').value || '');
       const adresse = encodeURIComponent(document.getElementById('cust-adresse').value || '');
+      const email = encodeURIComponent(document.getElementById('cust-email').value || ''); // <-- Ajout de l'e-mail
       
       document.querySelectorAll('.demo-link').forEach(link => {
         const baseUrl = link.href.split('?')[0];
-        link.href = `${baseUrl}?offre=${currentOffre}&nom=${nom}&ville=${ville}&tel=${tel}&adresse=${adresse}`;
+        // On ajoute &email= à la fin de l'URL générée
+        link.href = `${baseUrl}?offre=${currentOffre}&nom=${nom}&ville=${ville}&tel=${tel}&adresse=${adresse}&email=${email}`;
       });
     }
     updateLinks();
