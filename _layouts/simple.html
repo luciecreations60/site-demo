@@ -28,10 +28,27 @@
       .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
       .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
-      /* Restauration du style d'origine pour l'info-box (grille adaptative sans forçage de fond) */
-      .info-box-4col { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px; }
+      /* grille adaptative sans forçage de fond */
+      .info-box-4col { 
+        display: flex !important; 
+        flex-direction: row !important; 
+        justify-content: space-between; 
+        align-items: flex-start; 
+        gap: 15px; 
+        margin-top: 40px; 
+        text-align: center !important;
+      }
+      .info-box-4col > div { 
+        flex: 1; 
+        min-width: 0;
+      }
       .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
+
+      /* Version mobile : on repasse sur une seule colonne uniquement sur petit écran */
+      @media (max-width: 768px) { 
+        .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } 
+      }
 
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
@@ -187,26 +204,22 @@
         </div>
 
         <!-- Coordonnées d'origine avec classe CSS nettoyée (Conserve l'aspect visuel de base) -->
-        <div class="info-box info-box-4col">
+        <div class="info-box-4col">
           <div>
-            <p class="info-label">📍 ADRESSE DE L'ENTREPRISE</p>
+            <p class="info-label">📍 ADRESSE</p>
             <p class="info-val" id="footer-adresse">{{ client.adresse }}</p>
           </div>
           <div>
-            <p class="info-label">🚗 ZONE D'INTERVENTION</p>
+            <p class="info-label">🚗 INTERVENTION</p>
             <p class="info-val" id="footer-zone">{{ client.zoneIntervention }}</p>
           </div>
           <div>
-            <p class="info-label">📞 TÉLÉPHONE DIRECT</p>
+            <p class="info-label">📞 TÉLÉPHONE</p>
             <p class="info-val"><a href="{{ client.telephoneLien }}" id="footer-tel">{{ client.telephone }}</a></p>
           </div>
           <div>
-            <p class="info-label">✉️ ADRESSE EMAIL</p>
-            <p class="info-val">
-              <a href="mailto:{{ client.email | default: 'contact@artisan-digital.fr' }}" id="footer-email">
-                {{ client.email | default: "contact@artisan-digital.fr" }}
-              </a>
-            </p>
+            <p class="info-label">✉️ EMAIL</p>
+            <p class="info-val"><a href="{% if client.email %}mailto:{{ client.email }}{% endif %}" id="footer-email"> {{ client.email }}</a></p>
           </div>
         </div>
 
@@ -238,6 +251,7 @@
         const villePerso = params.get('ville') ? decodeURIComponent(params.get('ville')).trim() : "";
         const telPerso = params.get('tel') ? decodeURIComponent(params.get('tel')).trim() : "";
         const adressePerso = params.get('adresse') ? decodeURIComponent(params.get('adresse')).trim() : "";
+        const emailPerso = params.get('email') ? decodeURIComponent(params.get('email')).trim() : ""; // <-- Nouveau paramètre !
         const offreType = params.get('offre') || 'simple';
 
         let finalTabNom = nomPerso !== "" ? nomPerso : "{{ client.nom }}";
@@ -291,6 +305,13 @@
             let cpVilleSuffix = villePerso !== "" ? `, ${villePerso}` : "";
             footerAddress.innerText = adressePerso + cpVilleSuffix;
           }
+          if (emailPerso !== "") {
+          const footerMailEl = document.getElementById('footer-email');
+          if (footerMailEl) {
+            footerMailEl.innerText = emailPerso;
+            footerMailEl.href = "mailto:" + emailPerso;
+          }
+        }
         } else if (villePerso !== "") {
           const footerAddress = document.getElementById('footer-adresse');
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
