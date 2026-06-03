@@ -13,7 +13,7 @@
     {% include site-styles.html %}
 
     <style>
-      /* Styles additionnels existants */
+      /* Styles existants */
       .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
       .review-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); text-align: left; }
       .stars { color: #fbbf24; font-size: 18px; margin-bottom: 10px; }
@@ -34,19 +34,24 @@
       .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
 
-      /* CORRECTION : Barre d'onglets (Inspirée d'Avenue des Fleurs) */
-      .gallery-container { margin-top: 60px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 50px; }
+      /* Barre d'onglets */
+      .gallery-container { margin-top: 60px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 50px; scroll-margin-top: 40px; }
       .tabs-nav { display: flex; justify-content: center; border-bottom: 2px solid #e2e8f0; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; gap: 10px; }
       .tab-btn { background: none; border: none; padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; color: #64748b; cursor: pointer; position: relative; transition: color 0.3s ease; }
       .tab-btn::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background-color: var(--primary-color, #0f172a); transform: scaleX(0); transition: transform 0.3s ease; }
       .tab-btn.active { color: var(--primary-color, #0f172a); font-weight: 600; }
       .tab-btn.active::after { transform: scaleX(1); }
 
-      /* Mosaïque Asymétrique Pinterest */
-      .mosaic-content { display: none; columns: 4 200px; column-gap: 20px; width: 100%; animation: fadeIn 0.4s ease forwards; }
+      /* Modifs Tuiles Haut (Pour les rendre cliquables avec effet) */
+      .service-bg-card.clickable-tile { cursor: pointer; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; }
+      .service-bg-card.clickable-tile:hover { transform: translateY(-5px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.15); }
+
+      /* Mosaïque Pinterest corrigée */
+      .mosaic-content { display: none; width: 100%; animation: fadeIn 0.4s ease forwards; }
       .mosaic-content.active { display: block; }
-      .mosaic-item { margin-bottom: 20px; break-inside: avoid; position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.04); background: #f1f5f9; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-      .mosaic-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; }
+      .mosaic-grid { columns: 4 220px; column-gap: 20px; width: 100%; }
+      .mosaic-item { margin-bottom: 20px; break-inside: avoid; position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.04); background: #f1f5f9; transition: transform 0.3s ease; }
+      .mosaic-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; min-height: 150px; }
       .mosaic-item:hover { transform: translateY(-4px); }
       .mosaic-item:hover img { transform: scale(1.04); }
       .mosaic-overlay { position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 16px; }
@@ -61,7 +66,7 @@
       .lightbox-caption { position: absolute; bottom: 30px; color: #f1f5f9; font-family: 'Inter', sans-serif; font-size: 14px; background: rgba(15, 23, 42, 0.75); padding: 10px 20px; border-radius: 30px; backdrop-filter: blur(4px); }
 
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      @media (max-width: 768px) { .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } .mosaic-content { columns: 2 150px; } .tabs-nav { flex-wrap: wrap; } }
+      @media (max-width: 768px) { .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } .mosaic-grid { columns: 2 150px; } .tabs-nav { flex-wrap: wrap; } }
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -132,7 +137,7 @@
       </div>
     </section>
 
-    <!-- SECTION SERVICES PERFECTIONNÉE -->
+    <!-- SECTION SERVICES -->
     <section id="section-services" class="section bg-light">
       <div class="container">
         <div class="text-center mb-12">
@@ -140,10 +145,10 @@
           <p class="section-sub">Découvrez l'étendue de notre savoir-faire à travers nos prestations de référence.</p>
         </div>
         
-        <!-- Les 3 Tuiles Principales -->
+        <!-- Les 3 Tuiles Principales devenues entièrement CLIQUABLES -->
         <div class="services-grid">
           {% for s in info.services %}
-            <div class="service-bg-card leaf-shape">
+            <div class="service-bg-card leaf-shape clickable-tile" onclick="selectServiceTab('tab-{{ forloop.index }}')">
               <img src="{{ s.image }}" alt="{{ s.titre }}" class="service-bg-img" />
               <div class="img-overlay"></div>
               <div class="service-content">
@@ -154,48 +159,48 @@
           {% endfor %}
         </div>
 
-        <!-- REPRISE STRUCTURÉE : Système de navigation par Onglets Filtrables (Avenue des Fleurs) -->
-        <div class="gallery-container">
+        <!-- Système de navigation par Onglets Filtrables (Avenue des Fleurs) -->
+        <div id="notre-galerie" class="gallery-container">
           <div class="tabs-nav">
             {% for s in info.services %}
-              <button class="tab-btn {% if forloop.first %}active{% endif %}" onclick="switchTab('tab-{{ forloop.index }}')">
+              <button class="tab-btn {% if forloop.first %}active{% endif %}" id="btn-tab-{{ forloop.index }}" onclick="switchTab('tab-{{ forloop.index }}')">
                 {{ s.titre }}
               </button>
             {% endfor %}
           </div>
           
-          <!-- Génération des Mosaïques Pinterest dynamiques pour chaque onglet -->
+          <!-- Génération des Mosaïques (Correction URL images Unsplash incluse) -->
           {% for s in info.services %}
             <div id="tab-{{ forloop.index }}" class="mosaic-content {% if forloop.first %}active{% endif %}">
               <div class="mosaic-grid">
                 
-                <!-- Photo 1 (Portrait) -->
-                <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/600x800/?{{ s.titre | url_encode }},work,1', '{{ s.titre }} — Réalisation de qualité')">
-                  <img src="https://source.unsplash.com/featured/400x530/?{{ s.titre | url_encode }},work,1" alt="{{ s.titre }} 1" />
+                <!-- Photo 1 -->
+                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Réalisation Pro')">
+                  <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=450&h=600&q=80" alt="{{ s.titre }} 1" />
                   <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
                 </div>
                 
-                <!-- Photo 2 (Paysage court) -->
-                <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/800x600/?{{ s.titre | url_encode }},work,2', '{{ s.titre }} — Zoom finitions')">
-                  <img src="https://source.unsplash.com/featured/400x300/?{{ s.titre | url_encode }},work,2" alt="{{ s.titre }} 2" />
+                <!-- Photo 2 -->
+                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Finitions soignées')">
+                  <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=450&h=320&q=80" alt="{{ s.titre }} 2" />
                   <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
                 </div>
                 
-                <!-- Photo 3 (Carré) -->
-                <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/800x800/?{{ s.titre | url_encode }},work,3', '{{ s.titre }} — Chantier propre et soigné')">
-                  <img src="https://source.unsplash.com/featured/400x400/?{{ s.titre | url_encode }},work,3" alt="{{ s.titre }} 3" />
+                <!-- Photo 3 -->
+                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Notre expertise')">
+                  <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=450&h=450&q=80" alt="{{ s.titre }} 3" />
                   <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
                 </div>
                 
-                <!-- Photo 4 (Grand Portrait) -->
-                <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/600x900/?{{ s.titre | url_encode }},work,4', '{{ s.titre }} — Conformité et expertise')">
-                  <img src="https://source.unsplash.com/featured/400x600/?{{ s.titre | url_encode }},work,4" alt="{{ s.titre }} 4" />
+                <!-- Photo 4 -->
+                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Chantier Client')">
+                  <img src="https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=450&h=580&q=80" alt="{{ s.titre }} 4" />
                   <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
                 </div>
 
-                <!-- Photo 5 (Paysage) -->
-                <div class="mosaic-item" onclick="openLightbox('https://source.unsplash.com/featured/800x550/?{{ s.titre | url_encode }},work,5', '{{ s.titre }} — Matériaux certifiés')">
-                  <img src="https://source.unsplash.com/featured/400x275/?{{ s.titre | url_encode }},work,5" alt="{{ s.titre }} 5" />
+                <!-- Photo 5 -->
+                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Haute Qualité')">
+                  <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=450&h=300&q=80" alt="{{ s.titre }} 5" />
                   <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
                 </div>
 
@@ -245,7 +250,6 @@
         <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
         <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         
-        <!-- Formulaire de Devis -->
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
           <h3>Formulaire de demande de devis en ligne</h3>
           <form onsubmit="event.preventDefault(); alert('Démonstration : Formulaire envoyé avec succès !');">
@@ -276,7 +280,6 @@
           </form>
         </div>
 
-        <!-- Coordonnées d'origine unifiées sur une ligne (info-box) -->
         <div class="info-box info-box-4col">
           <div>
             <p class="info-label">📍 ADRESSE</p>
@@ -304,18 +307,26 @@
     </footer>
 
     <script>
-      // LOGIQUE DU FILTRAGE PAR ONGLETS (TABS)
+      // ACTION LORS DU CLIC SUR UNE DES 3 GRANDES TUILES
+      function selectServiceTab(tabId) {
+        // Active l'onglet correspondant
+        switchTab(tabId);
+        
+        // Fait descendre doucement la vue jusqu'à la section galerie
+        const targetSection = document.getElementById('notre-galerie');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+
+      // LOGIQUE DU FILTRAGE PAR ONGLETS
       function switchTab(tabId) {
-        // Enlever la classe active de tous les boutons d'onglets
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        // Enlever la classe active de toutes les galeries mosaïques
         document.querySelectorAll('.mosaic-content').forEach(content => content.classList.remove('active'));
         
-        // Ajouter la classe active sur l'onglet cliqué
-        const clickedBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.getAttribute('onclick').includes(tabId));
-        if (clickedBtn) clickedBtn.classList.add('active');
+        const targetBtn = document.getElementById('btn-' + tabId);
+        if (targetBtn) targetBtn.classList.add('active');
         
-        // Afficher la mosaïque correspondante
         const targetContent = document.getElementById(tabId);
         if (targetContent) targetContent.classList.add('active');
       }
@@ -405,7 +416,6 @@
           if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
-        // GESTION DYNAMIQUE DE L'EMAIL
         const footerMailEl = document.getElementById('footer-email');
         const emailContainer = document.getElementById('bloc-email-container');
         
@@ -421,7 +431,6 @@
           }
         }
 
-        // LOGIQUE DYNAMIQUE DES FORMULES COMMERCIALES
         const sectionServices = document.getElementById('section-services');
         const sectionAvis = document.getElementById('section-avis');
         const blocFormulairePro = document.getElementById('bloc-formulaire-pro');
