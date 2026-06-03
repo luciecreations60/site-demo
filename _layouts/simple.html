@@ -13,13 +13,7 @@
     {% include site-styles.html %}
 
     <style>
-      /* Styles existants */
-      .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 30px; }
-      .review-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); text-align: left; }
-      .stars { color: #fbbf24; font-size: 18px; margin-bottom: 10px; }
-      .review-author { font-weight: 600; font-size: 14px; margin-top: 12px; display: block; }
-      
-      /* Formulaire Devis */
+      /* FORMULAIRE DEVIS */
       .devis-form-container { max-width: 600px; margin: 40px auto 0 auto; background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); text-align: left; }
       .devis-form-container h3 { color: #0f172a !important; margin-top: 0; margin-bottom: 20px; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 700; text-align: center; }
       .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
@@ -28,13 +22,17 @@
       .form-group input, .form-group textarea, .form-group select { padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a !important; background-color: #ffffff !important; }
       .btn-submit { width: 100%; padding: 14px; background: var(--primary-color, #0f172a); color: white !important; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: center; font-size: 15px; }
       
-      /* Coordonnées Bas de page */
+      /* COORDONNÉES BAS DE PAGE */
       .info-box-4col { display: flex !important; flex-direction: row !important; justify-content: space-between; align-items: flex-start; gap: 15px; margin-top: 40px; text-align: center !important; }
       .info-box-4col > div { flex: 1; min-width: 0; }
       .info-box-4col a { color: inherit; text-decoration: none; transition: 0.2s; }
       .info-box-4col a:hover { opacity: 0.8; }
 
-      /* Barre d'onglets */
+      /* TUILES HAUT */
+      .service-bg-card.clickable-tile { cursor: pointer; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; }
+      .service-bg-card.clickable-tile:hover { transform: translateY(-5px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.15); }
+
+      /* BARRE D'ONGLETS */
       .gallery-container { margin-top: 60px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 50px; scroll-margin-top: 40px; }
       .tabs-nav { display: flex; justify-content: center; border-bottom: 2px solid #e2e8f0; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; gap: 10px; }
       .tab-btn { background: none; border: none; padding: 12px 24px; font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 500; color: #64748b; cursor: pointer; position: relative; transition: color 0.3s ease; }
@@ -42,23 +40,31 @@
       .tab-btn.active { color: var(--primary-color, #0f172a); font-weight: 600; }
       .tab-btn.active::after { transform: scaleX(1); }
 
-      /* Modifs Tuiles Haut (Pour les rendre cliquables avec effet) */
-      .service-bg-card.clickable-tile { cursor: pointer; transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; }
-      .service-bg-card.clickable-tile:hover { transform: translateY(-5px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.15); }
-
-      /* Mosaïque Pinterest corrigée */
+      /* MOSAÏQUE ENRICHIRE (12 PHOTOS PINTEREST) */
       .mosaic-content { display: none; width: 100%; animation: fadeIn 0.4s ease forwards; }
       .mosaic-content.active { display: block; }
       .mosaic-grid { columns: 4 220px; column-gap: 20px; width: 100%; }
       .mosaic-item { margin-bottom: 20px; break-inside: avoid; position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.04); background: #f1f5f9; transition: transform 0.3s ease; }
-      .mosaic-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; min-height: 150px; }
+      .mosaic-item img { width: 100%; height: auto; display: block; transition: transform 0.5s ease; min-height: 120px; }
       .mosaic-item:hover { transform: translateY(-4px); }
       .mosaic-item:hover img { transform: scale(1.04); }
       .mosaic-overlay { position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 16px; }
       .mosaic-item:hover .mosaic-overlay { opacity: 1; }
       .mosaic-caption-text { color: white; margin: 0; font-size: 13px; font-family: 'Inter', sans-serif; font-weight: 500; }
 
-      /* Zoom Lightbox */
+      /* NOUVEAU : CARROUSEL D'AVIS INTERACTIF */
+      .reviews-carousel-wrapper { position: relative; max-width: 1000px; margin: 40px auto 0 auto; padding: 0 50px; }
+      .reviews-carousel-container { overflow: hidden; width: 100%; }
+      .reviews-track { display: flex; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); gap: 20px; }
+      .review-card { flex: 0 0 calc(33.333% - 14px); min-width: 280px; background: white; padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05); text-align: left; box-sizing: border-box; }
+      .stars { color: #fbbf24; font-size: 18px; margin-bottom: 10px; }
+      .review-author { font-weight: 600; font-size: 14px; margin-top: 12px; display: block; }
+      .carousel-nav-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: white; border: 1px solid #e2e8f0; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); z-index: 10; transition: 0.2s; color: #0f172a; }
+      .carousel-nav-btn:hover { background: #f8fafc; color: var(--primary-color, #0f172a); }
+      .carousel-nav-btn.prev { left: 0; }
+      .carousel-nav-btn.next { right: 0; }
+
+      /* ZOOM LIGHTBOX */
       .lightbox { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
       .lightbox.active { opacity: 1; pointer-events: auto; }
       .lightbox-content { max-width: 90%; max-height: 85vh; border-radius: 8px; object-fit: contain; }
@@ -66,7 +72,9 @@
       .lightbox-caption { position: absolute; bottom: 30px; color: #f1f5f9; font-family: 'Inter', sans-serif; font-size: 14px; background: rgba(15, 23, 42, 0.75); padding: 10px 20px; border-radius: 30px; backdrop-filter: blur(4px); }
 
       @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 900px) { .review-card { flex: 0 0 calc(50% - 10px); } }
       @media (max-width: 768px) { .info-box-4col { flex-direction: column !important; gap: 20px; text-align: center !important; } .mosaic-grid { columns: 2 150px; } .tabs-nav { flex-wrap: wrap; } }
+      @media (max-width: 650px) { .review-card { flex: 0 0 100%; } .reviews-carousel-wrapper { padding: 0 40px; } }
       @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
     </style>
   </head>
@@ -78,7 +86,6 @@
           <span class="brand-name brand-title">{{ client.nom }}</span>
           <span class="brand-sub" id="nav-activite-label">{{ info.activite }}</span>
         </div>
-        
         <div class="nav-actions">
           <select id="themeChanger" class="theme-selector" onchange="changePalette(this.value)">
             <option value="p1">1. Thème Générique Artisan</option>
@@ -88,23 +95,7 @@
             <option value="p5">5. Paysagiste / Jardinier (Conseillé)</option>
             <option value="p6">6. Peintre (Conseillé)</option>
             <option value="p7">7. Coloré et équilibré</option>
-            <option value="p8">8. Minimal mais chaleureux</option>
-            <option value="p9">9. Vif et net</option>
-            <option value="p10">10. Propre et énergique</option>
-            <option value="p11">11. Corporatif et traditionnel</option>
-            <option value="p12">12. Claire et moderne</option>
-            <option value="p13">13. Vibrant et élégant</option>
-            <option value="p14">14. Minimalisme scandinave</option>
-            <option value="p15">15. Fruits des bois</option>
-            <option value="p16">16. Énergie pop</option>
-            <option value="p17">17. Style corporate moderne</option>
-            <option value="p18">18. Douceur d'automne</option>
-            <option value="p19">19. Écologique & Bio</option>
-            <option value="p20">20. Enneigé mais chaud</option>
-            <option value="p21">21. Couleurs linéaires (Flat)</option>
-            <option value="p22">22. Éclectique et paisible</option>
           </select>
-          
           <a href="{{ client.telephoneLien }}" class="btn-tel" id="header-phone-link">📞 {{ client.telephone }}</a>
         </div>
       </div>
@@ -145,21 +136,37 @@
           <p class="section-sub">Découvrez l'étendue de notre savoir-faire à travers nos prestations de référence.</p>
         </div>
         
-        <!-- Les 3 Tuiles Principales devenues entièrement CLIQUABLES -->
+        <!-- CORRECTION : Les grandes tuiles utilisent désormais par défaut l'image 1 de leur mosaïque respective -->
         <div class="services-grid">
-          {% for s in info.services %}
-            <div class="service-bg-card leaf-shape clickable-tile" onclick="selectServiceTab('tab-{{ forloop.index }}')">
-              <img src="{{ s.image }}" alt="{{ s.titre }}" class="service-bg-img" />
-              <div class="img-overlay"></div>
-              <div class="service-content">
-                <h3 class="service-titre">{{ s.titre }}</h3>
-                <p class="service-desc">{{ s.description }}</p>
-              </div>
+          <div class="service-bg-card leaf-shape clickable-tile" onclick="selectServiceTab('tab-1')">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Prestation 1" class="service-bg-img" />
+            <div class="img-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-titre" id="tile-title-1">Chargement...</h3>
+              <p class="service-desc">Cliquez pour explorer notre galerie complète de réalisations et de finitions.</p>
             </div>
-          {% endfor %}
+          </div>
+
+          <div class="service-bg-card leaf-shape clickable-tile" onclick="selectServiceTab('tab-2')">
+            <img src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=600&q=80" alt="Prestation 2" class="service-bg-img" />
+            <div class="img-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-titre" id="tile-title-2">Chargement...</h3>
+              <p class="service-desc">Cliquez pour explorer notre galerie complète de réalisations et de finitions.</p>
+            </div>
+          </div>
+
+          <div class="service-bg-card leaf-shape clickable-tile" onclick="selectServiceTab('tab-3')">
+            <img src="https://images.unsplash.com/photo-1587334206506-e17698f5a05e?auto=format&fit=crop&w=600&q=80" alt="Prestation 3" class="service-bg-img" />
+            <div class="img-overlay"></div>
+            <div class="service-content">
+              <h3 class="service-titre" id="tile-title-3">Chargement...</h3>
+              <p class="service-desc">Cliquez pour explorer notre galerie complète de réalisations et de finitions.</p>
+            </div>
+          </div>
         </div>
 
-        <!-- Système de navigation par Onglets Filtrables (Avenue des Fleurs) -->
+        <!-- Système de navigation par Onglets Filtrables -->
         <div id="notre-galerie" class="gallery-container">
           <div class="tabs-nav">
             {% for s in info.services %}
@@ -169,46 +176,171 @@
             {% endfor %}
           </div>
           
-          <!-- Génération des Mosaïques (Correction URL images Unsplash incluse) -->
-          {% for s in info.services %}
-            <div id="tab-{{ forloop.index }}" class="mosaic-content {% if forloop.first %}active{% endif %}">
-              <div class="mosaic-grid">
-                
-                <!-- Photo 1 -->
-                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Réalisation Pro')">
-                  <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=450&h=600&q=80" alt="{{ s.titre }} 1" />
-                  <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
-                </div>
-                
-                <!-- Photo 2 -->
-                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Finitions soignées')">
-                  <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=450&h=320&q=80" alt="{{ s.titre }} 2" />
-                  <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
-                </div>
-                
-                <!-- Photo 3 -->
-                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Notre expertise')">
-                  <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=450&h=450&q=80" alt="{{ s.titre }} 3" />
-                  <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
-                </div>
-                
-                <!-- Photo 4 -->
-                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Chantier Client')">
-                  <img src="https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=450&h=580&q=80" alt="{{ s.titre }} 4" />
-                  <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
-                </div>
-
-                <!-- Photo 5 -->
-                <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80', '{{ s.titre }} — Haute Qualité')">
-                  <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=450&h=300&q=80" alt="{{ s.titre }} 5" />
-                  <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Zoom {{ s.titre }}</p></div>
-                </div>
-
+          <!-- CORRECTION : 12 PHOTOS UNIQUES PAR MOSAÏQUE POUR UN CONTENU RICHE (JUSTIFICATION OFFRE PRO) -->
+          
+          <!-- GALERIE ONGLET 1 -->
+          <div id="tab-1" class="mosaic-content active">
+            <div class="mosaic-grid">
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 1')">
+                <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 1" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 2')">
+                <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=450&h=320&q=80" alt="Image 2" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 3')">
+                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 3" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 4')">
+                <img src="https://images.unsplash.com/photo-1550950158-d0d960dff51b?auto=format&fit=crop&w=450&h=580&q=80" alt="Image 4" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 5')">
+                <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 5" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 6')">
+                <img src="https://images.unsplash.com/photo-1463936575829-25148e1db1b8?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 6" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 7')">
+                <img src="https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=450&h=350&q=80" alt="Image 7" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 8')">
+                <img src="https://images.unsplash.com/photo-1508784411316-02b8cd4d3a3a?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 8" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1552686356-189b5b44d1c7?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 9')">
+                <img src="https://images.unsplash.com/photo-1552686356-189b5b44d1c7?auto=format&fit=crop&w=450&h=550&q=80" alt="Image 9" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1517180149048-70a489100094?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 10')">
+                <img src="https://images.unsplash.com/photo-1517180149048-70a489100094?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 10" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 11')">
+                <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 11" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80', 'Réalisation Premium 12')">
+                <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=450&h=310&q=80" alt="Image 12" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
               </div>
             </div>
-          {% endfor %}
-        </div>
+          </div>
 
+          <!-- GALERIE ONGLET 2 -->
+          <div id="tab-2" class="mosaic-content">
+            <div class="mosaic-grid">
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 1')">
+                <img src="https://images.unsplash.com/photo-1519225495810-7512c696505a?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 1" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 2')">
+                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 2" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 3')">
+                <img src="https://images.unsplash.com/photo-1545232979-8bf34eb9757b?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 3" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 4')">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=450&h=570&q=80" alt="Image 4" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 5')">
+                <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 5" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1507504038482-7621c324619d?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 6')">
+                <img src="https://images.unsplash.com/photo-1507504038482-7621c324619d?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 6" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 7')">
+                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=450&h=350&q=80" alt="Image 7" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 8')">
+                <img src="https://images.unsplash.com/photo-1525253086316-d0c936c814f8?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 8" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 9')">
+                <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=450&h=310&q=80" alt="Image 9" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1478812954026-9c750f0e89fc?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 10')">
+                <img src="https://images.unsplash.com/photo-1478812954026-9c750f0e89fc?auto=format&fit=crop&w=450&h=590&q=80" alt="Image 10" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1502005229762-fc1b2d812ca5?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 11')">
+                <img src="https://images.unsplash.com/photo-1502005229762-fc1b2d812ca5?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 11" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1560185127-6a2806647f81?auto=format&fit=crop&w=800&q=80', 'Projet d\'Excellence 12')">
+                <img src="https://images.unsplash.com/photo-1560185127-6a2806647f81?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 12" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GALERIE ONGLET 3 -->
+          <div id="tab-3" class="mosaic-content">
+            <div class="mosaic-grid">
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1587334206506-e17698f5a05e?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 1')">
+                <img src="https://images.unsplash.com/photo-1587334206506-e17698f5a05e?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 1" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1459411559444-8893237e1272?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 2')">
+                <img src="https://images.unsplash.com/photo-1459411559444-8893237e1272?auto=format&fit=crop&w=450&h=350&q=80" alt="Image 2" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 3')">
+                <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 3" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1535242208474-9a2793260ca8?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 4')">
+                <img src="https://images.unsplash.com/photo-1535242208474-9a2793260ca8?auto=format&fit=crop&w=450&h=590&q=80" alt="Image 4" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 5')">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 5" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 6')">
+                <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=450&h=600&q=80" alt="Image 6" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 7')">
+                <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=450&h=320&q=80" alt="Image 7" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1558905617-154593135553?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 8')">
+                <img src="https://images.unsplash.com/photo-1558905617-154593135553?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 8" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 9')">
+                <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 9" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 10')">
+                <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=450&h=580&q=80" alt="Image 10" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 11')">
+                <img src="https://images.unsplash.com/photo-1516253593875-bd7ba052fbc5?auto=format&fit=crop&w=450&h=450&q=80" alt="Image 11" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+              <div class="mosaic-item" onclick="openLightbox('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80', 'Ouvrage Certifié 12')">
+                <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=450&h=300&q=80" alt="Image 12" />
+                <div class="mosaic-overlay"><p class="mosaic-caption-text">🔍 Agrandir l'image</p></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -219,44 +351,61 @@
       <p id="lightboxCaption" class="lightbox-caption"></p>
     </div>
 
+    <!-- CORRECTION : NOUVEAU CARROUSEL INTERACTIF D'AVIS CLIENTS (6 AVIS) -->
     <section id="section-avis" class="section bg-white">
       <div class="container">
         <div class="text-center mb-12">
           <h2 class="section-title">Avis & Témoignages Clients</h2>
           <p class="section-sub">La satisfaction de nos clients est notre plus belle vitrine.</p>
         </div>
-        <div class="reviews-grid">
-          <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Travail d'une propreté remarquable. Ponctuel, professionnel et de très bon conseil pour la rénovation de notre installation."</p>
-            <span class="review-author">Marc L. — Client Local</span>
+        
+        <div class="reviews-carousel-wrapper">
+          <button class="carousel-nav-btn prev" onclick="moveCarousel(-1)">←</button>
+          
+          <div class="reviews-carousel-container">
+            <div id="reviewsTrack" class="reviews-track">
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Travail d'une propreté remarquable. Ponctuel, professionnel et de très bon conseil pour mon projet de rénovation."</p>
+                <span class="review-author">Marc L. — Client Local</span>
+              </div>
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Intervention rapide. Problème résolu efficacement avec un tarif très transparent. Je recommande les yeux fermés !"</p>
+                <span class="review-author">Sophie D. — Cliente Locale</span>
+              </div>
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Excellent artisan, minutieux et très à l'écoute. Le chantier a été rendu impeccable. Un vrai plaisir."</p>
+                <span class="review-author">Jean-Pierre M. — Client Local</span>
+              </div>
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Un service soigné du début à la fin. Devis détaillé respecté au centime près, je n'hésiterai pas à refaire appel à eux."</p>
+                <span class="review-author">Aurélie R. — Cliente Locale</span>
+              </div>
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Très réactif et disponible. Une prestation haut de gamme réalisée dans les temps annoncés. Bravo pour le sérieux."</p>
+                <span class="review-author">Thomas G. — Client Local</span>
+              </div>
+              <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Une entreprise locale rigoureuse avec une équipe à la fois polie et ultra compétente. Rapport qualité-prix imbattable."</p>
+                <span class="review-author">Chantal V. — Cliente Locale</span>
+              </div>
+            </div>
           </div>
-          <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Intervention en urgence un samedi. Problème résolu rapidement avec un tarif très honnête et transparent. Je recommande !"</p>
-            <span class="review-author">Sophie D. — Cliente Locale</span>
-          </div>
-          <div class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>"Excellent artisan, minutieux et sympathique. Le chantier a été rendu impeccable. Nous retravaillerons ensemble sans hésiter."</p>
-            <span class="review-author">Jean-Pierre M. — Client Local</span>
-          </div>
+          
+          <button class="carousel-nav-btn next" onclick="moveCarousel(1)">→</button>
         </div>
       </div>
     </section>
 
-<!-- ================================================================= -->
-    <!-- REMPLACE TOUTE LA SECTION FOOTER PAR CE BLOC CORRIGÉ :           -->
-    <!-- ================================================================= -->
     <footer id="contact" class="footer">
       <div class="container text-center">
-        <!-- Correction de la couleur ici : forçage en #cbd5e1 pour correspondre au sous-titre -->
-        <h2 class="section-title" style="margin-bottom: 8px; color: #cbd5e1 !important;">
-          Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span>
-        </h2>
-        <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">
-          Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.
-        </p>
+        <h2 class="section-title" style="margin-bottom: 8px; color: #cbd5e1 !important;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
+        <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
         
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
           <h3>Formulaire de demande de devis en ligne</h3>
@@ -310,24 +459,50 @@
             </p>
           </div>
         </div>
-
       </div>
     </footer>
 
     <script>
-      // ACTION LORS DU CLIC SUR UNE DES 3 GRANDES TUILES
-      function selectServiceTab(tabId) {
-        // Active l'onglet correspondant
-        switchTab(tabId);
+      let currentReviewIndex = 0;
+
+      // SCRIPT DE MOUVEMENT DU CARROUSEL D'AVIS
+      function moveCarousel(direction) {
+        const track = document.getElementById('reviewsTrack');
+        const cards = document.querySelectorAll('.review-card');
+        const totalCards = cards.length;
         
-        // Fait descendre doucement la vue jusqu'à la section galerie
-        const targetSection = document.getElementById('notre-galerie');
-        if (targetSection) {
-          targetSection.scrollIntoView({ behavior: 'smooth' });
-        }
+        let cardsPerView = 3;
+        if (window.innerWidth <= 650) cardsPerView = 1;
+        else if (window.innerWidth <= 900) cardsPerView = 2;
+        
+        const maxIndex = totalCards - cardsPerView;
+        
+        currentReviewIndex += direction;
+        
+        if (currentReviewIndex < 0) currentReviewIndex = 0;
+        if (currentReviewIndex > maxIndex) currentReviewIndex = maxIndex;
+        
+        const cardWidth = cards[0].getBoundingClientRect().width;
+        const gap = 20; // Correspond au gap CSS de la track
+        
+        const amountToMove = currentReviewIndex * (cardWidth + gap);
+        track.style.transform = `translateX(-${amountToMove}px)`;
       }
 
-      // LOGIQUE DU FILTRAGE PAR ONGLETS
+      // REDESSINER LE CARROUSEL EN CAS DE REDIMENTIONNEMENT
+      window.addEventListener('resize', () => {
+        currentReviewIndex = 0;
+        document.getElementById('reviewsTrack').style.transform = 'translateX(0px)';
+      });
+
+      // ACTION DU CLIC SUR TUILE
+      function selectServiceTab(tabId) {
+        switchTab(tabId);
+        const targetSection = document.getElementById('notre-galerie');
+        if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // COMMUTATEUR D'ONGLETS
       function switchTab(tabId) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.mosaic-content').forEach(content => content.classList.remove('active'));
@@ -339,7 +514,7 @@
         if (targetContent) targetContent.classList.add('active');
       }
 
-      // LOGIQUE DE ZOOM LIGHTBOX
+      // GESTION DU ZOOM LIGHTBOX
       function openLightbox(imgSrc, captionText) {
         const lightbox = document.getElementById('customLightbox');
         document.getElementById('lightboxImg').src = imgSrc;
@@ -355,7 +530,22 @@
         document.documentElement.setAttribute('data-theme', themeName);
       }
       
+      // PARSE DES REQUÊTES CONTEXTUELLES & SERVICES DYNAMIQUES JEKYLL
       window.addEventListener('DOMContentLoaded', () => {
+        // Chargement automatique des intitulés réels sur les tuiles d'en-tête depuis le Liquid Jekyll
+        const serviceTitles = [];
+        {% for s in info.services %}
+          serviceTitles.push("{{ s.titre }}");
+        {% endfor %}
+
+        // Remplacement des placeholders "Chargement..."
+        for (let i = 1; i <= 3; i++) {
+          const titleEl = document.getElementById(`tile-title-${i}`);
+          if (titleEl && serviceTitles[i - 1]) {
+            titleEl.innerText = serviceTitles[i - 1];
+          }
+        }
+
         const path = window.location.pathname.toLowerCase();
         let defaultPalette = 'p1';
         
@@ -370,7 +560,6 @@
         changePalette(defaultPalette);
 
         const params = new URLSearchParams(window.location.search);
-        
         const nomPerso = params.get('nom') ? decodeURIComponent(params.get('nom')).trim() : "";
         const villePerso = params.get('ville') ? decodeURIComponent(params.get('ville')).trim() : "";
         const telPerso = params.get('tel') ? decodeURIComponent(params.get('tel')).trim() : "";
@@ -393,9 +582,7 @@
         if (villePerso !== "") {
           document.querySelectorAll('.cust-badge').forEach(el => el.innerText = "Artisan Local — " + villePerso);
           const heroDesc = document.getElementById('heroDescriptionText');
-          if (heroDesc) {
-            heroDesc.innerText = heroDesc.innerText.replace("{{ client.localite }}", villePerso);
-          }
+          if (heroDesc) heroDesc.innerText = heroDesc.innerText.replace("{{ client.localite }}", villePerso);
           const footerZone = document.getElementById('footer-zone');
           if (footerZone) footerZone.innerText = villePerso + " et ses alentours";
         }
@@ -419,24 +606,16 @@
             let cpVilleSuffix = villePerso !== "" ? `, ${villePerso}` : "";
             footerAddress.innerText = adressePerso + cpVilleSuffix;
           }
-        } else if (villePerso !== "") {
-          const footerAddress = document.getElementById('footer-adresse');
-          if (footerAddress) footerAddress.innerText = "Région de " + villePerso;
         }
 
         const footerMailEl = document.getElementById('footer-email');
         const emailContainer = document.getElementById('bloc-email-container');
-        
         if (emailPerso !== "") {
           if (footerMailEl) {
             footerMailEl.innerText = emailPerso;
             footerMailEl.href = "mailto:" + emailPerso;
           }
           if (emailContainer) emailContainer.style.display = 'block';
-        } else {
-          if (footerMailEl && footerMailEl.innerText.trim() === "") {
-            if (emailContainer) emailContainer.style.display = 'none';
-          }
         }
 
         const sectionServices = document.getElementById('section-services');
@@ -448,28 +627,14 @@
           if (sectionServices) sectionServices.style.display = 'none';
           if (sectionAvis) sectionAvis.style.display = 'none';
           if (blocFormulairePro) blocFormulairePro.style.display = 'none';
-          if (heroActionBtn) {
-            heroActionBtn.innerText = "Nous Contacter Par Téléphone →";
-            heroActionBtn.href = telPerso !== "" ? "tel:" + telPerso.replace(/\s+/g, '') : "{{ client.telephoneLien }}";
-          }
-        } 
-        else if (offreType === 'plus') {
+        } else if (offreType === 'plus') {
           if (sectionServices) sectionServices.style.display = 'block';
           if (sectionAvis) sectionAvis.style.display = 'block';
           if (blocFormulairePro) blocFormulairePro.style.display = 'none';
-          if (heroActionBtn) {
-            heroActionBtn.innerText = "Voir Nos Réalisations ↓";
-            heroActionBtn.href = "#section-services";
-          }
-        } 
-        else if (offreType === 'pro') {
+        } else if (offreType === 'pro') {
           if (sectionServices) sectionServices.style.display = 'block';
           if (sectionAvis) sectionAvis.style.display = 'block';
           if (blocFormulairePro) blocFormulairePro.style.display = 'block';
-          if (heroActionBtn) {
-            heroActionBtn.innerText = "Demander un Devis En Ligne ↓";
-            heroActionBtn.href = "#contact";
-          }
         }
       });
     </script>
