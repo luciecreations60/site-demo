@@ -245,10 +245,18 @@
       </div>
     </section>
 
+<!-- ================================================================= -->
+    <!-- REMPLACE TOUTE LA SECTION FOOTER PAR CE BLOC CORRIGÉ :           -->
+    <!-- ================================================================= -->
     <footer id="contact" class="footer">
       <div class="container text-center">
-        <h2 class="section-title" style="margin-bottom: 8px;">Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span></h2>
-        <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.</p>
+        <!-- Correction de la couleur ici : forçage en #cbd5e1 pour correspondre au sous-titre -->
+        <h2 class="section-title" style="margin-bottom: 8px; color: #cbd5e1 !important;">
+          Confiez vos travaux à <span class="brand-title">{{ client.nom }}</span>
+        </h2>
+        <p style="color: #cbd5e1; font-weight: 300; margin: 0 0 30px 0;">
+          Contactez-nous directement pour un rendez-vous ou une étude gratuite sur site.
+        </p>
         
         <div id="bloc-formulaire-pro" class="devis-form-container" style="display: none;">
           <h3>Formulaire de demande de devis en ligne</h3>
